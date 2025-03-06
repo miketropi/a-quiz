@@ -1,0 +1,345 @@
+PHẦN 2: KỸ NĂNG PHÂN TÍCH (24 điểm)
+
+---
+
+11. "Phân tích các metrics sau của một dự án DeFi lending mới và xác định chỉ số ít quan trọng nhất trong việc đánh giá tiềm năng dự án:
+Dự án có các metrics:
+1. Số liệu tương tác:
+- TVL tăng 200% trong 1 tháng, đạt $50M
+- Unique users: 3000 (70% là địa chỉ mới)
+- Collateral ratio trung bình: 150%
+- Liquidation ratio: 0.5%
+2. Thông số thị trường:
+- Market cap: $100M
+- FDV: $500M
+- Token price tăng 150% từ private sale
+- CEX tier 1 sắp listing
+3. Số liệu protocol:
+- Lending APY: 8-15%
+- Borrowing APR: 12-20%
+- Protocol fee: 10% revenue
+- Insurance fund: 2% TVL
+4. Metrics kỹ thuật:
+- 3 audit reports (Certik, Hacken, Trail of Bits)
+- 95% code coverage trong testing
+- Timelock 48h cho admin functions
+- Multi-sig 5/8 cho treasury
+5. Thông số cộng đồng:
+- 50K Twitter followers (tăng 300% trong 2 tuần)
+- Discord: 100K members (60% online)
+- 30 KOL partnerships
+- AMA hàng tuần với team 
+(2 điểm)"
+
+- options:
+a) Các metrics TVL và user growth vì có thể bị thao túng bởi farming rewards
+b) Thông số thị trường vì chưa phản ánh giá trị thực của protocol
+c) Các chỉ số APY/APR vì có thể thay đổi theo market conditions
+d) Số liệu audit và testing vì chỉ là yếu tố cần chứ chưa đủ
+e) Metrics cộng đồng và social vì dễ bị thao túng và không phản ánh adoption thực
+
+- Đáp án đúng: e
+- Giải thích: "1. TVL và user growth dù có thể bị ảnh hưởng bởi farming rewards nhưng:
+- Collateral ratio 150% là mức an toàn
+- Liquidation ratio thấp (0.5%) cho thấy quản lý rủi ro tốt
+- 70% địa chỉ mới phản ánh adoption thực
+2. Thông số thị trường quan trọng vì:
+- FDV/TVL = 10x là mức hợp lý cho dự án mới
+- Token price tăng 150% không quá bất thường
+- CEX tier 1 thường có due diligence kỹ
+3. APY/APR metrics có giá trị vì:
+- Chênh lệch lending-borrowing rate hợp lý (4-5%)
+- Protocol fee và insurance fund đảm bảo tính bền vững
+4. Audit và testing metrics quan trọng:
+- 3 audit firms uy tín
+- Coverage cao trong testing
+- Timelock và multi-sig đảm bảo an toàn
+5. Social metrics ít giá trị nhất vì:
+- Tăng trưởng followers bất thường (300% trong 2 tuần)
+- Discord online rate quá cao (60% là bất thường)
+- Số lượng KOL lớn trong thời gian ngắn gợi ý marketing không organic
+- Các metrics này dễ bị thao túng và không phản ánh chất lượng protocol"
+
+---
+
+12. "Phân tích các dự án sau và xác định dự án có khả năng sống sót tốt nhất trong bear market:
+Dự án A:
+- Revenue Q3/2023: $2M (giảm 30% so với Q2)
+- 70% revenue từ trading fee
+- Treasury: $50M (60% stablecoin)
+- Burn 30% trading fee
+- Chi phí vận hành: $500K/tháng
+- Team size: 50 người
+Dự án B:
+- Revenue Q3/2023: $5M (tăng 20% so với Q2)
+- 90% revenue từ real-world lending
+- Treasury: $20M (20% stablecoin)
+- Staking APY: 40%
+- Chi phí vận hành: $800K/tháng
+- Team size: 80 người
+Dự án C:
+- Revenue Q3/2023: $1M (không đổi so với Q2)
+- 50% revenue từ NFT royalty
+- Treasury: $100M (40% stablecoin)
+- Partnerships với 5 brand lớn
+- Chi phí vận hành: $300K/tháng
+- Team size: 30 người
+(2 điểm)"
+
+- options:
+a) Dự án A vì có treasury lớn và tokenomics deflationary
+b) Dự án B vì có revenue tăng trưởng và nguồn thu từ thị trường truyền thống
+c) Dự án C vì chi phí vận hành thấp và có nhiều partnership
+d) Dự án A và C vì có treasury đủ lớn để duy trì hoạt động
+e) Dự án B và C vì có nguồn thu đa dạng không phụ thuộc thị trường crypto
+
+- Đáp án đúng: b
+- Giải thích: "- Dự án B có lợi thế nhất vì:
++ Revenue tăng trưởng trong bear market
++ Nguồn thu từ real-world lending ít bị ảnh hưởng bởi thị trường crypto
++ Tỷ lệ revenue/chi phí vận hành tốt (~6.25x)
++ Team size lớn cho thấy khả năng phát triển sản phẩm
+- Các dự án khác có rủi ro hơn:
++ Dự án A: Revenue giảm mạnh, phụ thuộc trading fee
++ Dự án C: Revenue thấp, phụ thuộc NFT (thường chịu ảnh hưởng nặng trong bear)
+- Treasury lớn không phải yếu tố quyết định vì có thể bị ảnh hưởng bởi giá token
+- Partnership không đảm bảo revenue trong bear market"
+
+---
+
+13. "Phân tích tình huống sau về một dự án DeFi và xác định red flag nghiêm trọng nhất:
+Dự án X có các đặc điểm:
+- Team có CTO từ Google với 15 năm kinh nghiệm (doxxed), nhưng chưa có kinh nghiệm blockchain
+- Smart contract được audit bởi Certik (97 điểm), OtterSec và Hacken
+- Tokenomics: 15% team (1 năm cliff, 4 năm vesting), 25% ecosystem, 30% liquidity mining, 30% community/treasury
+- TVL tăng từ 1M lên 50M trong 2 tuần
+- Token price tăng 500% trong 10 ngày
+- Tổng giá trị giao dịch (trading volume) 24h gần bằng market cap
+- Code base 90% fork từ một protocol lớn, có điều chỉnh một số tham số
+- APY các pool từ 100-500%
+- Marketing mạnh trên Twitter với các KOL lớn
+(2 điểm)"
+
+- options:
+a) Team technical thiếu kinh nghiệm blockchain
+b) APY các pool quá cao
+c) Tốc độ tăng trưởng TVL và token price bất thường
+d) Code base chủ yếu là fork
+e) Marketing tập trung vào KOL
+
+- Đáp án đúng: c
+- Giải thích: "- TVL tăng 50x trong 2 tuần + token tăng 500% trong 10 ngày + volume 24h gần bằng market cap là dấu hiệu rõ ràng nhất của thao túng giá và pump & dump
+- Các yếu tố khác dù có rủi ro nhưng chưa phải red flag nghiêm trọng nhất:
++ Team thiếu kinh nghiệm blockchain nhưng có background technical mạnh
++ APY 100-500% trong DeFi không phải quá cao nếu có tokenomics hợp lý
++ Fork code là phổ biến nếu có audit kỹ
++ Marketing với KOL là chiến lược bình thường"
+
+---
+
+14. "Khi phân tích một token đang có xu hướng tăng, phương pháp phân tích nào hiệu quả nhất? 
+Xem xét các yếu tố:
+Volume và price action
+Market sentiment
+On-chain data
+Social metrics
+News & partnerships (2 điểm)"
+
+- options:
+a) Kết hợp technical analysis với market structure 
+b) Phân tích volume profile và on-chain data 
+c) Đánh giá market sentiment và whale movements 
+d) So sánh price action với on-chain flows 
+e) Theo dõi market structure và social trends
+
+- Đáp án đúng: b
+- Giải thích: "Volume profile giúp xác định vùng giá quan trọng và chất lượng của trend
+On-chain data cung cấp thông tin về dòng tiền thực tế và hành vi holder
+Kết hợp hai yếu tố này giúp có cái nhìn toàn diện về sức mạnh của trend
+Các yếu tố khác dù quan trọng nhưng không phản ánh được dòng tiền thực"
+
+---
+
+15. "Một token có những đặc điểm sau:
+- Market Cap: $10M
+- Daily Volume: $100K
+- Holders: 100 địa chỉ
+- Top holder nắm 80% supply
+Đánh giá nào là chính xác nhất? (2 điểm)"
+
+- options:
+a) Token có tiềm năng tăng trưởng tốt
+b) Token có tính thanh khoản cao
+c) Token có rủi ro tập trung và thao túng cao
+d) Token phù hợp để đầu tư dài hạn
+e) Token có nền tảng holder vững chắc
+
+- Đáp án đúng: c
+- Giải thích: Với top holder nắm 80% supply và chỉ có 100 holders, token có rủi ro tập trung rất cao. Volume thấp so với market cap (1%) cho thấy thanh khoản kém, dễ bị thao túng giá.
+
+---
+
+16. On-chain metrics nào quan trọng nhất khi đánh giá sức khỏe của một blockchain? (2 điểm)
+
+- options:
+a) Daily active addresses và transaction volume
+b) Hash rate và mining difficulty
+c) Gas fees và network utilization
+d) Total value locked và liquidity depth
+e) Network growth rate và retention rate
+
+- Đáp án đúng: a
+- Giải thích: "- Daily active addresses phản ánh trực tiếp mức độ sử dụng thực của mạng lưới
+- Transaction volume cho thấy giá trị thực được chuyển qua blockchain
+- Hai metrics này kết hợp cho thấy chính xác nhất về adoption và network value
+- Các metrics khác dù quan trọng nhưng là yếu tố phụ trợ:
++ Hash rate/difficulty chỉ quan trọng với PoW
++ Gas fees có thể bị ảnh hưởng bởi nhiều yếu tố
++ TVL không phải là chỉ số chính của layer 1
++ Network growth có thể bị thao túng"
+
+---
+
+17. "Một dự án có vesting schedule như sau:
+- Team & Advisors (20%): 1 năm cliff, linear vesting 2 năm
+- Private Sale (15%): 6 tháng cliff, linear vesting 1 năm
+- Public Sale (5%): Unlock 40% TGE, còn lại 6 tháng linear
+- Treasury (30%): Lock 2 năm
+- Ecosystem (30%): Unlock theo milestone
+Thời điểm nào có thể tạo áp lực bán lớn nhất? (2 điểm)"
+
+- options:
+a) Sau 6 tháng khi private sale hết cliff
+b) Sau 1 năm khi team tokens bắt đầu unlock
+c) Tháng thứ 18 khi private sale kết thúc vesting và team tokens đang unlock
+d) Tại TGE khi public sale tokens unlock
+e) Sau 2 năm khi treasury unlock
+
+- Đáp án đúng: c
+- Giải thích: "- Tháng 18 là thời điểm:
++ Private sale kết thúc vesting (toàn bộ 15% được unlock)
++ Team tokens đã unlock được 25% tổng lượng (5% tổng supply)
++ Public sale đã unlock hoàn toàn
+- Các thời điểm khác ít rủi ro hơn vì:
++ 6 tháng: Chỉ bắt đầu unlock private sale
++ 12 tháng: Team mới bắt đầu unlock
++ TGE: Chỉ có 2% supply từ public sale
++ 24 tháng: Treasury thường không bán ngay"
+
+---
+
+18. "Một dự án GameFi có tokenomics như sau:
+- Total Supply: 1 tỷ token
+- Team & Advisors: 15% (2 năm vesting)
+- Private/Public: 20% (6 tháng-1 năm vesting)
+- Game Rewards: 40% (unlock theo player growth)
+- Staking Rewards: 15% (APY 100% năm đầu)
+- Treasury: 10% (lock 3 năm)
+
+Initial Token Price: $0.1
+Current Price: $0.5
+Player Growth: 10%/tháng
+Token Burn: 10% game revenue
+
+Yếu tố nào có thể gây áp lực giảm giá lớn nhất? (2 điểm)"
+
+- options:
+a) APY staking quá cao trong năm đầu
+b) Tốc độ phát hành game rewards không tương xứng với player growth
+c) Thời gian vesting của team quá ngắn
+d) Treasury lock không đủ dài
+e) Thiếu cơ chế buyback từ game revenue
+
+- Đáp án đúng: b
+- Giải thích: "- 40% supply từ game rewards là lượng lớn nhất
+- Player growth 10%/tháng nhưng rewards release có thể nhanh hơn
+- Điều này tạo mất cân bằng cung-cầu
+- Các yếu tố khác ít ảnh hưởng hơn:
+  + APY staking chỉ ảnh hưởng 15% supply
+  + Team vesting 2 năm là hợp lý
+  + Treasury 10% là tỷ lệ nhỏ
+  + Burn 10% revenue chưa đủ offset supply mới"
+
+---
+
+19. Khi whale wallet có hành động bất thường, phương pháp phân tích nào hiệu quả nhất? (2 điểm)
+
+- options:
+a) Phân tích historical wallet behavior kết hợp với token flow và thời gian holding
+b) Theo dõi cross-chain movement và correlation với derivative market
+c) So sánh exchange netflow với order book depth tại các vùng giá
+d) Đánh giá tương quan giữa wallet clustering và smart money movements
+e) Tracking whale wallet interactions với DeFi protocols và CEX deposits
+
+- Đáp án đúng: a
+- Giải thích: "- Historical behavior cho thấy pattern giao dịch của whale
+- Token flow cho biết hướng di chuyển của funds
+- Thời gian holding giúp phân biệt whale với market maker
+- Các phương pháp khác:
+  + Cross-chain data thường có độ trễ
+  + Order book depth có thể bị thao túng
+  + Wallet clustering phức tạp và không realtime
+  + DeFi/CEX tracking không phản ánh đầy đủ ý định của whale"
+
+---
+
+20. Khi phân tích dữ liệu on-chain cho một protocol DeFi, phương pháp nào hiệu quả nhất? (2 điểm)
+
+- options:
+a) Theo dõi token velocity kết hợp với liquidity concentration trong các pool tầng 2
+b) Phân tích mối tương quan giữa MEV activities và validator distribution
+c) Đánh giá gas optimization pattern của smart contracts với volume distribution
+d) So sánh holder segmentation dựa trên HODL waves và wallet age cohorts
+e) Tracking cross-protocol yield arbitrage thông qua flash loan activities
+
+- Đáp án đúng: d
+- Giải thích: "- HODL waves cho thấy hành vi nắm giữ theo thời gian
+- Wallet age cohorts phân loại được các nhóm holder khác nhau
+- Segmentation giúp hiểu được lifecycle của protocol
+- Các phương pháp khác có hạn chế:
++ Token velocity bị ảnh hưởng bởi market makers
++ MEV và validator data không phản ánh sức khỏe protocol
++ Gas pattern chỉ cho thấy hiệu quả technical
++ Flash loan activities thường là noise data"
+
+---
+
+21. Khi đánh giá một narrative mới trong thị trường crypto, phương pháp nào hiệu quả nhất trong việc xác định giai đoạn của narrative? (2 điểm)
+
+- options:
+a) Phân tích tương quan giữa institutional inflows và sector rotation index
+b) So sánh smart contract deployment frequency với protocol revenue growth
+c) Đánh giá perpetual funding rates kết hợp với aggregated DEX volumes
+d) Theo dõi venture capital deployment pattern trong các private rounds
+e) Tracking liquidity migration giữa các protocol cùng sector
+
+- Đáp án đúng: b
+- Giải thích: "- Smart contract deployment cho thấy mức độ phát triển thực của narrative
+- Protocol revenue phản ánh adoption thực tế
+- Kết hợp 2 yếu tố này giúp xác định narrative đang ở giai đoạn nào
+- Các phương pháp khác có hạn chế:
++ Institutional inflows có thể là lagging indicator
++ Funding rates chỉ phản ánh sentiment ngắn hạn
++ VC investments thường xảy ra trước khi narrative public
++ Liquidity migration có thể do yield farming"
+
+---
+
+22. Khi một narrative đang ở giai đoạn tăng trưởng mạnh, phương pháp nào hiệu quả nhất để đánh giá và chọn dự án? (2 điểm)
+
+- options:
+a) So sánh token distribution pattern với capital deployment timeline, kết hợp revenue model sustainability
+b) Phân tích token emission curve tương quan với protocol-market fit metrics
+c) Đánh giá protocol integration depth và cross-chain expansion velocity
+d) Theo dõi institutional staking ratio và governance participation rate
+e) Tracking development activity correlation với user retention metrics
+
+- Đáp án đúng: a
+- Giải thích:" - Token distribution pattern cho thấy sự phân bổ hợp lý của dự án
+- Capital deployment timeline phản ánh chiến lược phát triển
+- Revenue model sustainability đảm bảo tính bền vững
+- Các phương pháp khác có hạn chế:
++ Emission curve có thể được điều chỉnh
++ Protocol integration chưa đảm bảo adoption
++ Institutional staking có thể là temporary
++ Development activity không phải lúc nào cũng chuyển hóa thành value"

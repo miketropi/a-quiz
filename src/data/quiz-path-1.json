@@ -1,0 +1,150 @@
+{
+  "path": {
+    "id": "103827a5-b064-4314-b0b3-22b4a6e9e186",
+    "name": "Kiến Thức Cơ Bản",
+    "total_questions": 10,
+    "total_points": 20,
+    "questions": [
+      {
+        "id": "ff3d450b-3b26-40cb-92e6-3677dd64be37",
+        "question": "Blockchain có những đặc điểm cơ bản nào?",
+        "options": {
+          "a": "Phân tán, minh bạch và toàn vẹn dữ liệu chuỗi khối",
+          "b": "Tập trung, bảo mật và khả năng mã hóa thông tin",
+          "c": "Phi tập trung, không thể thay đổi và cơ chế đồng thuận",
+          "d": "Bất biến, ẩn danh và tốc độ xử lý giao dịch nhanh",
+          "e": "Khả năng mở rộng, security và tận dụng smart contract"
+        },
+        "right_answer": "c",
+        "point": 2,
+        "explanation": "Phi tập trung, không thể thay đổi và cơ chế đồng thuận là ba đặc điểm cốt lõi của blockchain. Phi tập trung giúp hệ thống hoạt động mà không cần trung gian, phân quyền cho toàn bộ mạng lưới thông qua các node. Tính không thể thay đổi đảm bảo dữ liệu một khi đã được xác nhận sẽ được bảo toàn, tạo nên tính minh bạch và tin cậy. Cơ chế đồng thuận là nền tảng để các node trong mạng lưới đạt được thống nhất về trạng thái của blockchain, đảm bảo tính an toàn và độ tin cậy của hệ thống. Các đáp án khác thiếu hoặc có những đặc điểm không phải cốt lõi của blockchain. Ví dụ, tốc độ xử lý nhanh không phải là đặc điểm của tất cả blockchain, tính ẩn danh cũng không phải là đặc tính mặc định. Tương tự, tính tập trung đi ngược lại với bản chất của blockchain."
+      },
+      {
+        "id": "dad4125c-bb4a-48e4-a40c-655f2b302e7f",
+        "question": "Đâu là đặc điểm chính khiến Bitcoin khác biệt với tiền fiat?",
+        "options": {
+          "a": "Token phân cấp với cung tối đa 21 triệu, independent monetary policy",
+          "b": "Digital currency được sở hữu bởi tổ chức tài chính quốc tế",
+          "c": "Token được quản lý bởi mạng lưới ngân hàng phi tập trung",
+          "d": "Tiền kỹ thuật số có tốc độ giao dịch nhanh và chi phí thấp",
+          "e": "Tài sản số được bảo vệ bởi mạng lưới máy tính toàn cầu"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Bitcoin là loại tiền phi tập trung đầu tiên với chính sách tiền tệ độc lập (independent monetary policy) được lập trình sẵn trong code. Yếu tố quan trọng nhất tạo nên sự khác biệt này là việc có cung tối đa 21 triệu coin, không thể thay đổi bởi bất kỳ tổ chức nào. Điều này tạo ra tính khan hiếm thực sự và là nền tảng cho việc chống lạm phát, hoàn toàn khác với tiền fiat - vốn có thể được tạo ra không giới hạn bởi các ngân hàng trung ương. Các đáp án khác hoặc không chính xác (b, c), hoặc chỉ đề cập đến các tính năng kỹ thuật không phải là điểm khác biệt cốt lõi của Bitcoin (d, e). Tốc độ giao dịch hay bảo mật mạng lưới là những yếu tố kỹ thuật có thể được cải thiện, trong khi chính sách tiền tệ độc lập và giới hạn cung là những đặc điểm nền tảng không thể thay đổi của Bitcoin."
+      },
+      {
+        "id": "1d51a290-ccc2-4da2-8603-fcd0d54b3ea3",
+        "question": "Thanh khoản (Liquidity) trong thị trường crypto là gì?",
+        "options": {
+          "a": "Tổng giá trị giao dịch trong 24h của một token",
+          "b": "Khả năng mua/bán token với khối lượng lớn mà ít ảnh hưởng đến giá",
+          "c": "Số lượng sàn giao dịch mà token được listing",
+          "d": "Tổng số lượng token đang lưu hành trên thị trường",
+          "e": "Giá trị vốn hóa hiện tại của một dự án"
+        },
+        "right_answer": "b",
+        "point": 2,
+        "explanation": "Thanh khoản là khả năng chuyển đổi một tài sản thành tiền mặt (hoặc ngược lại) một cách nhanh chóng mà không làm ảnh hưởng đáng kể đến giá thị trường. Trong crypto, thanh khoản cao có nghĩa là trader có thể mua hoặc bán một lượng lớn token mà không gây ra biến động giá lớn (slippage thấp). Đây là yếu tố quan trọng vì nó ảnh hưởng trực tiếp đến khả năng giao dịch và chi phí thực tế của mỗi giao dịch. Các khái niệm khác như volume 24h, số lượng sàn, số token lưu hành hay vốn hóa đều có liên quan nhưng không phải là định nghĩa của thanh khoản. Một token có thể có các chỉ số này cao nhưng vẫn thiếu thanh khoản thực."
+      },
+      {
+        "id": "81bc3b34-eafe-4cf7-b0b4-e5cbc821892d",
+        "question": "Stablecoin là gì?",
+        "options": {
+          "a": "Token được neo giá theo giá trị của một tài sản ổn định",
+          "b": "Token được sử dụng để trade trên sàn giao dịch",
+          "c": "Coin được đào thông qua mining",
+          "d": "Token được phát hành bởi ngân hàng trung ương",
+          "e": "Coin được sử dụng để staking trên blockchain"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Stablecoin là một loại tiền điện tử được thiết kế để duy trì giá trị ổn định bằng cách được neo (pegged) với một tài sản có giá trị ổn định, thường là đồng USD. Ví dụ phổ biến nhất là USDT, USDC được neo 1:1 với USD. Stablecoin giúp người dùng crypto có thể lưu trữ giá trị ổn định, tránh biến động của thị trường, đồng thời dễ dàng giao dịch giữa các cặp tiền điện tử khác nhau. Đây là công cụ quan trọng trong hệ sinh thái crypto, đặc biệt hữu ích trong giao dịch, DeFi và là cầu nối giữa tiền pháp định và crypto. Các định nghĩa khác hoặc không chính xác, hoặc nhầm lẫn với các khái niệm khác trong crypto. Stablecoin không phải là token giao dịch thông thường, không phải coin được đào, không phải CBDC, và cũng không phải token staking."
+      },
+      {
+        "id": "eba18b35-71d3-40b0-a5e8-669226482e7f",
+        "question": "Token Supply trong một dự án crypto bao gồm những loại nào và ý nghĩa của chúng?",
+        "options": {
+          "a": "Maximum Supply, Total Supply và Circulating Supply - thể hiện các giai đoạn phát hành token",
+          "b": "Initial Supply, Burned Supply và Locked Supply - phản ánh tình trạng hiện tại của token",
+          "c": "Private Supply, Public Supply và Team Supply - cho biết cách phân bổ token",
+          "d": "Genesis Supply, Mining Supply và Staking Supply - liên quan đến cách tạo ra token",
+          "e": "Market Supply, Trading Supply và Holding Supply - thể hiện trạng thái giao dịch của token"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Token Supply trong crypto có ba khái niệm chính quan trọng nhất định nghĩa lượng cung của token. Maximum Supply là số lượng token tối đa có thể tồn tại, được định sẵn trong smart contract và không thể vượt quá (ví dụ Bitcoin là 21 triệu). Total Supply là tổng số token đã được tạo ra đến thời điểm hiện tại, bao gồm cả token đang lưu hành và bị khóa. Circulating Supply là số token thực tế đang lưu thông trên thị trường, có thể giao dịch tự do. Ba khái niệm này có mối quan hệ: Circulating Supply ≤ Total Supply ≤ Maximum Supply, và là cơ sở để đánh giá tokenomics của một dự án. Các đáp án khác đề cập đến các khía cạnh khác của token nhưng không phải là định nghĩa cơ bản về Supply. Ví dụ, Private/Public Supply liên quan đến allocation, Mining/Staking Supply liên quan đến token emission, và Market/Trading Supply không phải là thuật ngữ chuẩn trong ngành."
+      },
+      {
+        "id": "8e599725-3c39-4ad9-938c-0176f86ae108",
+        "question": "Smart Contract là gì?",
+        "options": {
+          "a": "Chương trình máy tính thực thi tự động và lưu trữ trên blockchain",
+          "b": "Phần mềm quản lý giao dịch phi tập trung trên mạng lưới",
+          "c": "Hệ thống tự động xác thực và thực hiện các điều kiện hợp đồng",
+          "d": "Công cụ tạo và quản lý các giao dịch thông minh",
+          "e": "Giao thức tự động hóa các thỏa thuận trên blockchain"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Smart Contract là chương trình máy tính được lưu trữ trên blockchain và tự động thực thi khi các điều kiện được đáp ứng. Đặc điểm quan trọng là tính không thể thay đổi sau khi triển khai, tính minh bạch vì mọi người đều có thể xem code, và khả năng tự động thực thi mà không cần trung gian. Smart Contract là nền tảng cho các ứng dụng DeFi và dApp trên blockchain. Các định nghĩa khác hoặc quá rộng, hoặc chỉ nhấn mạnh một khía cạnh của smart contract mà không phản ánh đầy đủ bản chất của nó."
+      },
+      {
+        "id": "92c29b61-33bb-4bee-bdf8-833b4b02e7dc",
+        "question": "APY và APR trong DeFi biểu thị điều gì?",
+        "options": {
+          "a": "Tỷ suất sinh lời hàng năm với và không có lãi kép",
+          "b": "Chỉ số đo lường rủi ro và lợi nhuận trong DeFi",
+          "c": "Phương thức tính toán lợi nhuận staking và farming",
+          "d": "Tỷ lệ phần trăm phân phối token thưởng",
+          "e": "Chỉ số đánh giá hiệu quả của protocol"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "APY (Annual Percentage Yield) và APR (Annual Percentage Rate) là hai cách tính tỷ suất sinh lời trong DeFi. APY tính tổng lợi nhuận có thể nhận được trong một năm khi tính cả lãi kép (reinvest lợi nhuận), trong khi APR chỉ tính lãi đơn, không bao gồm lợi nhuận từ việc tái đầu tư. Do đó với cùng một mức lãi suất cơ bản, APY sẽ cao hơn APR vì bao gồm cả lợi nhuận từ lãi kép."
+      },
+      {
+        "id": "f9a6ff5b-177e-47f9-86d8-fb53e2e71a13",
+        "question": "Private Key trong ví crypto có chức năng gì?",
+        "options": {
+          "a": "Để chia sẻ với người khác",
+          "b": "Chỉ dùng để xem số dư",
+          "c": "Dùng để ký và xác nhận giao dịch",
+          "d": "Không quan trọng bằng seed phrase",
+          "e": "Chỉ dùng để nhận tiền"
+        },
+        "right_answer": "c",
+        "point": 2,
+        "explanation": "Private Key là chìa khóa để ký và xác nhận giao dịch từ ví của bạn. Nó phải được bảo mật tuyệt đối vì ai nắm private key sẽ kiểm soát được ví và tài sản trong đó."
+      },
+      {
+        "id": "e9e75bd4-3ab2-4c47-99ee-40cfa3b5efb5",
+        "question": "Trước khi tham gia một dự án crypto mới, yếu tố nào cần được ưu tiên xác minh?",
+        "options": {
+          "a": "Phân tích audit report và độ tin cậy của smart contract",
+          "b": "Xem xét hoạt động marketing và kế hoạch phát triển",
+          "c": "Kiểm tra số lượng holder và volume giao dịch",
+          "d": "Theo dõi giá token và đà tăng trưởng gần đây",
+          "e": "Tham khảo ý kiến từ các influencer nổi tiếng"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Audit report và smart contract là yếu tố cốt lõi đảm bảo tính an toàn của dự án crypto. Việc xác minh audit report giúp phát hiện các lỗ hổng bảo mật tiềm ẩn và đánh giá được mức độ an toàn của dự án. Smart contract đã được audit bởi các công ty uy tín sẽ giảm thiểu rủi ro bị hack hoặc rug pull. Các yếu tố khác như marketing, số lượng holder hay giá token có thể bị thao túng và không phản ánh chính xác giá trị thực của dự án."
+      },
+      {
+        "id": "8b789d0c-5ba0-47ab-801f-5c9f00d2e061",
+        "question": "Pump and Dump là gì?",
+        "options": {
+          "a": "Hành vi tạo sóng giá ngắn hạn qua tích lũy và chốt lời",
+          "b": "Chiến lược trade theo tin tức và thao túng dữ liệu thị trường",
+          "c": "Thao túng giá thông qua mua bán đồng loạt có tổ chức",
+          "d": "Kỹ thuật tạo thanh khoản thông qua bot giao dịch tự động",
+          "e": "Phương pháp market making theo cơ chế cung cầu"
+        },
+        "right_answer": "c",
+        "point": 2,
+        "explanation": "Pump and Dump là hành vi thao túng giá thông qua mua bán đồng loạt có tổ chức. Nhóm thao túng phối hợp mua để đẩy giá lên cao bất thường (pump), sau đó bán đồng loạt (dump) khiến giá sụp đổ. Đây là hành vi bị cấm vì gây thiệt hại cho nhà đầu tư nhỏ lẻ."
+      }
+    ]
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "path": {
+    "id": "9b1d689c-c0b0-4288-b23b-ad0e6a82a226",
+    "name": "Kỹ Năng Phân Tích",
+    "total_questions": 12,
+    "total_points": 24,
+    "questions": [
+      {
+        "id": "f6ac5ac5-939d-4905-a7d3-7ce177c9df24",
+        "question": "<div>   <div>     <strong>Phân tích Metrics Dự án DeFi Lending</strong>   </div>    <div>     <div>       <strong>1. Số liệu tương tác</strong>     </div>     <ul>       <li><strong>TVL:</strong> $50M (+200% trong 1 tháng)</li>       <li><strong>Unique users:</strong> 3,000 (70% địa chỉ mới)</li>       <li><strong>Collateral ratio:</strong> 150%</li>       <li><strong>Liquidation ratio:</strong> 0.5%</li>     </ul>   </div>    <div>     <div>       <strong>2. Thông số thị trường</strong>     </div>     <ul>       <li><strong>Market cap:</strong> $100M</li>       <li><strong>FDV:</strong> $500M</li>       <li><strong>Token price:</strong> +150% từ private sale</li>       <li><strong>CEX listing:</strong> Sắp lên sàn Tier 1</li>     </ul>   </div>    <div>     <div>       <strong>3. Số liệu protocol</strong>     </div>     <ul>       <li><strong>Lending APY:</strong> 8-15%</li>       <li><strong>Borrowing APR:</strong> 12-20%</li>       <li><strong>Protocol fee:</strong> 10% revenue</li>       <li><strong>Insurance fund:</strong> 2% TVL</li>     </ul>   </div>    <div>     <div>       <strong>4. Metrics kỹ thuật</strong>     </div>     <ul>       <li><strong>Audit:</strong> Certik, Hacken, Trail of Bits</li>       <li><strong>Code coverage:</strong> 95%</li>       <li><strong>Timelock:</strong> 48h</li>       <li><strong>Multi-sig:</strong> 5/8 treasury</li>     </ul>   </div>    <div>     <div>       <strong>5. Thông số cộng đồng</strong>     </div>     <ul>       <li><strong>Twitter:</strong> 50K followers (+300%)</li>       <li><strong>Discord:</strong> 100K members (60% online)</li>       <li><strong>KOL partnerships:</strong> 30</li>       <li><strong>AMA:</strong> Hàng tuần</li>     </ul>   </div>    <div>     <div>       <strong>Chỉ số ít quan trọng nhất:</strong>     </div>     <p><strong>Số lượng Twitter followers (50K)</strong> - Tăng trưởng nhanh nhưng dễ bị thổi phồng, không phản ánh trực tiếp chất lượng protocol hoặc adoption thực tế.</p>   </div> </div>",
+        "options": {
+          "a": "Các metrics TVL và user growth vì có thể bị thao túng bởi farming rewards",
+          "b": "Thông số thị trường vì chưa phản ánh giá trị thực của protocol",
+          "c": "Các chỉ số APY/APR vì có thể thay đổi theo market conditions",
+          "d": "Số liệu audit và testing vì chỉ là yếu tố cần chứ chưa đủ",
+          "e": "Metrics cộng đồng và social vì dễ bị thao túng và không phản ánh adoption thực"
+        },
+        "right answer": "e",
+        "point": "2 điểm",
+        "explain": "1. TVL và user growth dù có thể bị ảnh hưởng bởi farming rewards nhưng:\n\n- Collateral ratio 150% là mức an toàn\n\n- Liquidation ratio thấp (0.5%) cho thấy quản lý rủi ro tốt\n\n- 70% địa chỉ mới phản ánh adoption thực\n\n2. Thông số thị trường quan trọng vì:\n\n- FDV/TVL = 10x là mức hợp lý cho dự án mới\n\n- Token price tăng 150% không quá bất thường\n\n- CEX tier 1 thường có due diligence kỹ\n\n3. APY/APR metrics có giá trị vì:\n\n- Chênh lệch lending-borrowing rate hợp lý (4-5%)\n\n- Protocol fee và insurance fund đảm bảo tính bền vững\n\n4. Audit và testing metrics quan trọng:\n\n- 3 audit firms uy tín\n\n- Coverage cao trong testing\n\n- Timelock và multi-sig đảm bảo an toàn\n\n5. Social metrics ít giá trị nhất vì:\n\n- Tăng trưởng followers bất thường (300% trong 2 tuần)\n\n- Discord online rate quá cao (60% là bất thường)\n\n- Số lượng KOL lớn trong thời gian ngắn gợi ý marketing không organic\n\n- Các metrics này dễ bị thao túng và không phản ánh chất lượng protocol"
+      },
+      {
+        "id": "6057f564-310a-4cea-b184-e9c0d29c1df9",
+        "question": "Phân tích các dự án sau và xác định dự án có khả năng sống sót tốt nhất trong bear market:\n\nDự án A:\n\n- Revenue Q3/2023: $2M (giảm 30% so với Q2)\n\n- 70% revenue từ trading fee\n\n- Treasury: $50M (60% stablecoin)\n\n- Burn 30% trading fee\n\n- Chi phí vận hành: $500K/tháng\n\n- Team size: 50 người\n\nDự án B:\n\n- Revenue Q3/2023: $5M (tăng 20% so với Q2)\n\n- 90% revenue từ real-world lending\n\n- Treasury: $20M (20% stablecoin)\n\n- Staking APY: 40%\n\n- Chi phí vận hành: $800K/tháng\n\n- Team size: 80 người\n\nDự án C:\n\n- Revenue Q3/2023: $1M (không đổi so với Q2)\n\n- 50% revenue từ NFT royalty\n\n- Treasury: $100M (40% stablecoin)\n\n- Partnerships với 5 brand lớn\n\n- Chi phí vận hành: $300K/tháng\n\n- Team size: 30 người",
+        "options": {
+          "a": "Dự án A vì có treasury lớn và tokenomics deflationary",
+          "b": "Dự án B vì có revenue tăng trưởng và nguồn thu từ thị trường truyền thống",
+          "c": "Dự án C vì chi phí vận hành thấp và có nhiều partnership",
+          "d": "Dự án A và C vì có treasury đủ lớn để duy trì hoạt động",
+          "e": "Dự án B và C vì có nguồn thu đa dạng không phụ thuộc thị trường crypto"
+        },
+        "right answer": "b",
+        "point": "2 điểm",
+        "explain": "- Dự án B có lợi thế nhất vì:\n\n+ Revenue tăng trưởng trong bear market\n\n+ Nguồn thu từ real-world lending ít bị ảnh hưởng bởi thị trường crypto\n\n+ Tỷ lệ revenue/chi phí vận hành tốt (~6.25x)\n\n+ Team size lớn cho thấy khả năng phát triển sản phẩm\n\n- Các dự án khác có rủi ro hơn:\n\n+ Dự án A: Revenue giảm mạnh, phụ thuộc trading fee\n\n+ Dự án C: Revenue thấp, phụ thuộc NFT (thường chịu ảnh hưởng nặng trong bear)\n\n- Treasury lớn không phải yếu tố quyết định vì có thể bị ảnh hưởng bởi giá token\n\n- Partnership không đảm bảo revenue trong bear market"
+      },
+      {
+        "id": "7c4c50c4-3e88-4983-a164-0da6d08dce30",
+        "question": "Phân tích tình huống sau về một dự án DeFi và xác định red flag nghiêm trọng nhất:\n\nDự án X có các đặc điểm:\n\n- Team có CTO từ Google với 15 năm kinh nghiệm (doxxed), nhưng chưa có kinh nghiệm blockchain\n\n- Smart contract được audit bởi Certik (97 điểm), OtterSec và Hacken\n\n- Tokenomics: 15% team (1 năm cliff, 4 năm vesting), 25% ecosystem, 30% liquidity mining, 30% community/treasury\n\n- TVL tăng từ 1M lên 50M trong 2 tuần\n\n- Token price tăng 500% trong 10 ngày\n\n- Tổng giá trị giao dịch (trading volume) 24h gần bằng market cap\n\n- Code base 90% fork từ một protocol lớn, có điều chỉnh một số tham số\n\n- APY các pool từ 100-500%\n\n- Marketing mạnh trên Twitter với các KOL lớn",
+        "options": {
+          "a": "Team technical thiếu kinh nghiệm blockchain",
+          "b": "APY các pool quá cao",
+          "c": "Tốc độ tăng trưởng TVL và token price bất thường",
+          "d": "Code base chủ yếu là fork",
+          "e": "Marketing tập trung vào KOL"
+        },
+        "right answer": "c",
+        "point": "2 điểm",
+        "explain": "- TVL tăng 50x trong 2 tuần + token tăng 500% trong 10 ngày + volume 24h gần bằng market cap là dấu hiệu rõ ràng nhất của thao túng giá và pump & dump\n\n- Các yếu tố khác dù có rủi ro nhưng chưa phải red flag nghiêm trọng nhất:\n\n+ Team thiếu kinh nghiệm blockchain nhưng có background technical mạnh\n\n+ APY 100-500% trong DeFi không phải quá cao nếu có tokenomics hợp lý\n\n+ Fork code là phổ biến nếu có audit kỹ\n\n+ Marketing với KOL là chiến lược bình thường"
+      },
+      {
+        "id": "727720bc-a7cd-4d6d-93d4-9ce62821e80c",
+        "question": "Khi phân tích một token đang có xu hướng tăng, phương pháp phân tích nào hiệu quả nhất?\n\nXem xét các yếu tố:\n\nVolume và price action\n\nMarket sentiment\n\nOn-chain data\n\nSocial metrics\n\nNews & partnerships",
+        "options": {
+          "a": "Kết hợp technical analysis với market structure",
+          "b": "Phân tích volume profile và on-chain data",
+          "c": "Đánh giá market sentiment và whale movements",
+          "d": "So sánh price action với on-chain flows",
+          "e": "Theo dõi market structure và social trends"
+        },
+        "right answer": "b",
+        "point": "2 điểm",
+        "explain": "Volume profile giúp xác định vùng giá quan trọng và chất lượng của trend\n\nOn-chain data cung cấp thông tin về dòng tiền thực tế và hành vi holder\n\nKết hợp hai yếu tố này giúp có cái nhìn toàn diện về sức mạnh của trend\n\nCác yếu tố khác dù quan trọng nhưng không phản ánh được dòng tiền thực"
+      },
+      {
+        "id": "a76108c6-fa82-4f49-ae2b-603a337ab9ca",
+        "question": "Một token có những đặc điểm sau:\n\n- Market Cap: $10M\n\n- Daily Volume: $100K\n\n- Holders: 100 địa chỉ\n\n- Top holder nắm 80% supply\n\nĐánh giá nào là chính xác nhất?",
+        "options": {
+          "a": "Token có tiềm năng tăng trưởng tốt",
+          "b": "Token có tính thanh khoản cao",
+          "c": "Token có rủi ro tập trung và thao túng cao",
+          "d": "Token phù hợp để đầu tư dài hạn",
+          "e": "Token có nền tảng holder vững chắc"
+        },
+        "right answer": "c",
+        "point": "2 điểm",
+        "explain": "Với top holder nắm 80% supply và chỉ có 100 holders, token có rủi ro tập trung rất cao. Volume thấp so với market cap (1%) cho thấy thanh khoản kém, dễ bị thao túng giá."
+      },
+      {
+        "id": "fbf73415-2259-4ea4-b86f-3e10c231c75a",
+        "question": "On-chain metrics nào quan trọng nhất khi đánh giá sức khỏe của một blockchain?",
+        "options": {
+          "a": "Daily active addresses và transaction volume",
+          "b": "Hash rate và mining difficulty",
+          "c": "Gas fees và network utilization",
+          "d": "Total value locked và liquidity depth",
+          "e": "Network growth rate và retention rate"
+        },
+        "right answer": "a",
+        "point": "2 điểm",
+        "explain": "- Daily active addresses phản ánh trực tiếp mức độ sử dụng thực của mạng lưới\n\n- Transaction volume cho thấy giá trị thực được chuyển qua blockchain\n\n- Hai metrics này kết hợp cho thấy chính xác nhất về adoption và network value\n\n- Các metrics khác dù quan trọng nhưng là yếu tố phụ trợ:\n\n+ Hash rate/difficulty chỉ quan trọng với PoW\n\n+ Gas fees có thể bị ảnh hưởng bởi nhiều yếu tố\n\n+ TVL không phải là chỉ số chính của layer 1\n\n+ Network growth có thể bị thao túng"
+      },
+      {
+        "id": "bac481ac-b41c-4a25-9898-f49408d696de",
+        "question": "Một dự án có vesting schedule như sau:\n\n- Team & Advisors (20%): 1 năm cliff, linear vesting 2 năm\n\n- Private Sale (15%): 6 tháng cliff, linear vesting 1 năm\n\n- Public Sale (5%): Unlock 40% TGE, còn lại 6 tháng linear\n\n- Treasury (30%): Lock 2 năm\n\n- Ecosystem (30%): Unlock theo milestone\n\nThời điểm nào có thể tạo áp lực bán lớn nhất?",
+        "options": {
+          "a": "Sau 6 tháng khi private sale hết cliff",
+          "b": "Sau 1 năm khi team tokens bắt đầu unlock",
+          "c": "Tháng thứ 18 khi private sale kết thúc vesting và team tokens đang unlock",
+          "d": "Tại TGE khi public sale tokens unlock",
+          "e": "Sau 2 năm khi treasury unlock"
+        },
+        "right answer": "c",
+        "point": "2 điểm",
+        "explain": "- Tháng 18 là thời điểm:\n\n+ Private sale kết thúc vesting (toàn bộ 15% được unlock)\n\n+ Team tokens đã unlock được 25% tổng lượng (5% tổng supply)\n\n+ Public sale đã unlock hoàn toàn\n\n- Các thời điểm khác ít rủi ro hơn vì:\n\n+ 6 tháng: Chỉ bắt đầu unlock private sale\n\n+ 12 tháng: Team mới bắt đầu unlock\n\n+ TGE: Chỉ có 2% supply từ public sale\n\n+ 24 tháng: Treasury thường không bán ngay"
+      },
+      {
+        "id": "b19e244f-75aa-48f0-a5ab-b0b4f6496126",
+        "question": "Một dự án GameFi có tokenomics như sau:\n\n- Total Supply: 1 tỷ token\n\n- Team & Advisors: 15% (2 năm vesting)\n\n- Private/Public: 20% (6 tháng-1 năm vesting)\n\n- Game Rewards: 40% (unlock theo player growth)\n\n- Staking Rewards: 15% (APY 100% năm đầu)\n\n- Treasury: 10% (lock 3 năm)\n\nInitial Token Price: $0.1\n\nCurrent Price: $0.5\n\nPlayer Growth: 10%/tháng\n\nToken Burn: 10% game revenue\n\nYếu tố nào có thể gây áp lực giảm giá lớn nhất?",
+        "options": {
+          "a": "APY staking quá cao trong năm đầu",
+          "b": "Tốc độ phát hành game rewards không tương xứng với player growth",
+          "c": "Thời gian vesting của team quá ngắn",
+          "d": "Treasury lock không đủ dài",
+          "e": "Thiếu cơ chế buyback từ game revenue"
+        },
+        "right answer": "b",
+        "point": "2 điểm",
+        "explain": "- 40% supply từ game rewards là lượng lớn nhất\n\n- Player growth 10%/tháng nhưng rewards release có thể nhanh hơn\n\n- Điều này tạo mất cân bằng cung-cầu\n\n- Các yếu tố khác ít ảnh hưởng hơn:\n\n+ APY staking chỉ ảnh hưởng 15% supply\n\n+ Team vesting 2 năm là hợp lý\n\n+ Treasury 10% là tỷ lệ nhỏ\n\n+ Burn 10% revenue chưa đủ offset supply mới"
+      },
+      {
+        "id": "beae1b1e-792c-4416-9a16-24a3f634a102",
+        "question": "Khi whale wallet có hành động bất thường, phương pháp phân tích nào hiệu quả nhất?",
+        "options": {
+          "a": "Phân tích historical wallet behavior kết hợp với token flow và thời gian holding",
+          "b": "Theo dõi cross-chain movement và correlation với derivative market",
+          "c": "So sánh exchange netflow với order book depth tại các vùng giá",
+          "d": "Đánh giá tương quan giữa wallet clustering và smart money movements",
+          "e": "Tracking whale wallet interactions với DeFi protocols và CEX deposits"
+        },
+        "right answer": "a",
+        "point": "2 điểm",
+        "explain": "- Historical behavior cho thấy pattern giao dịch của whale\n\n- Token flow cho biết hướng di chuyển của funds\n\n- Thời gian holding giúp phân biệt whale với market maker\n\n- Các phương pháp khác:\n\n+ Cross-chain data thường có độ trễ\n\n+ Order book depth có thể bị thao túng\n\n+ Wallet clustering phức tạp và không realtime\n\n+ DeFi/CEX tracking không phản ánh đầy đủ ý định của whale"
+      },
+      {
+        "id": "10c6e6a9-e9b9-407f-8612-22fb397bb5a0",
+        "question": "Khi phân tích dữ liệu on-chain cho một protocol DeFi, phương pháp nào hiệu quả nhất?",
+        "options": {
+          "a": "Theo dõi token velocity kết hợp với liquidity concentration trong các pool tầng 2",
+          "b": "Phân tích mối tương quan giữa MEV activities và validator distribution",
+          "c": "Đánh giá gas optimization pattern của smart contracts với volume distribution",
+          "d": "So sánh holder segmentation dựa trên HODL waves và wallet age cohorts",
+          "e": "Tracking cross-protocol yield arbitrage thông qua flash loan activities"
+        },
+        "right answer": "d",
+        "point": "2 điểm",
+        "explain": "- HODL waves cho thấy hành vi nắm giữ theo thời gian\n\n- Wallet age cohorts phân loại được các nhóm holder khác nhau\n\n- Segmentation giúp hiểu được lifecycle của protocol\n\n- Các phương pháp khác có hạn chế:\n\n+ Token velocity bị ảnh hưởng bởi market makers\n\n+ MEV và validator data không phản ánh sức khỏe protocol\n\n+ Gas pattern chỉ cho thấy hiệu quả technical\n\n+ Flash loan activities thường là noise data"
+      },
+      {
+        "id": "138bccdd-d95c-4f40-a716-432c230838a6",
+        "question": "Khi đánh giá một narrative mới trong thị trường crypto, phương pháp nào hiệu quả nhất trong việc xác định giai đoạn của narrative?",
+        "options": {
+          "a": "Phân tích tương quan giữa institutional inflows và sector rotation index",
+          "b": "So sánh smart contract deployment frequency với protocol revenue growth",
+          "c": "Đánh giá perpetual funding rates kết hợp với aggregated DEX volumes",
+          "d": "Theo dõi venture capital deployment pattern trong các private rounds",
+          "e": "Tracking liquidity migration giữa các protocol cùng sector"
+        },
+        "right answer": "b",
+        "point": "2 điểm",
+        "explain": "- Smart contract deployment cho thấy mức độ phát triển thực của narrative\n\n- Protocol revenue phản ánh adoption thực tế\n\n- Kết hợp 2 yếu tố này giúp xác định narrative đang ở giai đoạn nào\n\n- Các phương pháp khác có hạn chế:\n\n+ Institutional inflows có thể là lagging indicator\n\n+ Funding rates chỉ phản ánh sentiment ngắn hạn\n\n+ VC investments thường xảy ra trước khi narrative public\n\n+ Liquidity migration có thể do yield farming"
+      },
+      {
+        "id": "d306c059-d1a7-4c48-9202-75ca4f85ee8f",
+        "question": "Khi một narrative đang ở giai đoạn tăng trưởng mạnh, phương pháp nào hiệu quả nhất để đánh giá và chọn dự án?",
+        "options": {
+          "a": "So sánh token distribution pattern với capital deployment timeline, kết hợp revenue model sustainability",
+          "b": "Phân tích token emission curve tương quan với protocol-market fit metrics",
+          "c": "Đánh giá protocol integration depth và cross-chain expansion velocity",
+          "d": "Theo dõi institutional staking ratio và governance participation rate",
+          "e": "Tracking development activity correlation với user retention metrics"
+        },
+        "right answer": "a",
+        "point": "2 điểm",
+        "explain": "- Token distribution pattern cho thấy sự phân bổ hợp lý của dự án\n\n- Capital deployment timeline phản ánh chiến lược phát triển\n\n- Revenue model sustainability đảm bảo tính bền vững\n\n- Các phương pháp khác có hạn chế:\n\n+ Emission curve có thể được điều chỉnh\n\n+ Protocol integration chưa đảm bảo adoption\n\n+ Institutional staking có thể là temporary\n\n+ Development activity không phải lúc nào cũng chuyển hóa thành value"
+      }
+    ]
+  }
+}

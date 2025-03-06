@@ -1,0 +1,61 @@
+#A_QUIZ_ROOT {
+  font-family: Arial, Helvetica, sans-serif;
+
+  h1, h2, h3, h4, h5, h6, p, div, label, button, a {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+.quiz-path-list {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  strong {
+    display: block;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: #333;
+    text-align: center;
+  }
+
+  &-option {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &-item {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+    border: solid 1px #eee;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &-path-name {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .__icon {
+    line-height: 0;
+  }
+}
