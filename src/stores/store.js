@@ -9,9 +9,21 @@ const userAnwser = [];
   return [...pItem.questions].map(qItem => {
     userAnwser.push({
       id: `${ pItem.id }.${ qItem.id }`,
-      userAnwser: ''
+      pathId: pItem.id,
+      questionId: qItem.id,
+      userAnwser: '',
+      rightAnwser: qItem.right_answer,
+      point: qItem.point,
     })
   })
+})
+const reports = [...quizData].map(pItem => {
+  return {
+    pathID: pItem.id,
+    userTotalPoins: 0,
+    pathTotalPoins: pItem.total_points,
+    status: '', // doing / done
+  }
 })
 
 // Define the initial state
@@ -21,6 +33,7 @@ const initialState = {
   currentPathId: null,
   currentQuestionId: null,
   userAnwser,
+  reports,
 }
 
 // Create store with Zustand + Immer
@@ -43,6 +56,16 @@ const useStore = create(
         state.userAnwser.map(item => {
           if (item.id === id) {
             item.userAnwser = userAnwser
+          }
+        })
+      })
+    },
+    updateReport: (pathId, userTotalPoints, status) => {
+      set((state) => {
+        state.reports.map(item => {
+          if (item.pathID === pathId) {
+            item.userTotalPoins = userTotalPoints
+            item.status = status
           }
         })
       })

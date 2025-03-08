@@ -31003,10 +31003,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-right.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var _excluded = ["quizData", "setCurrentQuestionId"];
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
+function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -31030,7 +31033,8 @@ function Question(_ref) {
     setAnswer = _useState2[1];
   var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
-    setCurrentQuestionId = _useStore.setCurrentQuestionId;
+    setCurrentQuestionId = _useStore.setCurrentQuestionId,
+    rest = _objectWithoutProperties(_useStore, _excluded);
   var currentPath = quizData.find(function (q) {
     return q.id === __currentPathId;
   });
@@ -31043,6 +31047,23 @@ function Question(_ref) {
   });
   var nextQuestionId = (_currentPath$question = currentPath.questions[currentQuestionIndex + 1]) === null || _currentPath$question === void 0 ? void 0 : _currentPath$question.id;
   var prevQuestionId = (_currentPath$question2 = currentPath.questions[currentQuestionIndex - 1]) === null || _currentPath$question2 === void 0 ? void 0 : _currentPath$question2.id;
+  var totalPoint = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    console.log(_toConsumableArray(rest.userAnwser).filter(function (i) {
+      return i.pathId == __currentPathId;
+    }));
+    return _toConsumableArray(rest.userAnwser).filter(function (i) {
+      return i.pathId == __currentPathId;
+    }).reduce(function (total, question) {
+      if (question.rightAnwser == question.userAnwser) {
+        return total + question.point;
+      } else {
+        return total;
+      }
+    }, 0);
+  }, [rest.userAnwser]);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    rest.updateReport(__currentPathId, totalPoint, 'doing');
+  }, [totalPoint]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // console.log('userAnwser', userAnwser)
     setAnswer(userAnwser);
@@ -31064,7 +31085,7 @@ function Question(_ref) {
     className: "questions",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h4", {
       children: [currentPath.name, " (", currentQuestionIndex + 1, " / ", totalQuestions, ")"]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {
+    }), " (", totalPoint, ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {
       style: {
         margin: "1em 0"
       }
@@ -31219,41 +31240,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Start)
 /* harmony export */ });
-/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
-/* harmony import */ var _QuizPathList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuizPathList */ "./src/components/QuizPathList.jsx");
-/* harmony import */ var _Question__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Question */ "./src/components/Question.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
+/* harmony import */ var _QuizPathList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QuizPathList */ "./src/components/QuizPathList.jsx");
+/* harmony import */ var _Question__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Question */ "./src/components/Question.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 
 function Start() {
   var _userAnwser$find;
-  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
     currentPathId = _useStore.currentPathId,
     currentQuestionId = _useStore.currentQuestionId,
     setCurrentPathId = _useStore.setCurrentPathId,
     setCurrentQuestionId = _useStore.setCurrentQuestionId,
     userAnwser = _useStore.userAnwser,
-    onSetUserAnwser = _useStore.onSetUserAnwser;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    onSetUserAnwser = _useStore.onSetUserAnwser,
+    reports = _useStore.reports;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "start",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
       children: "B\u1ED9 c\xE2u h\u1ECFi tr\u1EAFc nghi\u1EC7m A1Academy"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
       children: ["T\u1ED5ng h\u1EE3p v\xE0 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c n\u1EC1n c\u0103n b\u1EA3n trong \u0111\u1EA7u t\u01B0 Crypto cho ng\u01B0\u1EDDi m\u1EDBi. Bao g\u1ED3m ", quizData.length, " ph\u1EA7n, h\xE3y l\u1EA7n l\u01B0\u1EE3t tr\u1EA3 l\u1EDDi \u0111\u1EC3 nh\u1EADn \u0111\u01B0\u1EE3c k\u1EBFt qu\u1EA3 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c \u0111\u1EA7u t\u01B0 c\u1EE7a b\u1EA1n."]
-    }), console.log(userAnwser), currentPathId ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Question__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), JSON.stringify(reports), currentPathId ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Question__WEBPACK_IMPORTED_MODULE_3__["default"], {
       __currentPathId: currentPathId,
       __currentQuestionId: currentQuestionId,
       userAnwser: (_userAnwser$find = userAnwser.find(function (u) {
         return u.id == "".concat(currentPathId, ".").concat(currentQuestionId);
       })) === null || _userAnwser$find === void 0 ? void 0 : _userAnwser$find.userAnwser,
       onConfirm: function onConfirm(answer, pID, qID) {
-        // console.log(answer, `${ pID }.${ qID }`);
         onSetUserAnwser(answer, "".concat(pID, ".").concat(qID));
       }
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_2__["default"], {
       onSelect: function onSelect(q) {
         setCurrentPathId(q.id);
         setCurrentQuestionId(q.questions[0].id);
@@ -31367,9 +31391,21 @@ var userAnwser = [];
   return _toConsumableArray(pItem.questions).map(function (qItem) {
     userAnwser.push({
       id: "".concat(pItem.id, ".").concat(qItem.id),
-      userAnwser: ''
+      pathId: pItem.id,
+      questionId: qItem.id,
+      userAnwser: '',
+      rightAnwser: qItem.right_answer,
+      point: qItem.point
     });
   });
+});
+var reports = [].concat(quizData).map(function (pItem) {
+  return {
+    pathID: pItem.id,
+    userTotalPoins: 0,
+    pathTotalPoins: pItem.total_points,
+    status: '' // doing / done
+  };
 });
 
 // Define the initial state
@@ -31378,7 +31414,8 @@ var initialState = {
   quizData: quizData,
   currentPathId: null,
   currentQuestionId: null,
-  userAnwser: userAnwser
+  userAnwser: userAnwser,
+  reports: reports
 };
 
 // Create store with Zustand + Immer
@@ -31399,6 +31436,16 @@ var useStore = (0,zustand__WEBPACK_IMPORTED_MODULE_2__.create)((0,zustand_middle
         state.userAnwser.map(function (item) {
           if (item.id === id) {
             item.userAnwser = userAnwser;
+          }
+        });
+      });
+    },
+    updateReport: function updateReport(pathId, userTotalPoints, status) {
+      set(function (state) {
+        state.reports.map(function (item) {
+          if (item.pathID === pathId) {
+            item.userTotalPoins = userTotalPoints;
+            item.status = status;
           }
         });
       });
