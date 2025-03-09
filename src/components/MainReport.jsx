@@ -20,18 +20,6 @@ ChartJS.register(
   Legend
 );
 
-export const data = {
-  labels: ['Thing 1', 'Thing 2', 'Thing 3', 'Thing 4', 'Thing 5', 'Thing 6'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [2, 9, 3, 5, 2, 3],
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1,
-    },
-  ],
-};
 
 export default function MainReport() {
   const { reports } = useStore();
@@ -49,8 +37,8 @@ export default function MainReport() {
       {
         label: 'Kết qủa trắc nghiệm',
         data: [...__data],
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(198, 255, 234, 0.214)',
+        borderColor: '#21c8bd',
         borderWidth: 1,
       }
     ]
@@ -61,16 +49,17 @@ export default function MainReport() {
       maintainAspectRatio: false,
       scales: {
           r: {
-              beginAtZero: true,
-              min: 0,
-              max: 100,
+              // beginAtZero: true,
+              // min: 0,
+              // max: 100,
+
               ticks: {
                   stepSize: 20,
                   color: '#666',
                   backdropColor: 'rgba(255, 255, 255, 0.8)'
               },
               grid: {
-                  color: 'rgba(0, 0, 0, 0.1)'
+                  color: 'rgb(0, 68, 255)'
               },
               pointLabels: {
                   color: '#333',
@@ -96,12 +85,24 @@ export default function MainReport() {
   }
 
   return <>
-    <div className="main-report container">
+    <div className="main-report">
       <div className="main-report__entry">
         <h2>Kết quả trắc nghiệm</h2>
         <p>Chúng tôi đã tổng hợp và đánh giá kiến thức nền căn bản trong đầu tư Crypto cho bạn.</p>
 
-        <div className="">
+        
+      </div>
+
+      <div className="main-report__chart">
+        <div className="main-report__radar">
+          <Radar data={{
+            labels: [...labels, 'Sức Khỏe Tài Chính', 'Khả Năng Giải Quyết Vấn Đề'],
+            datasets: [...datasets, { label: '__', data: [100, 0] }],
+            options
+            }} />
+        </div>
+
+        <div className="main-report__bar">
           <div className="report-bars">
             {reports.map((report, index) => {
               const percentage = (report.userTotalPoins / report.pathTotalPoins) * 100;
@@ -116,7 +117,8 @@ export default function MainReport() {
                       className="report-bar__fill" 
                       style={{
                         width: `${percentage}%`,
-                        backgroundColor: 'rgba(255, 99, 132, 0.7)'
+  backgroundColor: percentage <= 30 ? '#ff4d4d' : 
+                percentage <= 70 ? '#ffd633' : '#66cc66'
                       }}
                     ></div>
                   </div>
@@ -129,13 +131,25 @@ export default function MainReport() {
           </div>
         </div>
       </div>
-      <div className="main-report__radar">
-        <Radar data={{
-          labels: [...labels, 'Sức Khỏe Tài Chính', 'Khả Năng Giải Quyết Vấn Đề'],
-          datasets: [...datasets, { label: '__', data: [100, 0] }],
-          options
-          }} />
+      
+      <div className="main-report__footer">
+        <h4>Bạn quan tâm đến các dịch vụ của A1A hoặc mong muốn hợp tác với A1A? Kết nối ngay với chung tôi qua các kênh:</h4>
+        <div className="contact-list">
+          <div className="contact-item">
+            <span className="contact-label">Email:</span>
+            <a href="mailto:cryptoman.onchain@gmail.com">cryptoman.onchain@gmail.com</a>
+          </div>
+          <div className="contact-item">
+            <span className="contact-label">Telegram:</span>
+            <a href="https://t.me/A1Aofficial" target="_blank" rel="noopener noreferrer">@NaNguyen_Lee</a>
+          </div>
+          <div className="contact-item">
+            <span className="contact-label">Discord:</span>
+            <a href="https://discord.gg/jZh4r6Fh" target="_blank" rel="noopener noreferrer">annenguyen</a>
+          </div>
+        </div>
       </div>
+
     </div>
     
   </>

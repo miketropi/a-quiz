@@ -46319,7 +46319,6 @@ Button.propTypes = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   data: () => (/* binding */ data),
 /* harmony export */   "default": () => (/* binding */ MainReport)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -46340,16 +46339,6 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 chart_js__WEBPACK_IMPORTED_MODULE_3__.Chart.register(chart_js__WEBPACK_IMPORTED_MODULE_3__.RadialLinearScale, chart_js__WEBPACK_IMPORTED_MODULE_3__.PointElement, chart_js__WEBPACK_IMPORTED_MODULE_3__.LineElement, chart_js__WEBPACK_IMPORTED_MODULE_3__.Filler, chart_js__WEBPACK_IMPORTED_MODULE_3__.Tooltip, chart_js__WEBPACK_IMPORTED_MODULE_3__.Legend);
-var data = {
-  labels: ['Thing 1', 'Thing 2', 'Thing 3', 'Thing 4', 'Thing 5', 'Thing 6'],
-  datasets: [{
-    label: '# of Votes',
-    data: [2, 9, 3, 5, 2, 3],
-    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    borderColor: 'rgba(255, 99, 132, 1)',
-    borderWidth: 1
-  }]
-};
 function MainReport() {
   var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     reports = _useStore.reports;
@@ -46368,8 +46357,8 @@ function MainReport() {
     return [{
       label: 'Kết qủa trắc nghiệm',
       data: _toConsumableArray(__data),
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255, 99, 132, 1)',
+      backgroundColor: 'rgba(198, 255, 234, 0.214)',
+      borderColor: '#21c8bd',
       borderWidth: 1
     }];
   }, [reports]);
@@ -46378,16 +46367,17 @@ function MainReport() {
     maintainAspectRatio: false,
     scales: {
       r: {
-        beginAtZero: true,
-        min: 0,
-        max: 100,
+        // beginAtZero: true,
+        // min: 0,
+        // max: 100,
+
         ticks: {
           stepSize: 20,
           color: '#666',
           backdropColor: 'rgba(255, 255, 255, 0.8)'
         },
         grid: {
-          color: 'rgba(0, 0, 0, 0.1)'
+          color: 'rgb(0, 68, 255)'
         },
         pointLabels: {
           color: '#333',
@@ -46413,15 +46403,30 @@ function MainReport() {
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-      className: "main-report container",
+      className: "main-report",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "main-report__entry",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
           children: "K\u1EBFt qu\u1EA3 tr\u1EAFc nghi\u1EC7m"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
           children: "Ch\xFAng t\xF4i \u0111\xE3 t\u1ED5ng h\u1EE3p v\xE0 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c n\u1EC1n c\u0103n b\u1EA3n trong \u0111\u1EA7u t\u01B0 Crypto cho b\u1EA1n."
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "main-report__chart",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "main-report__radar",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__.Radar, {
+            data: {
+              labels: [].concat(_toConsumableArray(labels), ['Sức Khỏe Tài Chính', 'Khả Năng Giải Quyết Vấn Đề']),
+              datasets: [].concat(_toConsumableArray(datasets), [{
+                label: '__',
+                data: [100, 0]
+              }]),
+              options: options
+            }
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "",
+          className: "main-report__bar",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "report-bars",
             children: reports.map(function (report, index) {
@@ -46441,7 +46446,7 @@ function MainReport() {
                     className: "report-bar__fill",
                     style: {
                       width: "".concat(percentage, "%"),
-                      backgroundColor: 'rgba(255, 99, 132, 0.7)'
+                      backgroundColor: percentage <= 30 ? '#ff4d4d' : percentage <= 70 ? '#ffd633' : '#66cc66'
                     }
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -46452,18 +46457,45 @@ function MainReport() {
             })
           })
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "main-report__radar",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__.Radar, {
-          data: {
-            labels: [].concat(_toConsumableArray(labels), ['Sức Khỏe Tài Chính', 'Khả Năng Giải Quyết Vấn Đề']),
-            datasets: [].concat(_toConsumableArray(datasets), [{
-              label: '__',
-              data: [100, 0]
-            }]),
-            options: options
-          }
-        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "main-report__footer",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+          children: "B\u1EA1n quan t\xE2m \u0111\u1EBFn c\xE1c d\u1ECBch v\u1EE5 c\u1EE7a A1A ho\u1EB7c mong mu\u1ED1n h\u1EE3p t\xE1c v\u1EDBi A1A? K\u1EBFt n\u1ED1i ngay v\u1EDBi chung t\xF4i qua c\xE1c k\xEAnh:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "contact-list",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "contact-item",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              className: "contact-label",
+              children: "Email:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+              href: "mailto:cryptoman.onchain@gmail.com",
+              children: "cryptoman.onchain@gmail.com"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "contact-item",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              className: "contact-label",
+              children: "Telegram:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+              href: "https://t.me/A1Aofficial",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              children: "@NaNguyen_Lee"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "contact-item",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+              className: "contact-label",
+              children: "Discord:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
+              href: "https://discord.gg/jZh4r6Fh",
+              target: "_blank",
+              rel: "noopener noreferrer",
+              children: "annenguyen"
+            })]
+          })]
+        })]
       })]
     })
   });
@@ -46990,7 +47022,7 @@ function Start() {
       children: "B\u1ED9 c\xE2u h\u1ECFi tr\u1EAFc nghi\u1EC7m A1Academy"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
       children: ["T\u1ED5ng h\u1EE3p v\xE0 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c n\u1EC1n c\u0103n b\u1EA3n trong \u0111\u1EA7u t\u01B0 Crypto cho ng\u01B0\u1EDDi m\u1EDBi. Bao g\u1ED3m ", quizData.length, " ph\u1EA7n, h\xE3y l\u1EA7n l\u01B0\u1EE3t tr\u1EA3 l\u1EDDi \u0111\u1EC3 nh\u1EADn \u0111\u01B0\u1EE3c k\u1EBFt qu\u1EA3 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c \u0111\u1EA7u t\u01B0 c\u1EE7a b\u1EA1n."]
-    }), JSON.stringify(reports), currentPathId ? View : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), currentPathId ? View : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_2__["default"], {
       onSelect: function onSelect(q) {
         setCurrentPathId(q.id);
         setCurrentQuestionId(q.questions[0].id);
@@ -47010,8 +47042,10 @@ function Start() {
         });
         setReport(__reports);
       },
-      children: "Make Random Report"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_MainReport__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
+      children: "Make Random Report (test report)"
+    }), reports.length > 0 && reports.every(function (report) {
+      return report.status === 'done';
+    }) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_MainReport__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
   });
 }
 

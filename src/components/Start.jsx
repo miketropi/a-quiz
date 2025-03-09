@@ -34,7 +34,7 @@ export default function Start() {
   return <div className="start">
     <h2>Bộ câu hỏi trắc nghiệm A1Academy</h2>
     <p>Tổng hợp và đánh giá kiến thức nền căn bản trong đầu tư Crypto cho người mới. Bao gồm { quizData.length } phần, hãy lần lượt trả lời để nhận được kết quả đánh giá kiến thức đầu tư của bạn.</p>
-    { JSON.stringify(reports) }
+    {/* { JSON.stringify(reports) } */}
     {/* { JSON.stringify(userAnwser) } */}
     
     {
@@ -59,7 +59,12 @@ export default function Start() {
       })
 
       setReport(__reports)
-    } }>Make Random Report</Button>
-    <MainReport />
+    } }>Make Random Report (test report)</Button>
+
+    {
+      reports.length > 0 && reports.every(report => report.status === 'done') && (
+        <MainReport />
+      )
+    }
   </div>
 }

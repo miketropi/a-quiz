@@ -1,5 +1,8 @@
 #A_QUIZ_ROOT {
   font-family: Arial, Helvetica, sans-serif;
+  width: 960px;
+  max-width: 100%;
+  margin: 2rem auto;
 }
 #A_QUIZ_ROOT h1, #A_QUIZ_ROOT h2, #A_QUIZ_ROOT h3, #A_QUIZ_ROOT h4, #A_QUIZ_ROOT h5, #A_QUIZ_ROOT h6, #A_QUIZ_ROOT p, #A_QUIZ_ROOT div, #A_QUIZ_ROOT label, #A_QUIZ_ROOT button, #A_QUIZ_ROOT a {
   font-family: Arial, Helvetica, sans-serif;
@@ -303,14 +306,31 @@
   gap: 1.5rem;
 }
 
-.report-bars {
-  max-width: 800px;
+.main-report {
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.main-report h2 {
+  margin: 0;
+}
+.main-report .main-report__entry {
+  margin-bottom: 2em;
+}
+.main-report .main-report__radar {
+  width: 800px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
+}
+
+.report-bars {
+  margin: 0 auto;
 }
 
 .report-bar {
-  margin-bottom: 24px;
+  margin-bottom: 0.5em;
 }
 .report-bar:last-child {
   margin-bottom: 0;
@@ -344,4 +364,57 @@
   font-size: 12px;
   color: #666;
   text-align: right;
+}
+
+.main-report__footer {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+.main-report__footer h4 {
+  margin: 0 0 1.5rem;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: center;
+  line-height: 1.5em;
+}
+.main-report__footer .contact-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .main-report__footer .contact-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+.main-report__footer .contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+.main-report__footer .contact-item:hover {
+  transform: translateY(-2px);
+}
+.main-report__footer .contact-label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #666;
+}
+.main-report__footer a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.main-report__footer a:hover {
+  color: #0056b3;
 }

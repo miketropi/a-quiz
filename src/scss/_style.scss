@@ -4,9 +4,15 @@
   h1, h2, h3, h4, h5, h6, p, div, label, button, a {
     font-family: Arial, Helvetica, sans-serif;
   }
+
+  width: 960px;
+  max-width: 100%;
+  margin: 2rem auto;
 }
 
 .quiz-path-list {
+  // width: 800px;
+  // max-width: 100%;
   margin: 2rem auto;
   padding: 1.5rem;
   background: #fff;
