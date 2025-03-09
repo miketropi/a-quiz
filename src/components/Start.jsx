@@ -3,9 +3,11 @@ import useStore from "../stores/store"
 import QuizPathList from "./QuizPathList"
 import Question from "./Question";
 import PathReport from "./PathReport";
+import MainReport from "./MainReport";
+import Button from "./Button";
 
 export default function Start() {
-  const { quizData, currentPathId, currentQuestionId, setCurrentPathId, setCurrentQuestionId, userAnwser, onSetUserAnwser, reports } = useStore();
+  const { quizData, currentPathId, currentQuestionId, setCurrentPathId, setCurrentQuestionId, userAnwser, onSetUserAnwser, reports, setReport } = useStore();
 
   const View = (
     <>
@@ -44,5 +46,20 @@ export default function Start() {
       )
     }
     {/* <PathReport pathID={ '103827a5-b064-4314-b0b3-22b4a6e9e186' } /> */}
+    <Button onClick={ e => {
+      const getRandomNumber = (min = 1, max = 24) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      let __reports = [...reports].map(item => {
+        return {
+          ...item,
+          userTotalPoins: getRandomNumber(),
+          status: 'done'
+        }
+      })
+
+      setReport(__reports)
+    } }>Make Random Report</Button>
+    <MainReport />
   </div>
 }

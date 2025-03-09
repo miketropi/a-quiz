@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import useStore from "../stores/store";
 import Button from "./Button";
 import { ChevronRight, ChevronLeft, Grip, House } from 'lucide-react'; 
+import QuestionsReport from "./QuestionsReport";
+import PathReport from "./PathReport";
 
 export default function Question({ __currentPathId, __currentQuestionId, userAnwser, onConfirm }) {
   const [ answer, setAnswer ] = useState("");
@@ -13,7 +15,7 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
   const nextQuestionId = currentPath.questions[currentQuestionIndex + 1]?.id;
   const prevQuestionId = currentPath.questions[currentQuestionIndex - 1]?.id;
   const totalPoint = useMemo(() => {
-    // console.log([...rest.userAnwser].filter(i => i.pathId == __currentPathId));
+    console.log([...rest.userAnwser].filter(i => i.pathId == __currentPathId));
     return [...rest.userAnwser].filter(i => i.pathId == __currentPathId).reduce((total, question) => {
       if(question.rightAnwser == question.userAnwser) {
         return total + question.point;
@@ -24,8 +26,10 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
   }, [rest.userAnwser])
 
   useEffect(() => {
-    rest.updateReport(__currentPathId, totalPoint, 'doing')
-  }, [totalPoint])
+    let status = nextQuestionId ? 'doing' : 'done';
+    // console.log(status, nextQuestionId)
+    rest.updateReport(__currentPathId, totalPoint, status)
+  }, [totalPoint, userAnwser])
 
   useEffect(() => {
     // console.log('userAnwser', userAnwser)
@@ -45,8 +49,8 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
   }
 
   const onFinish = () => { 
-    // console.log('Finish!!!')
-    rest.updateReport(__currentPathId, totalPoint, 'done')
+    console.log('Finish!!!')
+    // rest.updateReport(__currentPathId, totalPoint, 'done')
   }
 
   return <div className="questions">
@@ -83,6 +87,7 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
         e.preventDefault();
         
         onConfirm(answer, __currentPathId, __currentQuestionId);
+
         if(nextQuestionId) {
           onNext()
         } else {
@@ -94,5 +99,7 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
         }
       </Button>
     </div>
+
+    {/* <PathReport pathID={ __currentPathId } /> */}
   </div>
 }

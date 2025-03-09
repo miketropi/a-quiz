@@ -2,8 +2,9 @@ import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 import quizData1 from '../data/quiz-path-1.json'
 import quizData2 from '../data/quiz-path-2.json'
+import quizData3 from '../data/quiz-path-3.json'
 
-const quizData = [quizData1.path, quizData2.path];
+const quizData = [quizData1.path, quizData2.path, quizData3.path];
 const userAnwser = [];
 [...quizData].map(pItem => {
   return [...pItem.questions].map(qItem => {
@@ -70,6 +71,11 @@ const useStore = create(
             item.status = status
           }
         })
+      })
+    },
+    setReport: (report) => {
+      set((state) => {
+        state.reports = report
       })
     },
   }))

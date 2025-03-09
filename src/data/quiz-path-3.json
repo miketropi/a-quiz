@@ -1,0 +1,178 @@
+{
+  "path": {
+    "id": "c0efedcc-dafa-4cb7-80ee-eb246c5a8e10",
+    "name": "Tâm Lý Đầu Tư",
+    "total_questions": 12,
+    "total_points": 24,
+    "questions": [
+      {
+        "id": "43ebeb24-5d1b-467a-9015-398463a31721",
+        "question": "Khi thị trường giảm 50%, phản ứng nào phù hợp nhất?",
+        "options": {
+          "a": "Tái đánh giá danh mục và nghiên cứu thêm về các dự án đang nắm giữ",
+          "b": "Tạm dừng theo dõi giá và tập trung vào việc học hỏi thêm về thị trường",
+          "c": "Giảm bớt exposure và chờ đợi thị trường ổn định hơn",
+          "d": "Đánh giá lại chiến lược và tiếp tục DCA nếu tin tưởng fundamentals",
+          "e": "Tham gia các cộng đồng để chia sẻ và học hỏi kinh nghiệm"
+        },
+        "right_answer": "d",
+        "point": 2,
+        "explanation": "- Đánh giá lại chiến lược giúp kiểm tra xem plan ban đầu có còn phù hợp\n- Tiếp tục DCA nếu fundamentals tốt thể hiện tư duy dài hạn\n- Các phương pháp khác có hạn chế:\n+ Chỉ nghiên cứu thêm là chưa đủ, cần hành động theo kế hoạch\n+ Tạm dừng theo dõi có thể bỏ lỡ thông tin quan trọng\n+ Giảm exposure khi thị trường giảm thường là hành động theo cảm xúc\n+ Tham gia cộng đồng có thể bị ảnh hưởng bởi FUD"
+      },
+      {
+        "id": "8dc7b2f4-8c82-4796-9bb8-27ca5573353f",
+        "question": "Khi các dự án trong danh mục đầu tư đều tăng trưởng tốt, phản ứng nào phù hợp nhất?",
+        "options": {
+          "a": "Duy trì kỷ luật và tuân thủ kế hoạch take profit ban đầu",
+          "b": "Tăng thêm vị thế vì đã xác nhận được xu hướng",
+          "c": "Giữ nguyên danh mục nhưng điều chỉnh stop loss theo giá mới",
+          "d": "Nghiên cứu thêm các dự án mới để đa dạng hóa",
+          "e": "Chia sẻ thành công và khuyên người khác copy danh mục"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "- Tuân thủ kế hoạch ban đầu giúp tránh được tâm lý FOMO khi thị trường tốt\n- Take profit có kỷ luật là yếu tố quan trọng trong quản lý rủi ro dài hạn\n- Các phương pháp khác thường bị ảnh hưởng bởi cảm xúc tích cực quá mức"
+      },
+      {
+        "id": "b05240b8-de64-4017-ace3-72cc3bbeb0cb",
+        "question": "Làm thế nào để duy trì tâm lý ổn định khi nắm giữ crypto dài hạn?",
+        "options": {
+          "a": "Đặt mục tiêu lợi nhuận thực tế và kiểm soát kỳ vọng",
+          "b": "Chia nhỏ danh mục theo tỷ lệ phù hợp với khẩu vị rủi ro",
+          "c": "Chỉ đầu tư số tiền có thể chấp nhận mất và theo dõi định kỳ",
+          "d": "Tập trung vào các dự án đã phát triển lâu năm trong thị trường",
+          "e": "Xây dựng circle tin cậy để thảo luận và chia sẻ quan điểm"
+        },
+        "right_answer": "c",
+        "point": 2,
+        "explanation": "- Đầu tư trong khả năng chấp nhận rủi ro giúp giữ được bình tĩnh khi thị trường biến động\n- Theo dõi định kỳ giúp tránh được các quyết định theo cảm xúc nhất thời\n- Các phương pháp khác có thể tốt nhưng không quan trọng bằng việc đầu tư trong khả năng chịu đựng rủi ro"
+      },
+      {
+        "id": "6eec1b9b-c5c2-4565-9a6f-a5f09880a525",
+        "question": "Trong tình huống thị trường giảm sâu và dài hạn, cách quản lý cảm xúc nào hiệu quả nhất?",
+        "options": {
+          "a": "Tập trung vào công việc chính và chỉ kiểm tra portfolio định kỳ",
+          "b": "Dành thời gian nghiên cứu thêm về thị trường và tích lũy kiến thức",
+          "c": "Tương tác thường xuyên với cộng đồng để chia sẻ tâm lý",
+          "d": "Tập trung phân tích fundamentals của các dự án đang nắm giữ",
+          "e": "Thiết lập lại kế hoạch đầu tư và điều chỉnh mục tiêu"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Tập trung vào công việc chính và kiểm tra định kỳ giúp tránh được những quyết định cảm tính, giảm stress và duy trì được góc nhìn khách quan về thị trường."
+      },
+      {
+        "id": "90f8132e-4c80-4af0-9767-c7a34ff85965",
+        "question": "Khi một dự án trong danh mục tăng giá x5, phương pháp kiểm soát cảm xúc nào phù hợp nhất?",
+        "options": {
+          "a": "Thực hiện ngay kế hoạch take profit đã đề ra từ trước",
+          "b": "Đánh giá lại tiềm năng dự án với mức giá hiện tại",
+          "c": "Tận dụng đà tăng để tối đa hóa lợi nhuận",
+          "d": "Chốt một phần và tái đầu tư vào dự án khác",
+          "e": "Cập nhật stop loss để bảo vệ lợi nhuận"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Việc tuân thủ kế hoạch take profit đã đặt ra từ trước giúp tránh được những quyết định dựa trên cảm xúc tham lam khi thị trường tăng mạnh."
+      },
+      {
+        "id": "7193a929-0608-4327-92ce-945b23dba553",
+        "question": "Phương pháp nào hiệu quả nhất để tránh FOMO khi thị trường tăng nóng?",
+        "options": {
+          "a": "Tập trung vào kế hoạch dài hạn và bỏ qua biến động ngắn hạn",
+          "b": "So sánh với các lần pump trước đây để rút kinh nghiệm",
+          "c": "Tham khảo ý kiến những người có kinh nghiệm",
+          "d": "Đánh giá lại rủi ro của toàn thị trường",
+          "e": "Phân tích các metrics on-chain để xác nhận trend"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Tập trung vào kế hoạch dài hạn giúp tránh được cảm giác bỏ lỡ cơ hội khi thị trường tăng nóng. Việc bỏ qua các biến động ngắn hạn giúp duy trì được chiến lược đầu tư ban đầu."
+      },
+      {
+        "id": "d0d79aad-b8a2-4758-a45e-65a413f44dc7",
+        "question": "Khi một narrative mới xuất hiện và thu hút sự chú ý lớn, cách kiểm soát FOMO hiệu quả nhất là gì?",
+        "options": {
+          "a": "Tự đặt ra thời gian nghiên cứu tối thiểu trước khi ra quyết định",
+          "b": "Đầu tư một phần nhỏ để tránh cảm giác tiếc nuối",
+          "c": "Chờ đợi thị trường điều chỉnh rồi mới tham gia",
+          "d": "Tham khảo quan điểm từ nhiều nguồn khác nhau",
+          "e": "Đánh giá mức độ adoption thực tế của narrative"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Việc tự đặt ra thời gian nghiên cứu tối thiểu (ví dụ 1 tuần) giúp tránh được quyết định vội vàng dựa trên cảm xúc, đồng thời đảm bảo có đủ thời gian đánh giá tiềm năng và rủi ro của narrative."
+      },
+      {
+        "id": "fe738c69-6e4f-4b51-9d30-b1d763a58ed5",
+        "question": "Trong thời điểm FUD lan rộng, phương pháp nào giúp đưa ra quyết định đúng đắn?",
+        "options": {
+          "a": "Xác minh nguồn gốc thông tin và đợi phản hồi chính thức",
+          "b": "Quan sát phản ứng của các whale và smart money",
+          "c": "Theo dõi phản ứng của team dự án và cộng đồng",
+          "d": "Dựa vào kinh nghiệm từ các lần FUD trước đây",
+          "e": "Chờ đợi thị trường ổn định trở lại"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Trong thời điểm FUD, việc xác minh nguồn gốc thông tin và chờ đợi phản hồi chính thức giúp tránh được những quyết định vội vàng dựa trên tin đồn hoặc thông tin chưa được kiểm chứng."
+      },
+      {
+        "id": "ace666c5-4442-400c-b36e-98716b941f77",
+        "question": "Khi một dự án lớn trong thị trường gặp sự cố nghiêm trọng, cách phản ứng nào cho thấy sự kiểm soát cảm xúc tốt nhất?",
+        "options": {
+          "a": "Đánh giá mức độ ảnh hưởng đến các dự án nắm giữ",
+          "b": "Thanh lý ngay các dự án có liên quan",
+          "c": "Tận dụng cơ hội khi thị trường hoảng loạn",
+          "d": "Theo dõi phản ứng từ các nhà đầu tư lớn",
+          "e": "Chuyển một phần sang stablecoin để đảm bảo an toàn"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Đánh giá mức độ ảnh hưởng đến danh mục đang nắm giữ là phản ứng lý trí nhất, giúp đưa ra quyết định dựa trên phân tích chứ không phải hoảng loạn theo đám đông."
+      },
+      {
+        "id": "ed4d56a3-16d3-48a4-abc0-ecdbe93e3635",
+        "question": "Dấu hiệu nào cho thấy một nhà đầu tư đang thiếu kỷ luật trong quản lý danh mục?",
+        "options": {
+          "a": "Thường xuyên điều chỉnh kế hoạch khi thị trường biến động",
+          "b": "Thay đổi tỷ trọng dựa trên tin tức ngắn hạn",
+          "c": "Tập trung đầu tư vào các dự án đang hot",
+          "d": "Có xu hướng gia tăng rủi ro sau các lần thắng lớn",
+          "e": "Hay tìm kiếm cơ hội đầu tư mới"
+        },
+        "right_answer": "d",
+        "point": 2,
+        "explanation": "Tăng mức độ rủi ro sau khi thắng lớn là dấu hiệu rõ ràng của việc thiếu kỷ luật, thể hiện tâm lý chủ quan và đánh mất nguyên tắc quản lý rủi ro ban đầu."
+      },
+      {
+        "id": "77fa08d6-bd20-4bc4-a523-85c5a49e8dd4",
+        "question": "Yếu tố nào quan trọng nhất trong việc duy trì kỷ luật đầu tư dài hạn?",
+        "options": {
+          "a": "Tuân thủ nghiêm ngặt kế hoạch đã đề ra ban đầu",
+          "b": "Thiết lập các mốc take profit và stop loss rõ ràng",
+          "c": "Duy trì journal ghi chép và rút kinh nghiệm định kỳ",
+          "d": "Phân bổ tỷ trọng phù hợp với mức chịu rủi ro",
+          "e": "Cập nhật kiến thức thị trường thường xuyên"
+        },
+        "right_answer": "c",
+        "point": 2,
+        "explanation": "Việc duy trì journal ghi chép và rút kinh nghiệm định kỳ giúp nhà đầu tư nhìn nhận khách quan về các quyết định của mình, học hỏi từ cả thành công và thất bại, từ đó duy trì và cải thiện kỷ luật đầu tư."
+      },
+      {
+        "id": "c8d7a5c4-524e-4a7a-8455-18cc7f47da28",
+        "question": "Khi một dự án vượt kế hoạch lợi nhuận đề ra, phương pháp duy trì kỷ luật nào phù hợp nhất?",
+        "options": {
+          "a": "Thực hiện kế hoạch take profit và tái đầu tư theo chiến lược",
+          "b": "Điều chỉnh mục tiêu lợi nhuận lên cao hơn",
+          "c": "Tăng tỷ trọng do dự án đã chứng minh tiềm năng",
+          "d": "Chốt một phần và để phần còn lại tăng trưởng tự do",
+          "e": "Đánh giá lại toàn bộ chiến lược đầu tư"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Tuân thủ kế hoạch take profit ban đầu và tái đầu tư theo chiến lược đã đề ra thể hiện kỷ luật cao nhất, tránh được những quyết định cảm tính khi dự án đang thành công."
+      }
+    ]
+  }
+}
