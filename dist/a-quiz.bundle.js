@@ -1570,6 +1570,46 @@ const CirclePlay = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/house.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/house.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   __iconNode: () => (/* binding */ __iconNode),
+/* harmony export */   "default": () => (/* binding */ House)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.477.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const __iconNode = [
+  ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
+  [
+    "path",
+    {
+      d: "M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",
+      key: "1d0kgt"
+    }
+  ]
+];
+const House = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("House", __iconNode);
+
+
+//# sourceMappingURL=house.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/shared/src/utils.js":
 /*!****************************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/shared/src/utils.js ***!
@@ -30985,6 +31025,58 @@ Button.propTypes = {
 
 /***/ }),
 
+/***/ "./src/components/PathReport.jsx":
+/*!***************************************!*\
+  !*** ./src/components/PathReport.jsx ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PathReport)
+/* harmony export */ });
+/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
+/* harmony import */ var _QuestionsReport__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuestionsReport */ "./src/components/QuestionsReport.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+function PathReport(_ref) {
+  var pathID = _ref.pathID;
+  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+    quizData = _useStore.quizData,
+    reports = _useStore.reports;
+  var pathData = quizData.find(function (p) {
+    return p.id == pathID;
+  });
+  var currentReport = reports.find(function (r) {
+    return r.pathId == pathID;
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: "path-report",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "path-report__header",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+        children: ["K\u1EBFt qu\u1EA3 ph\u1EA7n tr\u1EAFc nghi\u1EC7m ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+          children: currentReport === null || currentReport === void 0 ? void 0 : currentReport.pathName
+        }), ", b\u1EA1n \u0111\xE3 d\xE0nh \u0111\u01B0\u1EE3c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+          children: currentReport === null || currentReport === void 0 ? void 0 : currentReport.userTotalPoins
+        }), " \u0111i\u1EC3m tr\xEAn t\u1ED5ng s\u1ED1 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
+          children: currentReport === null || currentReport === void 0 ? void 0 : currentReport.pathTotalPoins
+        }), " \u0111i\u1EC3m c\u1EE7a ph\u1EA7n n\xE0y."]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "path-report__questions",
+      children: (pathData === null || pathData === void 0 ? void 0 : pathData.questions) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_QuestionsReport__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        questions: pathData === null || pathData === void 0 ? void 0 : pathData.questions
+      })
+    })]
+  });
+}
+
+/***/ }),
+
 /***/ "./src/components/Question.jsx":
 /*!*************************************!*\
   !*** ./src/components/Question.jsx ***!
@@ -31001,9 +31093,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
 /* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Button */ "./src/components/Button.jsx");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-right.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/house.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-right.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var _excluded = ["quizData", "setCurrentQuestionId"];
+var _excluded = ["quizData", "setCurrentPathId", "setCurrentQuestionId"];
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
@@ -31033,6 +31126,7 @@ function Question(_ref) {
     setAnswer = _useState2[1];
   var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
+    setCurrentPathId = _useStore.setCurrentPathId,
     setCurrentQuestionId = _useStore.setCurrentQuestionId,
     rest = _objectWithoutProperties(_useStore, _excluded);
   var currentPath = quizData.find(function (q) {
@@ -31048,9 +31142,7 @@ function Question(_ref) {
   var nextQuestionId = (_currentPath$question = currentPath.questions[currentQuestionIndex + 1]) === null || _currentPath$question === void 0 ? void 0 : _currentPath$question.id;
   var prevQuestionId = (_currentPath$question2 = currentPath.questions[currentQuestionIndex - 1]) === null || _currentPath$question2 === void 0 ? void 0 : _currentPath$question2.id;
   var totalPoint = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    console.log(_toConsumableArray(rest.userAnwser).filter(function (i) {
-      return i.pathId == __currentPathId;
-    }));
+    // console.log([...rest.userAnwser].filter(i => i.pathId == __currentPathId));
     return _toConsumableArray(rest.userAnwser).filter(function (i) {
       return i.pathId == __currentPathId;
     }).reduce(function (total, question) {
@@ -31079,13 +31171,14 @@ function Question(_ref) {
     }
   };
   var onFinish = function onFinish() {
-    console.log('Finish!!!');
+    // console.log('Finish!!!')
+    rest.updateReport(__currentPathId, totalPoint, 'done');
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "questions",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h4", {
       children: [currentPath.name, " (", currentQuestionIndex + 1, " / ", totalQuestions, ")"]
-    }), " (", totalPoint, ")", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {
       style: {
         margin: "1em 0"
       }
@@ -31127,6 +31220,12 @@ function Question(_ref) {
         onClick: onPrev,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {}), " Tr\u1EDF l\u1EA1i"]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        onClick: function onClick(e) {
+          e.preventDefault();
+          setCurrentPathId(null);
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
         disabled: answer ? false : true,
         variant: "primary",
         onClick: function onClick(e) {
@@ -31139,10 +31238,114 @@ function Question(_ref) {
           }
         },
         children: nextQuestionId ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-          children: ["Ti\u1EBFp t\u1EE5c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
+          children: ["Ti\u1EBFp t\u1EE5c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {})]
         }) : 'Hoàn thành'
       })]
     })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/components/QuestionsReport.jsx":
+/*!********************************************!*\
+  !*** ./src/components/QuestionsReport.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ QuestionsReport)
+/* harmony export */ });
+/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+
+
+function QuestionsReport(_ref) {
+  var questions = _ref.questions;
+  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+    userAnwser = _useStore.userAnwser;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "questions-report-view",
+    children: questions.map(function (question, index) {
+      var id = question.id,
+        point = question.point;
+      var userAnwserItem = userAnwser.find(function (u) {
+        return u.questionId == id;
+      });
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "questions-report",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "questions-report__question-text",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+            className: "questions-report__number",
+            children: ["C\xE2u ", index + 1, ". "]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            dangerouslySetInnerHTML: {
+              __html: question.question.replace(/\n\n/g, '<br/>')
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {
+          style: {
+            margin: "1em 0"
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "questions-report__answer",
+          children: _toConsumableArray(Object.keys(question.options)).map(function (__key, index) {
+            var classes = ['questions-report__answer__item'];
+            var passed = false;
+            if (question.right_answer == __key) {
+              classes.push('questions-report__answer__item--right');
+            }
+            if ((userAnwserItem === null || userAnwserItem === void 0 ? void 0 : userAnwserItem.userAnwser) == __key) {
+              classes.push('questions-report__answer__item--user-selected');
+            }
+            if ((userAnwserItem === null || userAnwserItem === void 0 ? void 0 : userAnwserItem.userAnwser) == __key && question.right_answer == __key) {
+              classes.push('questions-report__answer__item--correct');
+              passed = true;
+            }
+            if ((userAnwserItem === null || userAnwserItem === void 0 ? void 0 : userAnwserItem.userAnwser) == __key && question.right_answer != __key) {
+              classes.push('questions-report__answer__item--wrong');
+            }
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: classes.join(' '),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+                className: "questions-report__answer__item__label",
+                children: [__key, ". "]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+                className: "questions-report__answer__item__content",
+                children: [question.options[__key], passed == true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+                  style: {
+                    marginLeft: '1em'
+                  },
+                  children: ["(+", point, " \u0111i\u1EC3m)"]
+                }) : '']
+              })]
+            }, index);
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {
+          style: {
+            margin: "1em 0"
+          }
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "questions-report__question-explain",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+            children: "Gi\u1EA3i th\xEDch: "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            dangerouslySetInnerHTML: {
+              __html: question === null || question === void 0 ? void 0 : question.explanation
+            }
+          })]
+        })]
+      }, id);
+    })
   });
 }
 
@@ -31245,14 +31448,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
 /* harmony import */ var _QuizPathList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QuizPathList */ "./src/components/QuizPathList.jsx");
 /* harmony import */ var _Question__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Question */ "./src/components/Question.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _PathReport__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PathReport */ "./src/components/PathReport.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 
 
 function Start() {
-  var _userAnwser$find;
   var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
     currentPathId = _useStore.currentPathId,
@@ -31262,22 +31466,37 @@ function Start() {
     userAnwser = _useStore.userAnwser,
     onSetUserAnwser = _useStore.onSetUserAnwser,
     reports = _useStore.reports;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "start",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-      children: "B\u1ED9 c\xE2u h\u1ECFi tr\u1EAFc nghi\u1EC7m A1Academy"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-      children: ["T\u1ED5ng h\u1EE3p v\xE0 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c n\u1EC1n c\u0103n b\u1EA3n trong \u0111\u1EA7u t\u01B0 Crypto cho ng\u01B0\u1EDDi m\u1EDBi. Bao g\u1ED3m ", quizData.length, " ph\u1EA7n, h\xE3y l\u1EA7n l\u01B0\u1EE3t tr\u1EA3 l\u1EDDi \u0111\u1EC3 nh\u1EADn \u0111\u01B0\u1EE3c k\u1EBFt qu\u1EA3 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c \u0111\u1EA7u t\u01B0 c\u1EE7a b\u1EA1n."]
-    }), JSON.stringify(reports), currentPathId ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Question__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      __currentPathId: currentPathId,
-      __currentQuestionId: currentQuestionId,
-      userAnwser: (_userAnwser$find = userAnwser.find(function (u) {
-        return u.id == "".concat(currentPathId, ".").concat(currentQuestionId);
-      })) === null || _userAnwser$find === void 0 ? void 0 : _userAnwser$find.userAnwser,
-      onConfirm: function onConfirm(answer, pID, qID) {
-        onSetUserAnwser(answer, "".concat(pID, ".").concat(qID));
+  var View = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: function () {
+      var currentReport = reports.find(function (r) {
+        return r.pathID == currentPathId;
+      });
+      if ((currentReport === null || currentReport === void 0 ? void 0 : currentReport.status) == 'done') {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_PathReport__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          pathID: currentPathId
+        });
+      } else {
+        var _userAnwser$find;
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Question__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          __currentPathId: currentPathId,
+          __currentQuestionId: currentQuestionId,
+          userAnwser: (_userAnwser$find = userAnwser.find(function (u) {
+            return u.id == "".concat(currentPathId, ".").concat(currentQuestionId);
+          })) === null || _userAnwser$find === void 0 ? void 0 : _userAnwser$find.userAnwser,
+          onConfirm: function onConfirm(answer, pID, qID) {
+            onSetUserAnwser(answer, "".concat(pID, ".").concat(qID));
+          }
+        });
       }
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }()
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "start",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+      children: "B\u1ED9 c\xE2u h\u1ECFi tr\u1EAFc nghi\u1EC7m A1Academy"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
+      children: ["T\u1ED5ng h\u1EE3p v\xE0 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c n\u1EC1n c\u0103n b\u1EA3n trong \u0111\u1EA7u t\u01B0 Crypto cho ng\u01B0\u1EDDi m\u1EDBi. Bao g\u1ED3m ", quizData.length, " ph\u1EA7n, h\xE3y l\u1EA7n l\u01B0\u1EE3t tr\u1EA3 l\u1EDDi \u0111\u1EC3 nh\u1EADn \u0111\u01B0\u1EE3c k\u1EBFt qu\u1EA3 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c \u0111\u1EA7u t\u01B0 c\u1EE7a b\u1EA1n."]
+    }), JSON.stringify(reports), currentPathId ? View : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_2__["default"], {
       onSelect: function onSelect(q) {
         setCurrentPathId(q.id);
         setCurrentQuestionId(q.questions[0].id);
@@ -31395,12 +31614,14 @@ var userAnwser = [];
       questionId: qItem.id,
       userAnwser: '',
       rightAnwser: qItem.right_answer,
-      point: qItem.point
+      point: qItem.point,
+      pathReportViewId: ''
     });
   });
 });
 var reports = [].concat(quizData).map(function (pItem) {
   return {
+    pathName: pItem.name,
     pathID: pItem.id,
     userTotalPoins: 0,
     pathTotalPoins: pItem.total_points,

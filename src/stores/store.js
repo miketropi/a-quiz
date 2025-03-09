@@ -14,11 +14,13 @@ const userAnwser = [];
       userAnwser: '',
       rightAnwser: qItem.right_answer,
       point: qItem.point,
+      pathReportViewId: '',
     })
   })
 })
 const reports = [...quizData].map(pItem => {
   return {
+    pathName: pItem.name,
     pathID: pItem.id,
     userTotalPoins: 0,
     pathTotalPoins: pItem.total_points,
