@@ -46097,6 +46097,459 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/zustand/esm/middleware.mjs":
+/*!*************************************************!*\
+  !*** ./node_modules/zustand/esm/middleware.mjs ***!
+  \*************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   combine: () => (/* binding */ combine),
+/* harmony export */   createJSONStorage: () => (/* binding */ createJSONStorage),
+/* harmony export */   devtools: () => (/* binding */ devtools),
+/* harmony export */   persist: () => (/* binding */ persist),
+/* harmony export */   redux: () => (/* binding */ redux),
+/* harmony export */   subscribeWithSelector: () => (/* binding */ subscribeWithSelector)
+/* harmony export */ });
+const reduxImpl = (reducer, initial) => (set, _get, api) => {
+  api.dispatch = (action) => {
+    set((state) => reducer(state, action), false, action);
+    return action;
+  };
+  api.dispatchFromDevtools = true;
+  return { dispatch: (...a) => api.dispatch(...a), ...initial };
+};
+const redux = reduxImpl;
+
+const trackedConnections = /* @__PURE__ */ new Map();
+const getTrackedConnectionState = (name) => {
+  const api = trackedConnections.get(name);
+  if (!api) return {};
+  return Object.fromEntries(
+    Object.entries(api.stores).map(([key, api2]) => [key, api2.getState()])
+  );
+};
+const extractConnectionInformation = (store, extensionConnector, options) => {
+  if (store === undefined) {
+    return {
+      type: "untracked",
+      connection: extensionConnector.connect(options)
+    };
+  }
+  const existingConnection = trackedConnections.get(options.name);
+  if (existingConnection) {
+    return { type: "tracked", store, ...existingConnection };
+  }
+  const newConnection = {
+    connection: extensionConnector.connect(options),
+    stores: {}
+  };
+  trackedConnections.set(options.name, newConnection);
+  return { type: "tracked", store, ...newConnection };
+};
+const devtoolsImpl = (fn, devtoolsOptions = {}) => (set, get, api) => {
+  const { enabled, anonymousActionType, store, ...options } = devtoolsOptions;
+  let extensionConnector;
+  try {
+    extensionConnector = (enabled != null ? enabled : ( false ? 0 : void 0) !== "production") && window.__REDUX_DEVTOOLS_EXTENSION__;
+  } catch (e) {
+  }
+  if (!extensionConnector) {
+    return fn(set, get, api);
+  }
+  const { connection, ...connectionInformation } = extractConnectionInformation(store, extensionConnector, options);
+  let isRecording = true;
+  api.setState = (state, replace, nameOrAction) => {
+    const r = set(state, replace);
+    if (!isRecording) return r;
+    const action = nameOrAction === undefined ? { type: anonymousActionType || "anonymous" } : typeof nameOrAction === "string" ? { type: nameOrAction } : nameOrAction;
+    if (store === undefined) {
+      connection == null ? undefined : connection.send(action, get());
+      return r;
+    }
+    connection == null ? undefined : connection.send(
+      {
+        ...action,
+        type: `${store}/${action.type}`
+      },
+      {
+        ...getTrackedConnectionState(options.name),
+        [store]: api.getState()
+      }
+    );
+    return r;
+  };
+  const setStateFromDevtools = (...a) => {
+    const originalIsRecording = isRecording;
+    isRecording = false;
+    set(...a);
+    isRecording = originalIsRecording;
+  };
+  const initialState = fn(api.setState, get, api);
+  if (connectionInformation.type === "untracked") {
+    connection == null ? undefined : connection.init(initialState);
+  } else {
+    connectionInformation.stores[connectionInformation.store] = api;
+    connection == null ? undefined : connection.init(
+      Object.fromEntries(
+        Object.entries(connectionInformation.stores).map(([key, store2]) => [
+          key,
+          key === connectionInformation.store ? initialState : store2.getState()
+        ])
+      )
+    );
+  }
+  if (api.dispatchFromDevtools && typeof api.dispatch === "function") {
+    let didWarnAboutReservedActionType = false;
+    const originalDispatch = api.dispatch;
+    api.dispatch = (...a) => {
+      if ( true && a[0].type === "__setState" && !didWarnAboutReservedActionType) {
+        console.warn(
+          '[zustand devtools middleware] "__setState" action type is reserved to set state from the devtools. Avoid using it.'
+        );
+        didWarnAboutReservedActionType = true;
+      }
+      originalDispatch(...a);
+    };
+  }
+  connection.subscribe((message) => {
+    var _a;
+    switch (message.type) {
+      case "ACTION":
+        if (typeof message.payload !== "string") {
+          console.error(
+            "[zustand devtools middleware] Unsupported action format"
+          );
+          return;
+        }
+        return parseJsonThen(
+          message.payload,
+          (action) => {
+            if (action.type === "__setState") {
+              if (store === undefined) {
+                setStateFromDevtools(action.state);
+                return;
+              }
+              if (Object.keys(action.state).length !== 1) {
+                console.error(
+                  `
+                    [zustand devtools middleware] Unsupported __setState action format.
+                    When using 'store' option in devtools(), the 'state' should have only one key, which is a value of 'store' that was passed in devtools(),
+                    and value of this only key should be a state object. Example: { "type": "__setState", "state": { "abc123Store": { "foo": "bar" } } }
+                    `
+                );
+              }
+              const stateFromDevtools = action.state[store];
+              if (stateFromDevtools === undefined || stateFromDevtools === null) {
+                return;
+              }
+              if (JSON.stringify(api.getState()) !== JSON.stringify(stateFromDevtools)) {
+                setStateFromDevtools(stateFromDevtools);
+              }
+              return;
+            }
+            if (!api.dispatchFromDevtools) return;
+            if (typeof api.dispatch !== "function") return;
+            api.dispatch(action);
+          }
+        );
+      case "DISPATCH":
+        switch (message.payload.type) {
+          case "RESET":
+            setStateFromDevtools(initialState);
+            if (store === undefined) {
+              return connection == null ? undefined : connection.init(api.getState());
+            }
+            return connection == null ? undefined : connection.init(getTrackedConnectionState(options.name));
+          case "COMMIT":
+            if (store === undefined) {
+              connection == null ? undefined : connection.init(api.getState());
+              return;
+            }
+            return connection == null ? undefined : connection.init(getTrackedConnectionState(options.name));
+          case "ROLLBACK":
+            return parseJsonThen(message.state, (state) => {
+              if (store === undefined) {
+                setStateFromDevtools(state);
+                connection == null ? undefined : connection.init(api.getState());
+                return;
+              }
+              setStateFromDevtools(state[store]);
+              connection == null ? undefined : connection.init(getTrackedConnectionState(options.name));
+            });
+          case "JUMP_TO_STATE":
+          case "JUMP_TO_ACTION":
+            return parseJsonThen(message.state, (state) => {
+              if (store === undefined) {
+                setStateFromDevtools(state);
+                return;
+              }
+              if (JSON.stringify(api.getState()) !== JSON.stringify(state[store])) {
+                setStateFromDevtools(state[store]);
+              }
+            });
+          case "IMPORT_STATE": {
+            const { nextLiftedState } = message.payload;
+            const lastComputedState = (_a = nextLiftedState.computedStates.slice(-1)[0]) == null ? undefined : _a.state;
+            if (!lastComputedState) return;
+            if (store === undefined) {
+              setStateFromDevtools(lastComputedState);
+            } else {
+              setStateFromDevtools(lastComputedState[store]);
+            }
+            connection == null ? undefined : connection.send(
+              null,
+              // FIXME no-any
+              nextLiftedState
+            );
+            return;
+          }
+          case "PAUSE_RECORDING":
+            return isRecording = !isRecording;
+        }
+        return;
+    }
+  });
+  return initialState;
+};
+const devtools = devtoolsImpl;
+const parseJsonThen = (stringified, f) => {
+  let parsed;
+  try {
+    parsed = JSON.parse(stringified);
+  } catch (e) {
+    console.error(
+      "[zustand devtools middleware] Could not parse the received json",
+      e
+    );
+  }
+  if (parsed !== undefined) f(parsed);
+};
+
+const subscribeWithSelectorImpl = (fn) => (set, get, api) => {
+  const origSubscribe = api.subscribe;
+  api.subscribe = (selector, optListener, options) => {
+    let listener = selector;
+    if (optListener) {
+      const equalityFn = (options == null ? undefined : options.equalityFn) || Object.is;
+      let currentSlice = selector(api.getState());
+      listener = (state) => {
+        const nextSlice = selector(state);
+        if (!equalityFn(currentSlice, nextSlice)) {
+          const previousSlice = currentSlice;
+          optListener(currentSlice = nextSlice, previousSlice);
+        }
+      };
+      if (options == null ? undefined : options.fireImmediately) {
+        optListener(currentSlice, currentSlice);
+      }
+    }
+    return origSubscribe(listener);
+  };
+  const initialState = fn(set, get, api);
+  return initialState;
+};
+const subscribeWithSelector = subscribeWithSelectorImpl;
+
+const combine = (initialState, create) => (...a) => Object.assign({}, initialState, create(...a));
+
+function createJSONStorage(getStorage, options) {
+  let storage;
+  try {
+    storage = getStorage();
+  } catch (e) {
+    return;
+  }
+  const persistStorage = {
+    getItem: (name) => {
+      var _a;
+      const parse = (str2) => {
+        if (str2 === null) {
+          return null;
+        }
+        return JSON.parse(str2, options == null ? undefined : options.reviver);
+      };
+      const str = (_a = storage.getItem(name)) != null ? _a : null;
+      if (str instanceof Promise) {
+        return str.then(parse);
+      }
+      return parse(str);
+    },
+    setItem: (name, newValue) => storage.setItem(
+      name,
+      JSON.stringify(newValue, options == null ? undefined : options.replacer)
+    ),
+    removeItem: (name) => storage.removeItem(name)
+  };
+  return persistStorage;
+}
+const toThenable = (fn) => (input) => {
+  try {
+    const result = fn(input);
+    if (result instanceof Promise) {
+      return result;
+    }
+    return {
+      then(onFulfilled) {
+        return toThenable(onFulfilled)(result);
+      },
+      catch(_onRejected) {
+        return this;
+      }
+    };
+  } catch (e) {
+    return {
+      then(_onFulfilled) {
+        return this;
+      },
+      catch(onRejected) {
+        return toThenable(onRejected)(e);
+      }
+    };
+  }
+};
+const persistImpl = (config, baseOptions) => (set, get, api) => {
+  let options = {
+    storage: createJSONStorage(() => localStorage),
+    partialize: (state) => state,
+    version: 0,
+    merge: (persistedState, currentState) => ({
+      ...currentState,
+      ...persistedState
+    }),
+    ...baseOptions
+  };
+  let hasHydrated = false;
+  const hydrationListeners = /* @__PURE__ */ new Set();
+  const finishHydrationListeners = /* @__PURE__ */ new Set();
+  let storage = options.storage;
+  if (!storage) {
+    return config(
+      (...args) => {
+        console.warn(
+          `[zustand persist middleware] Unable to update item '${options.name}', the given storage is currently unavailable.`
+        );
+        set(...args);
+      },
+      get,
+      api
+    );
+  }
+  const setItem = () => {
+    const state = options.partialize({ ...get() });
+    return storage.setItem(options.name, {
+      state,
+      version: options.version
+    });
+  };
+  const savedSetState = api.setState;
+  api.setState = (state, replace) => {
+    savedSetState(state, replace);
+    void setItem();
+  };
+  const configResult = config(
+    (...args) => {
+      set(...args);
+      void setItem();
+    },
+    get,
+    api
+  );
+  api.getInitialState = () => configResult;
+  let stateFromStorage;
+  const hydrate = () => {
+    var _a, _b;
+    if (!storage) return;
+    hasHydrated = false;
+    hydrationListeners.forEach((cb) => {
+      var _a2;
+      return cb((_a2 = get()) != null ? _a2 : configResult);
+    });
+    const postRehydrationCallback = ((_b = options.onRehydrateStorage) == null ? undefined : _b.call(options, (_a = get()) != null ? _a : configResult)) || undefined;
+    return toThenable(storage.getItem.bind(storage))(options.name).then((deserializedStorageValue) => {
+      if (deserializedStorageValue) {
+        if (typeof deserializedStorageValue.version === "number" && deserializedStorageValue.version !== options.version) {
+          if (options.migrate) {
+            const migration = options.migrate(
+              deserializedStorageValue.state,
+              deserializedStorageValue.version
+            );
+            if (migration instanceof Promise) {
+              return migration.then((result) => [true, result]);
+            }
+            return [true, migration];
+          }
+          console.error(
+            `State loaded from storage couldn't be migrated since no migrate function was provided`
+          );
+        } else {
+          return [false, deserializedStorageValue.state];
+        }
+      }
+      return [false, undefined];
+    }).then((migrationResult) => {
+      var _a2;
+      const [migrated, migratedState] = migrationResult;
+      stateFromStorage = options.merge(
+        migratedState,
+        (_a2 = get()) != null ? _a2 : configResult
+      );
+      set(stateFromStorage, true);
+      if (migrated) {
+        return setItem();
+      }
+    }).then(() => {
+      postRehydrationCallback == null ? undefined : postRehydrationCallback(stateFromStorage, undefined);
+      stateFromStorage = get();
+      hasHydrated = true;
+      finishHydrationListeners.forEach((cb) => cb(stateFromStorage));
+    }).catch((e) => {
+      postRehydrationCallback == null ? undefined : postRehydrationCallback(undefined, e);
+    });
+  };
+  api.persist = {
+    setOptions: (newOptions) => {
+      options = {
+        ...options,
+        ...newOptions
+      };
+      if (newOptions.storage) {
+        storage = newOptions.storage;
+      }
+    },
+    clearStorage: () => {
+      storage == null ? undefined : storage.removeItem(options.name);
+    },
+    getOptions: () => options,
+    rehydrate: () => hydrate(),
+    hasHydrated: () => hasHydrated,
+    onHydrate: (cb) => {
+      hydrationListeners.add(cb);
+      return () => {
+        hydrationListeners.delete(cb);
+      };
+    },
+    onFinishHydration: (cb) => {
+      finishHydrationListeners.add(cb);
+      return () => {
+        finishHydrationListeners.delete(cb);
+      };
+    }
+  };
+  if (!options.skipHydration) {
+    hydrate();
+  }
+  return stateFromStorage || configResult;
+};
+const persist = persistImpl;
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/zustand/esm/middleware/immer.mjs":
 /*!*******************************************************!*\
   !*** ./node_modules/zustand/esm/middleware/immer.mjs ***!
@@ -46417,7 +46870,7 @@ function MainReport() {
           className: "main-report__radar",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_chartjs_2__WEBPACK_IMPORTED_MODULE_4__.Radar, {
             data: {
-              labels: [].concat(_toConsumableArray(labels), ['Sức Khỏe Tài Chính', 'Khả Năng Giải Quyết Vấn Đề']),
+              labels: _toConsumableArray(labels),
               datasets: [].concat(_toConsumableArray(datasets), [{
                 label: '__',
                 data: [100, 0]
@@ -47084,6 +47537,28 @@ module.exports = /*#__PURE__*/JSON.parse('{"path":{"id":"c0efedcc-dafa-4cb7-80ee
 
 /***/ }),
 
+/***/ "./src/data/quiz-path-4.json":
+/*!***********************************!*\
+  !*** ./src/data/quiz-path-4.json ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"path":{"id":"e4f8b9c2-d6a3-4f15-9e87-1c2d3b4a5e6f","name":"Sức Khỏe Tài Chính","total_questions":5,"total_points":10,"questions":[{"id":"a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d","question":"Theo nguyên tắc bảo toàn vốn, tỷ lệ đầu tư vào crypto so với tổng tài sản nên là bao nhiêu?","options":{"a":"Tối đa 5-10% cho mọi nhà đầu tư","b":"15-20% với điều kiện có thu nhập ổn định","c":"25-30% nếu còn trẻ và độc thân","d":"40-50% nếu có kinh nghiệm thị trường","e":">50% nếu tin tưởng vào tương lai crypto"},"right_answer":"a","point":2,"explanation":"Nguyên tắc bảo toàn vốn đặt lên hàng đầu. 5-10% đủ để tận dụng tiềm năng tăng trưởng. Tỷ lệ này áp dụng cho mọi người để đảm bảo an toàn tài chính. Kinh nghiệm không phải yếu tố quyết định trong việc phân bổ tài sản vào loại tài sản rủi ro cao"},{"id":"b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e","question":"Trong việc quản lý tài chính cá nhân khi đầu tư crypto, thứ tự ưu tiên nào là hợp lý nhất?","options":{"a":"Chi tiêu thiết yếu > Quỹ khẩn cấp > Đầu tư an toàn > Crypto","b":"Đầu tư crypto > Tiết kiệm > Chi tiêu > Quỹ khẩn cấp","c":"Tiết kiệm > Crypto > Chi tiêu > Đầu tư an toàn","d":"Crypto > Chi tiêu > Quỹ khẩn cấp > Tiết kiệm","e":"Chi tiêu > Crypto > Tiết kiệm > Quỹ khẩn cấp"},"right_answer":"a","point":2,"explanation":"Ưu tiên chi tiêu thiết yếu và xây dựng quỹ khẩn cấp trước khi đầu tư crypto là nền tảng của sức khỏe tài chính, giúp đảm bảo cuộc sống ổn định và tránh phải bán crypto khi cần tiền gấp."},{"id":"c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f","question":"Khi nào KHÔNG NÊN tăng tỷ trọng đầu tư vào crypto?","options":{"a":"Khi tỷ lệ nợ/thu nhập hàng tháng vượt quá 30%","b":"Khi quỹ dự phòng chỉ đủ cho 2 tháng chi tiêu","c":"Khi phải vay nợ để đầu tư thêm","d":"Tất cả các điều trên","e":"Chỉ b và c"},"right_answer":"d","point":2,"explanation":"Không nên tăng tỷ trọng crypto khi có bất kỳ dấu hiệu nào về áp lực tài chính, bao gồm nợ cao, thiếu quỹ dự phòng hoặc phải vay nợ để đầu tư."},{"id":"d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8g","question":"Phương pháp nào hiệu quả nhất để bảo vệ sức khỏe tài chính khi đầu tư crypto?","options":{"a":"Đa dạng hóa danh mục đầu tư theo tỷ lệ phù hợp với thu nhập","b":"Chỉ đầu tư vào các dự án đã được kiểm chứng","c":"Tập trung vào một vài dự án tiềm năng","d":"Đầu tư theo signal của các chuyên gia","e":"Tham gia các nhóm đầu tư có uy tín"},"right_answer":"a","point":2,"explanation":"Đa dạng hóa danh mục theo tỷ lệ phù hợp với thu nhập giúp giảm thiểu rủi ro, đồng thời đảm bảo việc đầu tư không ảnh hưởng đến cuộc sống và các kế hoạch tài chính khác."},{"id":"e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8g9h","question":"Tần suất nào phù hợp nhất để review và điều chỉnh kế hoạch tài chính khi đầu tư crypto?","options":{"a":"Review hàng tháng, điều chỉnh mỗi quý nếu cần thiết","b":"Review hàng ngày, điều chỉnh theo biến động thị trường","c":"Review hàng tuần, điều chỉnh hàng tháng","d":"Review mỗi quý, điều chỉnh mỗi năm","e":"Chỉ review và điều chỉnh khi thị trường biến động mạnh"},"right_answer":"a","point":2,"explanation":"Review hàng tháng giúp nắm bắt được tình hình tài chính và thị trường, trong khi điều chỉnh mỗi quý tránh được các quyết định vội vàng và đảm bảo đủ thời gian đánh giá hiệu quả của kế hoạch."}]}}');
+
+/***/ }),
+
+/***/ "./src/data/quiz-path-5.json":
+/*!***********************************!*\
+  !*** ./src/data/quiz-path-5.json ***!
+  \***********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = /*#__PURE__*/JSON.parse('{"path":{"id":"f5g6h7i8-j9k0-4l1m-2n3o-4p5q6r7s8t9u","name":"Khả Năng Giải Quyết Vấn Đề","total_questions":8,"total_points":16,"questions":[{"id":"a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p","question":"Khi một dự án bạn đầu tư bị hack, phản ứng nào phù hợp nhất?","options":{"a":"Kiểm tra các nguồn thông tin chính thức và phản ứng của team","b":"Đợi smart contract audit report và đánh giá mức độ thiệt hại","c":"Xem xét phản ứng của cộng đồng và các nhà đầu tư lớn","d":"Theo dõi giá và volume để đánh giá tác động tới thị trường","e":"Phân tích khả năng phục hồi dựa trên lịch sử các vụ hack tương tự"},"right_answer":"b","point":2,"explanation":"Audit report là nguồn thông tin kỹ thuật đáng tin cậy nhất về mức độ nghiêm trọng của vụ hack. Đánh giá thiệt hại thực tế giúp đưa ra quyết định dựa trên dữ liệu. Các phương án khác có hạn chế: thông tin chính thức có thể chậm hoặc thiếu chi tiết kỹ thuật, phản ứng cộng đồng thường thiên về cảm xúc, biến động giá không phản ánh chính xác mức độ thiệt hại, so sánh với các vụ hack khác có thể không phù hợp do mỗi trường hợp đều khác biệt"},{"id":"b2c3d4e5-f6g7-4h8i-9j0k-1l2m3n4o5p6q","question":"Trong thị trường panic sell, phương pháp xử lý nào hiệu quả nhất?","options":{"a":"Phân tích nguyên nhân và nguồn gốc của đợt dump từ các nguồn thông tin chính thống","b":"Đánh giá riêng tác động của sự kiện lên từng dự án và điều chỉnh theo kế hoạch sẵn có","c":"Xem xét các chỉ số RSI, Volume và hành vi nhà đầu tư trong các đợt panic trước đây","d":"Theo dõi hoạt động của top holders và dòng tiền institutional thông qua on-chain data","e":"Sử dụng fear & greed index kết hợp với các chỉ báo social sentiment để tìm bottom"},"right_answer":"b","point":2,"explanation":"Đánh giá tác động riêng lẻ giúp có cái nhìn chi tiết cho từng dự án. Mỗi dự án có đặc thù riêng và chịu ảnh hưởng khác nhau. Quyết định dựa trên kế hoạch sẵn có giúp tránh hành động theo cảm xúc. Các phương án khác có hạn chế: tìm nguyên nhân có thể mất nhiều thời gian, các đợt panic sell trong quá khứ có context khác nhau, hành vi whale có thể gây nhiễu, các chỉ báo sentiment thường là lagging indicators"},{"id":"c3d4e5f6-g7h8-4i9j-0k1l-2m3n4o5p6q7r","question":"Khi một altcoin trong danh mục tăng 300% trong 24h, phương pháp quản lý rủi ro nào hiệu quả nhất?","options":{"a":"Take profit 50% position tại các mức tăng quan trọng và trailing stop cho phần còn lại","b":"Take profit 30% và đặt breakeven stop loss cho 70% position còn lại","c":"Chốt lời toàn bộ và chờ pullback để tái tích lũy nếu xu hướng vẫn tốt","d":"Take profit 20% và tái phân bổ vào các dự án cùng narrative","e":"Giữ nguyên position và đặt mental stop loss ở mức entry"},"right_answer":"b","point":2,"explanation":"Take profit một phần và đặt breakeven stop loss giúp bảo vệ lợi nhuận trong khi vẫn duy trì khả năng hưởng lợi từ đà tăng tiếp theo. Tỷ lệ 30-70 là sự cân bằng hợp lý giữa bảo toàn lợi nhuận và tối ưu hóa tiềm năng tăng trưởng"},{"id":"d4e5f6g7-h8i9-4j0k-1l2m-3n4o5p6q7r8s","question":"Trong giai đoạn thị trường biến động mạnh, chiến lược bảo vệ danh mục nào hiệu quả nhất?","options":{"a":"Chuyển 70% danh mục sang stablecoin và 30% giữ các bluechip","b":"Duy trì tỷ lệ 50-50 giữa layer 1 bluechip và các dự án tiềm năng","c":"Giảm 30% exposure và đặt các limit orders ở vùng hỗ trợ mạnh","d":"Phân bổ 40% stablecoin, 40% bluechip, 20% các dự án triển vọng","e":"Duy trì danh mục hiện tại và tăng DCA vào các dự án mục tiêu"},"right_answer":"d","point":2,"explanation":"Phân bổ 40-40-20 tạo sự cân bằng tối ưu giữa an toàn và cơ hội tăng trưởng. 40% stablecoin đảm bảo thanh khoản và khả năng tận dụng cơ hội, 40% bluechip giữ vững giá trị danh mục, 20% dự án triển vọng duy trì tiềm năng tăng trưởng"},{"id":"e5f6g7h8-i9j0-4k1l-2m3n-4o5p6q7r8s9t","question":"Khi một sector mới nổi trong crypto (như AI, GameFi...), phương pháp đánh giá nào hiệu quả nhất?","options":{"a":"Phân tích TVL growth và user adoption của top 5 dự án đầu ngành","b":"So sánh protocol revenue và token metrics giữa các dự án cùng sector","c":"Đánh giá tốc độ phát triển của ecosystem và chất lượng các partnership","d":"Theo dõi venture capital funding và các vòng gọi vốn private","e":"Nghiên cứu tokenomics và vesting schedule của team/investors"},"right_answer":"b","point":2,"explanation":"Protocol revenue là chỉ số thực tế nhất về hiệu quả hoạt động của dự án. Token metrics giúp so sánh định giá giữa các dự án. Kết hợp 2 yếu tố này giúp xác định dự án nào có hiệu quả thực sự, tìm ra dự án có định giá hợp lý, tránh các dự án chỉ tốt về mặt marketing. Các phương án khác có hạn chế: TVL có thể bị thao túng bởi farming rewards, partnership không phải lúc nào cũng tạo ra giá trị, VC funding không đảm bảo thành công, tokenomics tốt vẫn cần có sản phẩm thực tế"},{"id":"f6g7h8i9-j0k1-4l2m-3n4o-5p6q7r8s9t0u","question":"Trong thị trường sideway kéo dài, phương pháp tích lũy nào hiệu quả nhất?","options":{"a":"DCA 40% danh mục vào layer 1 bluechip theo tuần","b":"Chia 50% ngân sách thành các limit orders tại vùng hỗ trợ","c":"Tích lũy 30% cho narrative mới và 20% cho dự án đã có product","d":"Set buy orders với 60% ngân sách ở các mức giá quan trọng","e":"Phân bổ 70% vào staking/farming và 30% chờ cơ hội"},"right_answer":"c","point":2,"explanation":"30% cho narrative mới giúp nắm bắt cơ hội tăng trưởng, 20% cho dự án có product đảm bảo yếu tố an toàn. Tỷ lệ này cân bằng giữa rủi ro và cơ hội, dự án mới và dự án đã proven, tiềm năng tăng trưởng và độ an toàn. Các phương án khác: DCA vào bluechip có thể bỏ lỡ cơ hội ở các dự án mới, limit orders có thể không được kích hoạt, 60-70% là tỷ lệ quá cao cho một chiến lược"},{"id":"g7h8i9j0-k1l2-4m3n-4o5p-6q7r8s9t0u1v","question":"Khi chiến lược không hiệu quả, phương pháp điều chỉnh nào phù hợp nhất?","options":{"a":"Điều chỉnh 30% tỷ trọng và đánh giá trong 2 tuần","b":"Giảm 50% exposure và tìm kiếm cơ hội ở các sector khác","c":"Tạm dừng 70% hoạt động và phân tích lại toàn bộ thị trường","d":"Chuyển 40% sang stablecoin và tái đánh giá từng dự án","e":"Duy trì 80% chiến lược cũ và thử nghiệm 20% phương pháp mới"},"right_answer":"e","point":2,"explanation":"80-20 là tỷ lệ cân bằng giữa ổn định và đổi mới. Duy trì 80% chiến lược cũ giúp không thay đổi quá đột ngột, giữ được những phần đang hoạt động tốt, đảm bảo tính liên tục của danh mục. 20% thử nghiệm cho phép test phương pháp mới với rủi ro thấp, thu thập dữ liệu để đánh giá, điều chỉnh dần dần nếu hiệu quả. Các phương án khác quá cực đoan: 30-50% là thay đổi quá lớn, tạm dừng 70% có thể bỏ lỡ cơ hội, chuyển 40% sang stablecoin làm giảm hiệu suất"},{"id":"h8i9j0k1-l2m3-4n4o-5p6q-7r8s9t0u1v2w","question":"Trong giai đoạn bear market kéo dài, phương pháp tối ưu nào giúp tận dụng tốt nhất cơ hội?","options":{"a":"Nghiên cứu 3-5 dự án tiềm năng và DCA theo tỷ lệ phân bổ cố định","b":"Tập trung theo dõi hoạt động phát triển sản phẩm của các dự án đã chọn","c":"Cập nhật kiến thức và tìm hiểu các narrative mới đang được xây dựng","d":"Tham gia sâu vào các protocol và trải nghiệm sản phẩm thực tế","e":"Tích lũy các token có tokenomics tốt và giảm mạnh về giá"},"right_answer":"d","point":2,"explanation":"Tham gia sâu vào protocol giúp hiểu rõ giá trị thực của dự án, phát hiện các vấn đề tiềm ẩn, đánh giá được khả năng phát triển dài hạn, có góc nhìn của user thực. Trải nghiệm sản phẩm thực tế giúp định giá chính xác hơn, tránh các dự án chỉ có marketing, xác định được competitive advantage. Các phương án khác có hạn chế: DCA máy móc có thể bỏ lỡ cơ hội tốt hơn, chỉ theo dõi mà không tham gia thiếu góc nhìn thực tế, narrative mới trong bear market thường chưa có sản phẩm thật, token giảm giá không đảm bảo sẽ hồi phục"}]}}');
+
+/***/ }),
+
 /***/ "./src/main.js":
 /*!*********************!*\
   !*** ./src/main.js ***!
@@ -47139,11 +47614,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! zustand */ "./node_modules/zustand/esm/react.mjs");
-/* harmony import */ var zustand_middleware_immer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! zustand/middleware/immer */ "./node_modules/zustand/esm/middleware/immer.mjs");
+/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! zustand */ "./node_modules/zustand/esm/react.mjs");
+/* harmony import */ var zustand_middleware__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! zustand/middleware */ "./node_modules/zustand/esm/middleware.mjs");
+/* harmony import */ var zustand_middleware_immer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! zustand/middleware/immer */ "./node_modules/zustand/esm/middleware/immer.mjs");
 /* harmony import */ var _data_quiz_path_1_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../data/quiz-path-1.json */ "./src/data/quiz-path-1.json");
 /* harmony import */ var _data_quiz_path_2_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../data/quiz-path-2.json */ "./src/data/quiz-path-2.json");
 /* harmony import */ var _data_quiz_path_3_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../data/quiz-path-3.json */ "./src/data/quiz-path-3.json");
+/* harmony import */ var _data_quiz_path_4_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../data/quiz-path-4.json */ "./src/data/quiz-path-4.json");
+/* harmony import */ var _data_quiz_path_5_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data/quiz-path-5.json */ "./src/data/quiz-path-5.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -47161,7 +47639,10 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
-var quizData = [_data_quiz_path_1_json__WEBPACK_IMPORTED_MODULE_0__.path, _data_quiz_path_2_json__WEBPACK_IMPORTED_MODULE_1__.path, _data_quiz_path_3_json__WEBPACK_IMPORTED_MODULE_2__.path];
+
+
+
+var quizData = [_data_quiz_path_1_json__WEBPACK_IMPORTED_MODULE_0__.path, _data_quiz_path_2_json__WEBPACK_IMPORTED_MODULE_1__.path, _data_quiz_path_3_json__WEBPACK_IMPORTED_MODULE_2__.path, _data_quiz_path_4_json__WEBPACK_IMPORTED_MODULE_3__.path, _data_quiz_path_5_json__WEBPACK_IMPORTED_MODULE_4__.path];
 var userAnwser = [];
 [].concat(quizData).map(function (pItem) {
   return _toConsumableArray(pItem.questions).map(function (qItem) {
@@ -47195,9 +47676,7 @@ var initialState = {
   userAnwser: userAnwser,
   reports: reports
 };
-
-// Create store with Zustand + Immer
-var useStore = (0,zustand__WEBPACK_IMPORTED_MODULE_3__.create)((0,zustand_middleware_immer__WEBPACK_IMPORTED_MODULE_4__.immer)(function (set) {
+var persistStore = function persistStore(set, get) {
   return _objectSpread(_objectSpread({}, initialState), {}, {
     setCurrentPathId: function setCurrentPathId(pathId) {
       set(function (state) {
@@ -47234,6 +47713,16 @@ var useStore = (0,zustand__WEBPACK_IMPORTED_MODULE_3__.create)((0,zustand_middle
       });
     }
   });
+};
+var useStore = (0,zustand__WEBPACK_IMPORTED_MODULE_5__.create)((0,zustand_middleware__WEBPACK_IMPORTED_MODULE_6__.persist)((0,zustand_middleware_immer__WEBPACK_IMPORTED_MODULE_7__.immer)(persistStore), {
+  name: 'quiz-storage',
+  version: 1,
+  partialize: function partialize(state) {
+    return {
+      userAnwser: state.userAnwser,
+      reports: state.reports
+    };
+  }
 }));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useStore);
 

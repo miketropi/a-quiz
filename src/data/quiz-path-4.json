@@ -1,0 +1,80 @@
+{
+  "path": {
+    "id": "e4f8b9c2-d6a3-4f15-9e87-1c2d3b4a5e6f",
+    "name": "Sức Khỏe Tài Chính",
+    "total_questions": 5,
+    "total_points": 10,
+    "questions": [
+      {
+        "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+        "question": "Theo nguyên tắc bảo toàn vốn, tỷ lệ đầu tư vào crypto so với tổng tài sản nên là bao nhiêu?",
+        "options": {
+          "a": "Tối đa 5-10% cho mọi nhà đầu tư",
+          "b": "15-20% với điều kiện có thu nhập ổn định",
+          "c": "25-30% nếu còn trẻ và độc thân",
+          "d": "40-50% nếu có kinh nghiệm thị trường",
+          "e": ">50% nếu tin tưởng vào tương lai crypto"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Nguyên tắc bảo toàn vốn đặt lên hàng đầu. 5-10% đủ để tận dụng tiềm năng tăng trưởng. Tỷ lệ này áp dụng cho mọi người để đảm bảo an toàn tài chính. Kinh nghiệm không phải yếu tố quyết định trong việc phân bổ tài sản vào loại tài sản rủi ro cao"
+      },
+      {
+        "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+        "question": "Trong việc quản lý tài chính cá nhân khi đầu tư crypto, thứ tự ưu tiên nào là hợp lý nhất?",
+        "options": {
+          "a": "Chi tiêu thiết yếu > Quỹ khẩn cấp > Đầu tư an toàn > Crypto",
+          "b": "Đầu tư crypto > Tiết kiệm > Chi tiêu > Quỹ khẩn cấp",
+          "c": "Tiết kiệm > Crypto > Chi tiêu > Đầu tư an toàn",
+          "d": "Crypto > Chi tiêu > Quỹ khẩn cấp > Tiết kiệm",
+          "e": "Chi tiêu > Crypto > Tiết kiệm > Quỹ khẩn cấp"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Ưu tiên chi tiêu thiết yếu và xây dựng quỹ khẩn cấp trước khi đầu tư crypto là nền tảng của sức khỏe tài chính, giúp đảm bảo cuộc sống ổn định và tránh phải bán crypto khi cần tiền gấp."
+      },
+      {
+        "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+        "question": "Khi nào KHÔNG NÊN tăng tỷ trọng đầu tư vào crypto?",
+        "options": {
+          "a": "Khi tỷ lệ nợ/thu nhập hàng tháng vượt quá 30%",
+          "b": "Khi quỹ dự phòng chỉ đủ cho 2 tháng chi tiêu",
+          "c": "Khi phải vay nợ để đầu tư thêm",
+          "d": "Tất cả các điều trên",
+          "e": "Chỉ b và c"
+        },
+        "right_answer": "d",
+        "point": 2,
+        "explanation": "Không nên tăng tỷ trọng crypto khi có bất kỳ dấu hiệu nào về áp lực tài chính, bao gồm nợ cao, thiếu quỹ dự phòng hoặc phải vay nợ để đầu tư."
+      },
+      {
+        "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8g",
+        "question": "Phương pháp nào hiệu quả nhất để bảo vệ sức khỏe tài chính khi đầu tư crypto?",
+        "options": {
+          "a": "Đa dạng hóa danh mục đầu tư theo tỷ lệ phù hợp với thu nhập",
+          "b": "Chỉ đầu tư vào các dự án đã được kiểm chứng",
+          "c": "Tập trung vào một vài dự án tiềm năng",
+          "d": "Đầu tư theo signal của các chuyên gia",
+          "e": "Tham gia các nhóm đầu tư có uy tín"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Đa dạng hóa danh mục theo tỷ lệ phù hợp với thu nhập giúp giảm thiểu rủi ro, đồng thời đảm bảo việc đầu tư không ảnh hưởng đến cuộc sống và các kế hoạch tài chính khác."
+      },
+      {
+        "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8g9h",
+        "question": "Tần suất nào phù hợp nhất để review và điều chỉnh kế hoạch tài chính khi đầu tư crypto?",
+        "options": {
+          "a": "Review hàng tháng, điều chỉnh mỗi quý nếu cần thiết",
+          "b": "Review hàng ngày, điều chỉnh theo biến động thị trường",
+          "c": "Review hàng tuần, điều chỉnh hàng tháng",
+          "d": "Review mỗi quý, điều chỉnh mỗi năm",
+          "e": "Chỉ review và điều chỉnh khi thị trường biến động mạnh"
+        },
+        "right_answer": "a",
+        "point": 2,
+        "explanation": "Review hàng tháng giúp nắm bắt được tình hình tài chính và thị trường, trong khi điều chỉnh mỗi quý tránh được các quyết định vội vàng và đảm bảo đủ thời gian đánh giá hiệu quả của kế hoạch."
+      }
+    ]
+  }
+}

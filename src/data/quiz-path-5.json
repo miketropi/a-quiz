@@ -1,0 +1,122 @@
+{
+  "path": {
+    "id": "f5g6h7i8-j9k0-4l1m-2n3o-4p5q6r7s8t9u",
+    "name": "Khả Năng Giải Quyết Vấn Đề",
+    "total_questions": 8,
+    "total_points": 16,
+    "questions": [
+      {
+        "id": "a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p",
+        "question": "Khi một dự án bạn đầu tư bị hack, phản ứng nào phù hợp nhất?",
+        "options": {
+          "a": "Kiểm tra các nguồn thông tin chính thức và phản ứng của team",
+          "b": "Đợi smart contract audit report và đánh giá mức độ thiệt hại",
+          "c": "Xem xét phản ứng của cộng đồng và các nhà đầu tư lớn",
+          "d": "Theo dõi giá và volume để đánh giá tác động tới thị trường",
+          "e": "Phân tích khả năng phục hồi dựa trên lịch sử các vụ hack tương tự"
+        },
+        "right_answer": "b",
+        "point": 2,
+        "explanation": "Audit report là nguồn thông tin kỹ thuật đáng tin cậy nhất về mức độ nghiêm trọng của vụ hack. Đánh giá thiệt hại thực tế giúp đưa ra quyết định dựa trên dữ liệu. Các phương án khác có hạn chế: thông tin chính thức có thể chậm hoặc thiếu chi tiết kỹ thuật, phản ứng cộng đồng thường thiên về cảm xúc, biến động giá không phản ánh chính xác mức độ thiệt hại, so sánh với các vụ hack khác có thể không phù hợp do mỗi trường hợp đều khác biệt"
+      },
+      {
+        "id": "b2c3d4e5-f6g7-4h8i-9j0k-1l2m3n4o5p6q",
+        "question": "Trong thị trường panic sell, phương pháp xử lý nào hiệu quả nhất?",
+        "options": {
+          "a": "Phân tích nguyên nhân và nguồn gốc của đợt dump từ các nguồn thông tin chính thống",
+          "b": "Đánh giá riêng tác động của sự kiện lên từng dự án và điều chỉnh theo kế hoạch sẵn có",
+          "c": "Xem xét các chỉ số RSI, Volume và hành vi nhà đầu tư trong các đợt panic trước đây",
+          "d": "Theo dõi hoạt động của top holders và dòng tiền institutional thông qua on-chain data",
+          "e": "Sử dụng fear & greed index kết hợp với các chỉ báo social sentiment để tìm bottom"
+        },
+        "right_answer": "b",
+        "point": 2,
+        "explanation": "Đánh giá tác động riêng lẻ giúp có cái nhìn chi tiết cho từng dự án. Mỗi dự án có đặc thù riêng và chịu ảnh hưởng khác nhau. Quyết định dựa trên kế hoạch sẵn có giúp tránh hành động theo cảm xúc. Các phương án khác có hạn chế: tìm nguyên nhân có thể mất nhiều thời gian, các đợt panic sell trong quá khứ có context khác nhau, hành vi whale có thể gây nhiễu, các chỉ báo sentiment thường là lagging indicators"
+      },
+      {
+        "id": "c3d4e5f6-g7h8-4i9j-0k1l-2m3n4o5p6q7r",
+        "question": "Khi một altcoin trong danh mục tăng 300% trong 24h, phương pháp quản lý rủi ro nào hiệu quả nhất?",
+        "options": {
+          "a": "Take profit 50% position tại các mức tăng quan trọng và trailing stop cho phần còn lại",
+          "b": "Take profit 30% và đặt breakeven stop loss cho 70% position còn lại",
+          "c": "Chốt lời toàn bộ và chờ pullback để tái tích lũy nếu xu hướng vẫn tốt",
+          "d": "Take profit 20% và tái phân bổ vào các dự án cùng narrative",
+          "e": "Giữ nguyên position và đặt mental stop loss ở mức entry"
+        },
+        "right_answer": "b",
+        "point": 2,
+        "explanation": "Take profit một phần và đặt breakeven stop loss giúp bảo vệ lợi nhuận trong khi vẫn duy trì khả năng hưởng lợi từ đà tăng tiếp theo. Tỷ lệ 30-70 là sự cân bằng hợp lý giữa bảo toàn lợi nhuận và tối ưu hóa tiềm năng tăng trưởng"
+      },
+      {
+        "id": "d4e5f6g7-h8i9-4j0k-1l2m-3n4o5p6q7r8s",
+        "question": "Trong giai đoạn thị trường biến động mạnh, chiến lược bảo vệ danh mục nào hiệu quả nhất?",
+        "options": {
+          "a": "Chuyển 70% danh mục sang stablecoin và 30% giữ các bluechip",
+          "b": "Duy trì tỷ lệ 50-50 giữa layer 1 bluechip và các dự án tiềm năng",
+          "c": "Giảm 30% exposure và đặt các limit orders ở vùng hỗ trợ mạnh",
+          "d": "Phân bổ 40% stablecoin, 40% bluechip, 20% các dự án triển vọng",
+          "e": "Duy trì danh mục hiện tại và tăng DCA vào các dự án mục tiêu"
+        },
+        "right_answer": "d",
+        "point": 2,
+        "explanation": "Phân bổ 40-40-20 tạo sự cân bằng tối ưu giữa an toàn và cơ hội tăng trưởng. 40% stablecoin đảm bảo thanh khoản và khả năng tận dụng cơ hội, 40% bluechip giữ vững giá trị danh mục, 20% dự án triển vọng duy trì tiềm năng tăng trưởng"
+      },
+      {
+        "id": "e5f6g7h8-i9j0-4k1l-2m3n-4o5p6q7r8s9t",
+        "question": "Khi một sector mới nổi trong crypto (như AI, GameFi...), phương pháp đánh giá nào hiệu quả nhất?",
+        "options": {
+          "a": "Phân tích TVL growth và user adoption của top 5 dự án đầu ngành",
+          "b": "So sánh protocol revenue và token metrics giữa các dự án cùng sector",
+          "c": "Đánh giá tốc độ phát triển của ecosystem và chất lượng các partnership",
+          "d": "Theo dõi venture capital funding và các vòng gọi vốn private",
+          "e": "Nghiên cứu tokenomics và vesting schedule của team/investors"
+        },
+        "right_answer": "b",
+        "point": 2,
+        "explanation": "Protocol revenue là chỉ số thực tế nhất về hiệu quả hoạt động của dự án. Token metrics giúp so sánh định giá giữa các dự án. Kết hợp 2 yếu tố này giúp xác định dự án nào có hiệu quả thực sự, tìm ra dự án có định giá hợp lý, tránh các dự án chỉ tốt về mặt marketing. Các phương án khác có hạn chế: TVL có thể bị thao túng bởi farming rewards, partnership không phải lúc nào cũng tạo ra giá trị, VC funding không đảm bảo thành công, tokenomics tốt vẫn cần có sản phẩm thực tế"
+      },
+      {
+        "id": "f6g7h8i9-j0k1-4l2m-3n4o-5p6q7r8s9t0u",
+        "question": "Trong thị trường sideway kéo dài, phương pháp tích lũy nào hiệu quả nhất?",
+        "options": {
+          "a": "DCA 40% danh mục vào layer 1 bluechip theo tuần",
+          "b": "Chia 50% ngân sách thành các limit orders tại vùng hỗ trợ",
+          "c": "Tích lũy 30% cho narrative mới và 20% cho dự án đã có product",
+          "d": "Set buy orders với 60% ngân sách ở các mức giá quan trọng",
+          "e": "Phân bổ 70% vào staking/farming và 30% chờ cơ hội"
+        },
+        "right_answer": "c",
+        "point": 2,
+        "explanation": "30% cho narrative mới giúp nắm bắt cơ hội tăng trưởng, 20% cho dự án có product đảm bảo yếu tố an toàn. Tỷ lệ này cân bằng giữa rủi ro và cơ hội, dự án mới và dự án đã proven, tiềm năng tăng trưởng và độ an toàn. Các phương án khác: DCA vào bluechip có thể bỏ lỡ cơ hội ở các dự án mới, limit orders có thể không được kích hoạt, 60-70% là tỷ lệ quá cao cho một chiến lược"
+      },
+      {
+        "id": "g7h8i9j0-k1l2-4m3n-4o5p-6q7r8s9t0u1v",
+        "question": "Khi chiến lược không hiệu quả, phương pháp điều chỉnh nào phù hợp nhất?",
+        "options": {
+          "a": "Điều chỉnh 30% tỷ trọng và đánh giá trong 2 tuần",
+          "b": "Giảm 50% exposure và tìm kiếm cơ hội ở các sector khác",
+          "c": "Tạm dừng 70% hoạt động và phân tích lại toàn bộ thị trường",
+          "d": "Chuyển 40% sang stablecoin và tái đánh giá từng dự án",
+          "e": "Duy trì 80% chiến lược cũ và thử nghiệm 20% phương pháp mới"
+        },
+        "right_answer": "e",
+        "point": 2,
+        "explanation": "80-20 là tỷ lệ cân bằng giữa ổn định và đổi mới. Duy trì 80% chiến lược cũ giúp không thay đổi quá đột ngột, giữ được những phần đang hoạt động tốt, đảm bảo tính liên tục của danh mục. 20% thử nghiệm cho phép test phương pháp mới với rủi ro thấp, thu thập dữ liệu để đánh giá, điều chỉnh dần dần nếu hiệu quả. Các phương án khác quá cực đoan: 30-50% là thay đổi quá lớn, tạm dừng 70% có thể bỏ lỡ cơ hội, chuyển 40% sang stablecoin làm giảm hiệu suất"
+      },
+      {
+        "id": "h8i9j0k1-l2m3-4n4o-5p6q-7r8s9t0u1v2w",
+        "question": "Trong giai đoạn bear market kéo dài, phương pháp tối ưu nào giúp tận dụng tốt nhất cơ hội?",
+        "options": {
+          "a": "Nghiên cứu 3-5 dự án tiềm năng và DCA theo tỷ lệ phân bổ cố định",
+          "b": "Tập trung theo dõi hoạt động phát triển sản phẩm của các dự án đã chọn",
+          "c": "Cập nhật kiến thức và tìm hiểu các narrative mới đang được xây dựng",
+          "d": "Tham gia sâu vào các protocol và trải nghiệm sản phẩm thực tế",
+          "e": "Tích lũy các token có tokenomics tốt và giảm mạnh về giá"
+        },
+        "right_answer": "d",
+        "point": 2,
+        "explanation": "Tham gia sâu vào protocol giúp hiểu rõ giá trị thực của dự án, phát hiện các vấn đề tiềm ẩn, đánh giá được khả năng phát triển dài hạn, có góc nhìn của user thực. Trải nghiệm sản phẩm thực tế giúp định giá chính xác hơn, tránh các dự án chỉ có marketing, xác định được competitive advantage. Các phương án khác có hạn chế: DCA máy móc có thể bỏ lỡ cơ hội tốt hơn, chỉ theo dõi mà không tham gia thiếu góc nhìn thực tế, narrative mới trong bear market thường chưa có sản phẩm thật, token giảm giá không đảm bảo sẽ hồi phục"
+      }
+    ]
+  }
+}

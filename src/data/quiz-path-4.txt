@@ -1,0 +1,74 @@
+# PHẦN 4: Sức Khỏe Tài Chính (10 điểm)
+
+---
+
+35. Theo nguyên tắc bảo toàn vốn, tỷ lệ đầu tư vào crypto so với tổng tài sản nên là bao nhiêu? (2 điểm)
+
+options: 
+a) Tối đa 5-10% cho mọi nhà đầu tư
+b) 15-20% với điều kiện có thu nhập ổn định
+c) 25-30% nếu còn trẻ và độc thân
+d) 40-50% nếu có kinh nghiệm thị trường
+e) >50% nếu tin tưởng vào tương lai crypto
+
+- Đáp án đúng: a
+- Giải thích: "- Nguyên tắc bảo toàn vốn đặt lên hàng đầu
+- 5-10% đủ để tận dụng tiềm năng tăng trưởng
+- Tỷ lệ này áp dụng cho mọi người để đảm bảo an toàn tài chính
+- Kinh nghiệm không phải yếu tố quyết định trong việc phân bổ tài sản vào loại tài sản rủi ro cao"
+
+---
+
+36. Trong việc quản lý tài chính cá nhân khi đầu tư crypto, thứ tự ưu tiên nào là hợp lý nhất? (2 điểm)
+
+- options:
+a) Chi tiêu thiết yếu > Quỹ khẩn cấp > Đầu tư an toàn > Crypto
+b) Đầu tư crypto > Tiết kiệm > Chi tiêu > Quỹ khẩn cấp
+c) Tiết kiệm > Crypto > Chi tiêu > Đầu tư an toàn
+d) Crypto > Chi tiêu > Quỹ khẩn cấp > Tiết kiệm
+e) Chi tiêu > Crypto > Tiết kiệm > Quỹ khẩn cấp
+
+- Đáp án đúng: a
+- Giải thích: "Ưu tiên chi tiêu thiết yếu và xây dựng quỹ khẩn cấp trước khi đầu tư crypto là nền tảng của sức khỏe tài chính, giúp đảm bảo cuộc sống ổn định và tránh phải bán crypto khi cần tiền gấp."
+
+---
+
+37. Khi nào KHÔNG NÊN tăng tỷ trọng đầu tư vào crypto? (2 điểm)
+
+options: 
+a) Khi tỷ lệ nợ/thu nhập hàng tháng vượt quá 30%
+b) Khi quỹ dự phòng chỉ đủ cho 2 tháng chi tiêu
+c) Khi phải vay nợ để đầu tư thêm
+d) Tất cả các điều trên
+e) Chỉ b và c
+
+- Đáp án đúng: d
+- Giải thích: "Không nên tăng tỷ trọng crypto khi có bất kỳ dấu hiệu nào về áp lực tài chính, bao gồm nợ cao, thiếu quỹ dự phòng hoặc phải vay nợ để đầu tư."
+
+---
+
+38. Phương pháp nào hiệu quả nhất để bảo vệ sức khỏe tài chính khi đầu tư crypto? (2 điểm)
+
+options: 
+a) Đa dạng hóa danh mục đầu tư theo tỷ lệ phù hợp với thu nhập
+b) Chỉ đầu tư vào các dự án đã được kiểm chứng
+c) Tập trung vào một vài dự án tiềm năng
+d) Đầu tư theo signal của các chuyên gia
+e) Tham gia các nhóm đầu tư có uy tín
+
+- Đáp án đúng: a
+- Giải thích: "Đa dạng hóa danh mục theo tỷ lệ phù hợp với thu nhập giúp giảm thiểu rủi ro, đồng thời đảm bảo việc đầu tư không ảnh hưởng đến cuộc sống và các kế hoạch tài chính khác."
+
+---
+
+39. Tần suất nào phù hợp nhất để review và điều chỉnh kế hoạch tài chính khi đầu tư crypto? (2 điểm)
+
+options: 
+a) Review hàng tháng, điều chỉnh mỗi quý nếu cần thiết
+b) Review hàng ngày, điều chỉnh theo biến động thị trường
+c) Review hàng tuần, điều chỉnh hàng tháng
+d) Review mỗi quý, điều chỉnh mỗi năm
+e) Chỉ review và điều chỉnh khi thị trường biến động mạnh
+
+- Đáp án đúng: a
+- Giải thích: "Review hàng tháng giúp nắm bắt được tình hình tài chính và thị trường, trong khi điều chỉnh mỗi quý tránh được các quyết định vội vàng và đảm bảo đủ thời gian đánh giá hiệu quả của kế hoạch."

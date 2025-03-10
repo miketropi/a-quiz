@@ -96,7 +96,7 @@ export default function MainReport() {
       <div className="main-report__chart">
         <div className="main-report__radar">
           <Radar data={{
-            labels: [...labels, 'Sức Khỏe Tài Chính', 'Khả Năng Giải Quyết Vấn Đề'],
+            labels: [...labels],
             datasets: [...datasets, { label: '__', data: [100, 0] }],
             options
             }} />

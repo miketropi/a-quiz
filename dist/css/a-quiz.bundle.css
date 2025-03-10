@@ -318,6 +318,7 @@
 }
 .main-report .main-report__entry {
   margin-bottom: 2em;
+  text-align: center;
 }
 .main-report .main-report__radar {
   width: 800px;
