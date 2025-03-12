@@ -30,7 +30,15 @@ export default function MainReport() {
   const datasets = useMemo(() => {
     let __data = reports.map(i => {
       const { userTotalPoins, pathTotalPoins } = i;
-      const percent = (userTotalPoins / pathTotalPoins) * 100;
+      let totalPoint = userTotalPoins
+
+      if(i.metaPoints.length) {
+        totalPoint = i.metaPoints.reduce((total, meta) => {
+          return total + meta.point;
+        }, totalPoint);
+      }
+
+      const percent = (totalPoint / pathTotalPoins) * 100;
       return percent;
     })
     return [
@@ -105,7 +113,14 @@ export default function MainReport() {
         <div className="main-report__bar">
           <div className="report-bars">
             {reports.map((report, index) => {
-              const percentage = (report.userTotalPoins / report.pathTotalPoins) * 100;
+              const { userTotalPoins, pathTotalPoins } = report;
+              let totalPoint = userTotalPoins;
+              if(report.metaPoints.length) {
+                totalPoint = report.metaPoints.reduce((total, meta) => {
+                  return total + meta.point;
+                }, totalPoint);
+              }
+              const percentage = (totalPoint / report.pathTotalPoins) * 100;
               return (
                 <div key={report.pathID} className="report-bar">
                   <div className="report-bar__label">
@@ -123,7 +138,7 @@ export default function MainReport() {
                     ></div>
                   </div>
                   <div className="report-bar__points">
-                    {report.userTotalPoins}/{report.pathTotalPoins} điểm
+                    {totalPoint}/{report.pathTotalPoins} điểm
                   </div>
                 </div>
               );

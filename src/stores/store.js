@@ -22,8 +22,8 @@ const userAnwser = [];
       pathId: pItem.id,
       questionId: qItem.id,
       userAnwser: '',
-      rightAnwser: qItem.right_answer,
-      point: qItem.point,
+      rightAnwser: qItem?.right_answer,
+      point: qItem?.point,
       pathReportViewId: '',
     })
   })
@@ -33,6 +33,7 @@ const reports = [...quizData].map(pItem => {
     pathName: pItem.name,
     pathID: pItem.id,
     userTotalPoins: 0,
+    metaPoints: [],
     pathTotalPoins: pItem.total_points,
     status: '', // doing / done
   }
@@ -79,11 +80,26 @@ const persistStore = (set, get) => ({
       })
     })
   },
+  updateReportMetaPoints: (pathId, metaPoints) => {
+    set((state) => {
+      state.reports.map(item => {
+        if (item.pathID === pathId) {
+          let __metaPointsIndex = item.metaPoints.findIndex(m => m.name == metaPoints.name);
+          if (__metaPointsIndex >= 0) {
+            item.metaPoints[__metaPointsIndex] = metaPoints
+          } else {
+            item.metaPoints.push(metaPoints)
+          }
+        }
+      })
+    })
+  },
   setReport: (report) => {
     set((state) => {
       state.reports = report
     })
   },
+
 })
 
 const useStore = create(

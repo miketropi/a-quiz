@@ -18014,6 +18014,621 @@ const Scatter = /* #__PURE__ */ createTypedChart('scatter', chart_js__WEBPACK_IM
 
 /***/ }),
 
+/***/ "./node_modules/react-currency-input-field/dist/index.esm.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-currency-input-field/dist/index.esm.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cleanValue: () => (/* binding */ cleanValue),
+/* harmony export */   "default": () => (/* binding */ CurrencyInput),
+/* harmony export */   formatValue: () => (/* binding */ formatValue)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/******************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+
+var __assign = function() {
+  __assign = Object.assign || function __assign(t) {
+      for (var s, i = 1, n = arguments.length; i < n; i++) {
+          s = arguments[i];
+          for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+      return t;
+  };
+  return __assign.apply(this, arguments);
+};
+
+function __rest(s, e) {
+  var t = {};
+  for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+      t[p] = s[p];
+  if (s != null && typeof Object.getOwnPropertySymbols === "function")
+      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+          if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+              t[p[i]] = s[p[i]];
+      }
+  return t;
+}
+
+function __spreadArray(to, from, pack) {
+  if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+      if (ar || !(i in from)) {
+          if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+          ar[i] = from[i];
+      }
+  }
+  return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+  var e = new Error(message);
+  return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
+/**
+ * Escape regex char
+ *
+ * See: https://stackoverflow.com/questions/17885855/use-dynamic-variable-string-as-regex-pattern-in-javascript
+ */
+var escapeRegExp = function (stringToGoIntoTheRegex) {
+    return stringToGoIntoTheRegex.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&');
+};
+
+var abbrMap = { k: 1000, m: 1000000, b: 1000000000 };
+/**
+ * Parse a value with abbreviation e.g 1k = 1000
+ */
+var parseAbbrValue = function (value, decimalSeparator) {
+    if (decimalSeparator === void 0) { decimalSeparator = '.'; }
+    var reg = new RegExp("(\\d+(".concat(escapeRegExp(decimalSeparator), "\\d*)?)([kmb])$"), 'i');
+    var match = value.match(reg);
+    if (match) {
+        var digits = match[1], abbr = match[3];
+        var multiplier = abbrMap[abbr.toLowerCase()];
+        return Number(digits.replace(decimalSeparator, '.')) * multiplier;
+    }
+    return undefined;
+};
+
+/**
+ * Remove group separator from value eg. 1,000 > 1000
+ */
+var removeSeparators = function (value, separator) {
+    if (separator === void 0) { separator = ','; }
+    var reg = new RegExp(escapeRegExp(separator), 'g');
+    return value.replace(reg, '');
+};
+
+/**
+ * Remove invalid characters
+ */
+var removeInvalidChars = function (value, validChars) {
+    var chars = escapeRegExp(validChars.join(''));
+    var reg = new RegExp("[^\\d".concat(chars, "]"), 'gi');
+    return value.replace(reg, '');
+};
+
+/**
+ * Remove prefix, separators and extra decimals from value
+ */
+var cleanValue = function (_a) {
+    var value = _a.value, _b = _a.groupSeparator, groupSeparator = _b === void 0 ? ',' : _b, _c = _a.decimalSeparator, decimalSeparator = _c === void 0 ? '.' : _c, _d = _a.allowDecimals, allowDecimals = _d === void 0 ? true : _d, _e = _a.decimalsLimit, decimalsLimit = _e === void 0 ? 2 : _e, _f = _a.allowNegativeValue, allowNegativeValue = _f === void 0 ? true : _f, _g = _a.disableAbbreviations, disableAbbreviations = _g === void 0 ? false : _g, _h = _a.prefix, prefix = _h === void 0 ? '' : _h, _j = _a.transformRawValue, transformRawValue = _j === void 0 ? function (rawValue) { return rawValue; } : _j;
+    var transformedValue = transformRawValue(value);
+    if (transformedValue === '-') {
+        return transformedValue;
+    }
+    var abbreviations = disableAbbreviations ? [] : ['k', 'm', 'b'];
+    var reg = new RegExp("((^|\\D)-\\d)|(-".concat(escapeRegExp(prefix), ")"));
+    var isNegative = reg.test(transformedValue);
+    // Is there a digit before the prefix? eg. 1$
+    var _k = RegExp("(\\d+)-?".concat(escapeRegExp(prefix))).exec(value) || [], prefixWithValue = _k[0], preValue = _k[1];
+    var withoutPrefix = prefix
+        ? prefixWithValue
+            ? transformedValue.replace(prefixWithValue, '').concat(preValue)
+            : transformedValue.replace(prefix, '')
+        : transformedValue;
+    var withoutSeparators = removeSeparators(withoutPrefix, groupSeparator);
+    var withoutInvalidChars = removeInvalidChars(withoutSeparators, __spreadArray([
+        groupSeparator,
+        decimalSeparator
+    ], abbreviations, true));
+    var valueOnly = withoutInvalidChars;
+    if (!disableAbbreviations) {
+        // disallow letter without number
+        if (abbreviations.some(function (letter) { return letter === withoutInvalidChars.toLowerCase().replace(decimalSeparator, ''); })) {
+            return '';
+        }
+        var parsed = parseAbbrValue(withoutInvalidChars, decimalSeparator);
+        if (parsed) {
+            valueOnly = String(parsed);
+        }
+    }
+    var includeNegative = isNegative && allowNegativeValue ? '-' : '';
+    if (decimalSeparator && valueOnly.includes(decimalSeparator)) {
+        var _l = withoutInvalidChars.split(decimalSeparator), int = _l[0], decimals = _l[1];
+        var trimmedDecimals = decimalsLimit && decimals ? decimals.slice(0, decimalsLimit) : decimals;
+        var includeDecimals = allowDecimals ? "".concat(decimalSeparator).concat(trimmedDecimals) : '';
+        return "".concat(includeNegative).concat(int).concat(includeDecimals);
+    }
+    return "".concat(includeNegative).concat(valueOnly);
+};
+
+var fixedDecimalValue = function (value, decimalSeparator, fixedDecimalLength) {
+    if (fixedDecimalLength !== undefined && value.length > 1) {
+        if (fixedDecimalLength === 0) {
+            return value.replace(decimalSeparator, '');
+        }
+        if (value.includes(decimalSeparator)) {
+            var _a = value.split(decimalSeparator), int = _a[0], decimals = _a[1];
+            if (decimals.length === fixedDecimalLength) {
+                return value;
+            }
+            if (decimals.length > fixedDecimalLength) {
+                return "".concat(int).concat(decimalSeparator).concat(decimals.slice(0, fixedDecimalLength));
+            }
+        }
+        var reg = value.length > fixedDecimalLength
+            ? new RegExp("(\\d+)(\\d{".concat(fixedDecimalLength, "})"))
+            : new RegExp("(\\d)(\\d+)");
+        var match = value.match(reg);
+        if (match) {
+            var int = match[1], decimals = match[2];
+            return "".concat(int).concat(decimalSeparator).concat(decimals);
+        }
+    }
+    return value;
+};
+
+var getSuffix = function (value, _a) {
+    var _b = _a.groupSeparator, groupSeparator = _b === void 0 ? ',' : _b, _c = _a.decimalSeparator, decimalSeparator = _c === void 0 ? '.' : _c;
+    var suffixReg = new RegExp("\\d([^".concat(escapeRegExp(groupSeparator)).concat(escapeRegExp(decimalSeparator), "0-9]+)"));
+    var suffixMatch = value.match(suffixReg);
+    return suffixMatch ? suffixMatch[1] : undefined;
+};
+
+/**
+ * Format value with decimal separator, group separator and prefix
+ */
+var formatValue = function (options) {
+    var _value = options.value, decimalSeparator = options.decimalSeparator, intlConfig = options.intlConfig, decimalScale = options.decimalScale, _a = options.prefix, prefix = _a === void 0 ? '' : _a, _b = options.suffix, suffix = _b === void 0 ? '' : _b;
+    if (_value === '' || _value === undefined) {
+        return '';
+    }
+    if (_value === '-') {
+        return '-';
+    }
+    var isNegative = new RegExp("^\\d?-".concat(prefix ? "".concat(escapeRegExp(prefix), "?") : '', "\\d")).test(_value);
+    var value = decimalSeparator !== '.'
+        ? replaceDecimalSeparator(_value, decimalSeparator, isNegative)
+        : _value;
+    if (decimalSeparator && decimalSeparator !== '-' && value.startsWith(decimalSeparator)) {
+        value = '0' + value;
+    }
+    var _c = intlConfig || {}, locale = _c.locale, currency = _c.currency, formatOptions = __rest(_c, ["locale", "currency"]);
+    var defaultNumberFormatOptions = __assign(__assign({}, formatOptions), { minimumFractionDigits: decimalScale || 0, maximumFractionDigits: 20 });
+    var numberFormatter = intlConfig
+        ? new Intl.NumberFormat(locale, __assign(__assign({}, defaultNumberFormatOptions), (currency && { style: 'currency', currency: currency })))
+        : new Intl.NumberFormat(undefined, defaultNumberFormatOptions);
+    var parts = numberFormatter.formatToParts(Number(value));
+    var formatted = replaceParts(parts, options);
+    // Does intl formatting add a suffix?
+    var intlSuffix = getSuffix(formatted, __assign({}, options));
+    // Include decimal separator if user input ends with decimal separator
+    var includeDecimalSeparator = _value.slice(-1) === decimalSeparator ? decimalSeparator : '';
+    var _d = value.match(RegExp('\\d+\\.(\\d+)')) || [], decimals = _d[1];
+    // Keep original decimal padding if no decimalScale
+    if (decimalScale === undefined && decimals && decimalSeparator) {
+        if (formatted.includes(decimalSeparator)) {
+            formatted = formatted.replace(RegExp("(\\d+)(".concat(escapeRegExp(decimalSeparator), ")(\\d+)"), 'g'), "$1$2".concat(decimals));
+        }
+        else {
+            if (intlSuffix && !suffix) {
+                formatted = formatted.replace(intlSuffix, "".concat(decimalSeparator).concat(decimals).concat(intlSuffix));
+            }
+            else {
+                formatted = "".concat(formatted).concat(decimalSeparator).concat(decimals);
+            }
+        }
+    }
+    if (suffix && includeDecimalSeparator) {
+        return "".concat(formatted).concat(includeDecimalSeparator).concat(suffix);
+    }
+    if (intlSuffix && includeDecimalSeparator) {
+        return formatted.replace(intlSuffix, "".concat(includeDecimalSeparator).concat(intlSuffix));
+    }
+    if (intlSuffix && suffix) {
+        return formatted.replace(intlSuffix, "".concat(includeDecimalSeparator).concat(suffix));
+    }
+    return [formatted, includeDecimalSeparator, suffix].join('');
+};
+/**
+ * Before converting to Number, decimal separator has to be .
+ */
+var replaceDecimalSeparator = function (value, decimalSeparator, isNegative) {
+    var newValue = value;
+    if (decimalSeparator && decimalSeparator !== '.') {
+        newValue = newValue.replace(RegExp(escapeRegExp(decimalSeparator), 'g'), '.');
+        if (isNegative && decimalSeparator === '-') {
+            newValue = "-".concat(newValue.slice(1));
+        }
+    }
+    return newValue;
+};
+var replaceParts = function (parts, _a) {
+    var prefix = _a.prefix, groupSeparator = _a.groupSeparator, decimalSeparator = _a.decimalSeparator, decimalScale = _a.decimalScale, _b = _a.disableGroupSeparators, disableGroupSeparators = _b === void 0 ? false : _b;
+    return parts
+        .reduce(function (prev, _a, i) {
+        var type = _a.type, value = _a.value;
+        if (i === 0 && prefix) {
+            if (type === 'minusSign') {
+                return [value, prefix];
+            }
+            if (type === 'currency') {
+                return __spreadArray(__spreadArray([], prev, true), [prefix], false);
+            }
+            return [prefix, value];
+        }
+        if (type === 'currency') {
+            return prefix ? prev : __spreadArray(__spreadArray([], prev, true), [value], false);
+        }
+        if (type === 'group') {
+            return !disableGroupSeparators
+                ? __spreadArray(__spreadArray([], prev, true), [groupSeparator !== undefined ? groupSeparator : value], false) : prev;
+        }
+        if (type === 'decimal') {
+            if (decimalScale !== undefined && decimalScale === 0) {
+                return prev;
+            }
+            return __spreadArray(__spreadArray([], prev, true), [decimalSeparator !== undefined ? decimalSeparator : value], false);
+        }
+        if (type === 'fraction') {
+            return __spreadArray(__spreadArray([], prev, true), [decimalScale !== undefined ? value.slice(0, decimalScale) : value], false);
+        }
+        return __spreadArray(__spreadArray([], prev, true), [value], false);
+    }, [''])
+        .join('');
+};
+
+var defaultConfig = {
+    currencySymbol: '',
+    groupSeparator: '',
+    decimalSeparator: '',
+    prefix: '',
+    suffix: '',
+};
+/**
+ * Get locale config from input or default
+ */
+var getLocaleConfig = function (intlConfig) {
+    var _a = intlConfig || {}, locale = _a.locale, currency = _a.currency, formatOptions = __rest(_a, ["locale", "currency"]);
+    var numberFormatter = locale
+        ? new Intl.NumberFormat(locale, __assign(__assign({}, formatOptions), (currency && { currency: currency, style: 'currency' })))
+        : new Intl.NumberFormat();
+    return numberFormatter.formatToParts(1000.1).reduce(function (prev, curr, i) {
+        if (curr.type === 'currency') {
+            if (i === 0) {
+                return __assign(__assign({}, prev), { currencySymbol: curr.value, prefix: curr.value });
+            }
+            else {
+                return __assign(__assign({}, prev), { currencySymbol: curr.value, suffix: curr.value });
+            }
+        }
+        if (curr.type === 'group') {
+            return __assign(__assign({}, prev), { groupSeparator: curr.value });
+        }
+        if (curr.type === 'decimal') {
+            return __assign(__assign({}, prev), { decimalSeparator: curr.value });
+        }
+        return prev;
+    }, defaultConfig);
+};
+
+var isNumber = function (input) { return RegExp(/\d/, 'gi').test(input); };
+
+var padTrimValue = function (value, decimalSeparator, decimalScale) {
+    if (decimalScale === undefined ||
+        decimalSeparator === '' ||
+        decimalSeparator === undefined ||
+        value === '' ||
+        value === undefined) {
+        return value;
+    }
+    if (!value.match(/\d/g)) {
+        return '';
+    }
+    var _a = value.split(decimalSeparator), int = _a[0], decimals = _a[1];
+    if (decimalScale === 0) {
+        return int;
+    }
+    var newValue = decimals || '';
+    if (newValue.length < decimalScale) {
+        while (newValue.length < decimalScale) {
+            newValue += '0';
+        }
+    }
+    else {
+        newValue = newValue.slice(0, decimalScale);
+    }
+    return "".concat(int).concat(decimalSeparator).concat(newValue);
+};
+
+/**
+ * Based on the last key stroke and the cursor position, update the value
+ * and reposition the cursor to the right place
+ */
+var repositionCursor = function (_a) {
+    var selectionStart = _a.selectionStart, value = _a.value, lastKeyStroke = _a.lastKeyStroke, stateValue = _a.stateValue, groupSeparator = _a.groupSeparator;
+    var cursorPosition = selectionStart;
+    var modifiedValue = value;
+    if (stateValue && cursorPosition) {
+        var splitValue = value.split('');
+        // if cursor is to right of groupSeparator and backspace pressed, delete the character to the left of the separator and reposition the cursor
+        if (lastKeyStroke === 'Backspace' && stateValue[cursorPosition] === groupSeparator) {
+            splitValue.splice(cursorPosition - 1, 1);
+            cursorPosition -= 1;
+        }
+        // if cursor is to left of groupSeparator and delete pressed, delete the character to the right of the separator and reposition the cursor
+        if (lastKeyStroke === 'Delete' && stateValue[cursorPosition] === groupSeparator) {
+            splitValue.splice(cursorPosition, 1);
+            cursorPosition += 1;
+        }
+        modifiedValue = splitValue.join('');
+        return { modifiedValue: modifiedValue, cursorPosition: cursorPosition };
+    }
+    return { modifiedValue: modifiedValue, cursorPosition: selectionStart };
+};
+
+var CurrencyInput = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)(function (_a, ref) {
+    var _b = _a.allowDecimals, allowDecimals = _b === void 0 ? true : _b, _c = _a.allowNegativeValue, allowNegativeValue = _c === void 0 ? true : _c, id = _a.id, name = _a.name, className = _a.className, customInput = _a.customInput, decimalsLimit = _a.decimalsLimit, defaultValue = _a.defaultValue, _d = _a.disabled, disabled = _d === void 0 ? false : _d, userMaxLength = _a.maxLength, userValue = _a.value, onValueChange = _a.onValueChange, fixedDecimalLength = _a.fixedDecimalLength, placeholder = _a.placeholder, decimalScale = _a.decimalScale, prefix = _a.prefix, suffix = _a.suffix, intlConfig = _a.intlConfig, step = _a.step, min = _a.min, max = _a.max, _e = _a.disableGroupSeparators, disableGroupSeparators = _e === void 0 ? false : _e, _f = _a.disableAbbreviations, disableAbbreviations = _f === void 0 ? false : _f, _decimalSeparator = _a.decimalSeparator, _groupSeparator = _a.groupSeparator, onChange = _a.onChange, onFocus = _a.onFocus, onBlur = _a.onBlur, onKeyDown = _a.onKeyDown, onKeyUp = _a.onKeyUp, transformRawValue = _a.transformRawValue, _g = _a.formatValueOnBlur, formatValueOnBlur = _g === void 0 ? true : _g, props = __rest(_a, ["allowDecimals", "allowNegativeValue", "id", "name", "className", "customInput", "decimalsLimit", "defaultValue", "disabled", "maxLength", "value", "onValueChange", "fixedDecimalLength", "placeholder", "decimalScale", "prefix", "suffix", "intlConfig", "step", "min", "max", "disableGroupSeparators", "disableAbbreviations", "decimalSeparator", "groupSeparator", "onChange", "onFocus", "onBlur", "onKeyDown", "onKeyUp", "transformRawValue", "formatValueOnBlur"]);
+    if (_decimalSeparator && isNumber(_decimalSeparator)) {
+        throw new Error('decimalSeparator cannot be a number');
+    }
+    if (_groupSeparator && isNumber(_groupSeparator)) {
+        throw new Error('groupSeparator cannot be a number');
+    }
+    var localeConfig = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () { return getLocaleConfig(intlConfig); }, [intlConfig]);
+    var decimalSeparator = _decimalSeparator || localeConfig.decimalSeparator || '';
+    var groupSeparator = _groupSeparator || localeConfig.groupSeparator || '';
+    if (decimalSeparator &&
+        groupSeparator &&
+        decimalSeparator === groupSeparator &&
+        disableGroupSeparators === false) {
+        throw new Error('decimalSeparator cannot be the same as groupSeparator');
+    }
+    var formatValueOptions = {
+        decimalSeparator: decimalSeparator,
+        groupSeparator: groupSeparator,
+        disableGroupSeparators: disableGroupSeparators,
+        intlConfig: intlConfig,
+        prefix: prefix || localeConfig.prefix,
+        suffix: suffix,
+    };
+    var cleanValueOptions = {
+        decimalSeparator: decimalSeparator,
+        groupSeparator: groupSeparator,
+        allowDecimals: allowDecimals,
+        decimalsLimit: decimalsLimit || fixedDecimalLength || 2,
+        allowNegativeValue: allowNegativeValue,
+        disableAbbreviations: disableAbbreviations,
+        prefix: prefix || localeConfig.prefix,
+        transformRawValue: transformRawValue,
+    };
+    var _h = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+        return defaultValue != null
+            ? formatValue(__assign(__assign({}, formatValueOptions), { decimalScale: decimalScale, value: String(defaultValue) }))
+            : userValue != null
+                ? formatValue(__assign(__assign({}, formatValueOptions), { decimalScale: decimalScale, value: String(userValue) }))
+                : '';
+    }), stateValue = _h[0], setStateValue = _h[1];
+    var _j = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false), dirty = _j[0], setDirty = _j[1];
+    var _k = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0), cursor = _k[0], setCursor = _k[1];
+    var _l = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0), changeCount = _l[0], setChangeCount = _l[1];
+    var _m = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null), lastKeyStroke = _m[0], setLastKeyStroke = _m[1];
+    var inputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useImperativeHandle)(ref, function () { return inputRef.current; });
+    /**
+     * Process change in value
+     */
+    var processChange = function (value, selectionStart) {
+        setDirty(true);
+        var _a = repositionCursor({
+            selectionStart: selectionStart,
+            value: value,
+            lastKeyStroke: lastKeyStroke,
+            stateValue: stateValue,
+            groupSeparator: groupSeparator,
+        }), modifiedValue = _a.modifiedValue, cursorPosition = _a.cursorPosition;
+        var stringValue = cleanValue(__assign({ value: modifiedValue }, cleanValueOptions));
+        if (userMaxLength && stringValue.replace(/-/g, '').length > userMaxLength) {
+            return;
+        }
+        if (stringValue === '' || stringValue === '-' || stringValue === decimalSeparator) {
+            onValueChange && onValueChange(undefined, name, { float: null, formatted: '', value: '' });
+            setStateValue(stringValue);
+            // Always sets cursor after '-' or decimalSeparator input
+            setCursor(1);
+            return;
+        }
+        var stringValueWithoutSeparator = decimalSeparator
+            ? stringValue.replace(decimalSeparator, '.')
+            : stringValue;
+        var numberValue = parseFloat(stringValueWithoutSeparator);
+        var formattedValue = formatValue(__assign({ value: stringValue }, formatValueOptions));
+        if (cursorPosition != null) {
+            // Prevent cursor jumping
+            var newCursor = cursorPosition + (formattedValue.length - value.length);
+            newCursor = newCursor <= 0 ? (prefix ? prefix.length : 0) : newCursor;
+            setCursor(newCursor);
+            setChangeCount(changeCount + 1);
+        }
+        setStateValue(formattedValue);
+        if (onValueChange) {
+            var values = {
+                float: numberValue,
+                formatted: formattedValue,
+                value: stringValue,
+            };
+            onValueChange(stringValue, name, values);
+        }
+    };
+    /**
+     * Handle change event
+     */
+    var handleOnChange = function (event) {
+        var _a = event.target, value = _a.value, selectionStart = _a.selectionStart;
+        processChange(value, selectionStart);
+        onChange && onChange(event);
+    };
+    /**
+     * Handle focus event
+     */
+    var handleOnFocus = function (event) {
+        onFocus && onFocus(event);
+        return stateValue ? stateValue.length : 0;
+    };
+    /**
+     * Handle blur event
+     *
+     * Format value by padding/trimming decimals if required by
+     */
+    var handleOnBlur = function (event) {
+        var value = event.target.value;
+        var valueOnly = cleanValue(__assign({ value: value }, cleanValueOptions));
+        if (valueOnly === '-' || valueOnly === decimalSeparator || !valueOnly) {
+            setStateValue('');
+            onBlur && onBlur(event);
+            return;
+        }
+        var fixedDecimals = fixedDecimalValue(valueOnly, decimalSeparator, fixedDecimalLength);
+        var newValue = padTrimValue(fixedDecimals, decimalSeparator, decimalScale !== undefined ? decimalScale : fixedDecimalLength);
+        var stringValueWithoutSeparator = decimalSeparator
+            ? newValue.replace(decimalSeparator, '.')
+            : newValue;
+        var numberValue = parseFloat(stringValueWithoutSeparator);
+        var formattedValue = formatValue(__assign(__assign({}, formatValueOptions), { value: newValue }));
+        if (onValueChange && formatValueOnBlur) {
+            onValueChange(newValue, name, {
+                float: numberValue,
+                formatted: formattedValue,
+                value: newValue,
+            });
+        }
+        setStateValue(formattedValue);
+        onBlur && onBlur(event);
+    };
+    /**
+     * Handle key down event
+     *
+     * Increase or decrease value by step
+     */
+    var handleOnKeyDown = function (event) {
+        var key = event.key;
+        setLastKeyStroke(key);
+        if (step && (key === 'ArrowUp' || key === 'ArrowDown')) {
+            event.preventDefault();
+            setCursor(stateValue.length);
+            var stringValue = userValue != null ? String(userValue) : undefined;
+            var stringValueWithoutSeparator = decimalSeparator && stringValue
+                ? stringValue.replace(decimalSeparator, '.')
+                : stringValue;
+            var currentValue = parseFloat(stringValueWithoutSeparator != null
+                ? stringValueWithoutSeparator
+                : cleanValue(__assign({ value: stateValue }, cleanValueOptions))) || 0;
+            var newValue = key === 'ArrowUp' ? currentValue + step : currentValue - step;
+            if ((min !== undefined && newValue < Number(min)) ||
+                (!allowNegativeValue && newValue < 0)) {
+                return;
+            }
+            if (max !== undefined && newValue > Number(max)) {
+                return;
+            }
+            var fixedLength = String(step).includes('.')
+                ? Number(String(step).split('.')[1].length)
+                : undefined;
+            processChange(String(fixedLength ? newValue.toFixed(fixedLength) : newValue).replace('.', decimalSeparator));
+        }
+        onKeyDown && onKeyDown(event);
+    };
+    /**
+     * Handle key up event
+     *
+     * Move cursor if there is a suffix to prevent user typing past suffix
+     */
+    var handleOnKeyUp = function (event) {
+        var key = event.key, selectionStart = event.currentTarget.selectionStart;
+        if (key !== 'ArrowUp' && key !== 'ArrowDown' && stateValue !== '-') {
+            var suffix_1 = getSuffix(stateValue, { groupSeparator: groupSeparator, decimalSeparator: decimalSeparator });
+            if (suffix_1 && selectionStart && selectionStart > stateValue.length - suffix_1.length) {
+                /* istanbul ignore else */
+                if (inputRef.current) {
+                    var newCursor = stateValue.length - suffix_1.length;
+                    inputRef.current.setSelectionRange(newCursor, newCursor);
+                }
+            }
+        }
+        onKeyUp && onKeyUp(event);
+    };
+    // Update state if userValue changes to undefined
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+        if (userValue == null && defaultValue == null) {
+            setStateValue('');
+        }
+    }, [defaultValue, userValue]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+        // prevent cursor jumping if editing value
+        if (dirty &&
+            stateValue !== '-' &&
+            inputRef.current &&
+            document.activeElement === inputRef.current) {
+            inputRef.current.setSelectionRange(cursor, cursor);
+        }
+    }, [stateValue, cursor, inputRef, dirty, changeCount]);
+    /**
+     * If user has only entered "-" or decimal separator,
+     * keep the char to allow them to enter next value
+     */
+    var getRenderValue = function () {
+        if (userValue != null &&
+            stateValue !== '-' &&
+            (!decimalSeparator || stateValue !== decimalSeparator)) {
+            return formatValue(__assign(__assign({}, formatValueOptions), { decimalScale: dirty ? undefined : decimalScale, value: String(userValue) }));
+        }
+        return stateValue;
+    };
+    var inputProps = __assign({ type: 'text', inputMode: 'decimal', id: id, name: name, className: className, onChange: handleOnChange, onBlur: handleOnBlur, onFocus: handleOnFocus, onKeyDown: handleOnKeyDown, onKeyUp: handleOnKeyUp, placeholder: placeholder, disabled: disabled, value: getRenderValue(), ref: inputRef }, props);
+    if (customInput) {
+        var CustomInput = customInput;
+        return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CustomInput, __assign({}, inputProps));
+    }
+    return react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", __assign({}, inputProps));
+});
+CurrencyInput.displayName = 'CurrencyInput';
+
+
+//# sourceMappingURL=index.esm.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/react-dom/cjs/react-dom-client.development.js":
 /*!********************************************************************!*\
   !*** ./node_modules/react-dom/cjs/react-dom-client.development.js ***!
@@ -46763,6 +47378,75 @@ Button.propTypes = {
 
 /***/ }),
 
+/***/ "./src/components/FieldCurrency.jsx":
+/*!******************************************!*\
+  !*** ./src/components/FieldCurrency.jsx ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+var FieldCurrency = function FieldCurrency(_ref) {
+  var value = _ref.value,
+    onChange = _ref.onChange,
+    _ref$placeholder = _ref.placeholder,
+    placeholder = _ref$placeholder === void 0 ? "Enter amount" : _ref$placeholder;
+  // Format number as currency
+  var formatCurrency = function formatCurrency(num) {
+    if (!num) return '';
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(num);
+  };
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(formatCurrency(value)),
+    _useState2 = _slicedToArray(_useState, 2),
+    displayValue = _useState2[0],
+    setDisplayValue = _useState2[1];
+
+  // Handle input change
+  var handleChange = function handleChange(e) {
+    // Remove all non-numeric characters except decimal point
+    var rawValue = e.target.value.replace(/[^0-9.]/g, '');
+
+    // Ensure only valid decimal numbers
+    var numericValue = parseFloat(rawValue);
+    if (!isNaN(numericValue)) {
+      setDisplayValue(formatCurrency(numericValue));
+      onChange(numericValue);
+    } else {
+      setDisplayValue('');
+      onChange('');
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+    type: "text",
+    value: displayValue,
+    onChange: handleChange,
+    placeholder: placeholder,
+    className: "currency-input"
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FieldCurrency);
+
+/***/ }),
+
 /***/ "./src/components/MainReport.jsx":
 /*!***************************************!*\
   !*** ./src/components/MainReport.jsx ***!
@@ -46804,7 +47488,13 @@ function MainReport() {
     var __data = reports.map(function (i) {
       var userTotalPoins = i.userTotalPoins,
         pathTotalPoins = i.pathTotalPoins;
-      var percent = userTotalPoins / pathTotalPoins * 100;
+      var totalPoint = userTotalPoins;
+      if (i.metaPoints.length) {
+        totalPoint = i.metaPoints.reduce(function (total, meta) {
+          return total + meta.point;
+        }, totalPoint);
+      }
+      var percent = totalPoint / pathTotalPoins * 100;
       return percent;
     });
     return [{
@@ -46883,7 +47573,15 @@ function MainReport() {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "report-bars",
             children: reports.map(function (report, index) {
-              var percentage = report.userTotalPoins / report.pathTotalPoins * 100;
+              var userTotalPoins = report.userTotalPoins,
+                pathTotalPoins = report.pathTotalPoins;
+              var totalPoint = userTotalPoins;
+              if (report.metaPoints.length) {
+                totalPoint = report.metaPoints.reduce(function (total, meta) {
+                  return total + meta.point;
+                }, totalPoint);
+              }
+              var percentage = totalPoint / report.pathTotalPoins * 100;
               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                 className: "report-bar",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -46904,7 +47602,7 @@ function MainReport() {
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "report-bar__points",
-                  children: [report.userTotalPoins, "/", report.pathTotalPoins, " \u0111i\u1EC3m"]
+                  children: [totalPoint, "/", report.pathTotalPoins, " \u0111i\u1EC3m"]
                 })]
               }, report.pathID);
             })
@@ -46967,11 +47665,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ PathReport)
 /* harmony export */ });
-/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Button */ "./src/components/Button.jsx");
-/* harmony import */ var _QuestionsReport__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QuestionsReport */ "./src/components/QuestionsReport.jsx");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Button */ "./src/components/Button.jsx");
+/* harmony import */ var _QuestionsReport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./QuestionsReport */ "./src/components/QuestionsReport.jsx");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -46979,7 +47680,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function PathReport(_ref) {
   var pathID = _ref.pathID;
-  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
     reports = _useStore.reports,
     setCurrentPathId = _useStore.setCurrentPathId;
@@ -46989,33 +47690,43 @@ function PathReport(_ref) {
   var currentReport = reports.find(function (r) {
     return r.pathID == pathID;
   });
-  var reportTemp = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  var totalPoint = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var mainPoint = currentReport === null || currentReport === void 0 ? void 0 : currentReport.userTotalPoins;
+    if (currentReport.metaPoints.length) {
+      mainPoint = currentReport.metaPoints.reduce(function (total, meta) {
+        return total + meta.point;
+      }, mainPoint);
+    }
+    return mainPoint;
+  }, [currentReport]);
+  var reportTemp = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "path-report__header",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-      children: ["K\u1EBFt qu\u1EA3 ph\u1EA7n tr\u1EAFc nghi\u1EC7m ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+      children: ["K\u1EBFt qu\u1EA3 ph\u1EA7n tr\u1EAFc nghi\u1EC7m ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
         children: currentReport === null || currentReport === void 0 ? void 0 : currentReport.pathName
-      }), ", b\u1EA1n \u0111\xE3 d\xE0nh \u0111\u01B0\u1EE3c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
-        children: currentReport === null || currentReport === void 0 ? void 0 : currentReport.userTotalPoins
-      }), " \u0111i\u1EC3m tr\xEAn t\u1ED5ng s\u1ED1 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+      }), ", b\u1EA1n \u0111\xE3 d\xE0nh \u0111\u01B0\u1EE3c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
+        children: totalPoint
+      }), " \u0111i\u1EC3m tr\xEAn t\u1ED5ng s\u1ED1 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
         children: currentReport === null || currentReport === void 0 ? void 0 : currentReport.pathTotalPoins
       }), " \u0111i\u1EC3m c\u1EE7a ph\u1EA7n n\xE0y."]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("hr", {
       style: {
         margin: "1em 0"
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
       onClick: function onClick(e) {
         e.preventDefault();
         setCurrentPathId(null);
       },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {}), " Tr\u1EDF l\u1EA1i"]
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {}), " Tr\u1EDF l\u1EA1i"]
     })]
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "path-report",
-    children: [reportTemp, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+    children: [reportTemp, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "path-report__questions",
-      children: (pathData === null || pathData === void 0 ? void 0 : pathData.questions) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_QuestionsReport__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      children: (pathData === null || pathData === void 0 ? void 0 : pathData.questions) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_QuestionsReport__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        pathID: pathID,
         questions: pathData === null || pathData === void 0 ? void 0 : pathData.questions
       })
     }), reportTemp]
@@ -47075,6 +47786,10 @@ function Question(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     answer = _useState2[0],
     setAnswer = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    finish = _useState4[0],
+    setFinish = _useState4[1];
   var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
     setCurrentPathId = _useStore.setCurrentPathId,
@@ -47093,9 +47808,7 @@ function Question(_ref) {
   var nextQuestionId = (_currentPath$question = currentPath.questions[currentQuestionIndex + 1]) === null || _currentPath$question === void 0 ? void 0 : _currentPath$question.id;
   var prevQuestionId = (_currentPath$question2 = currentPath.questions[currentQuestionIndex - 1]) === null || _currentPath$question2 === void 0 ? void 0 : _currentPath$question2.id;
   var totalPoint = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
-    console.log(_toConsumableArray(rest.userAnwser).filter(function (i) {
-      return i.pathId == __currentPathId;
-    }));
+    // console.log([...rest.userAnwser].filter(i => i.pathId == __currentPathId));
     return _toConsumableArray(rest.userAnwser).filter(function (i) {
       return i.pathId == __currentPathId;
     }).reduce(function (total, question) {
@@ -47107,10 +47820,10 @@ function Question(_ref) {
     }, 0);
   }, [rest.userAnwser]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var status = nextQuestionId ? 'doing' : 'done';
+    var status = finish ? 'done' : 'doing';
     // console.log(status, nextQuestionId)
     rest.updateReport(__currentPathId, totalPoint, status);
-  }, [totalPoint, userAnwser]);
+  }, [totalPoint, userAnwser, finish]);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     // console.log('userAnwser', userAnwser)
     setAnswer(userAnwser);
@@ -47126,7 +47839,8 @@ function Question(_ref) {
     }
   };
   var onFinish = function onFinish() {
-    console.log('Finish!!!');
+    // console.log('Finish!!!')
+    setFinish(true);
     // rest.updateReport(__currentPathId, totalPoint, 'done')
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -47214,44 +47928,107 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ QuestionsReport)
 /* harmony export */ });
 /* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _UserFinanceForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserFinanceForm */ "./src/components/UserFinanceForm.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+var _excluded = ["id", "point"];
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
+function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
 
 
+
+var components = {
+  "UserFinanceForm": _UserFinanceForm__WEBPACK_IMPORTED_MODULE_1__["default"]
+};
 function QuestionsReport(_ref) {
-  var questions = _ref.questions;
+  var pathID = _ref.pathID,
+    questions = _ref.questions;
   var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_0__["default"])(),
-    userAnwser = _useStore.userAnwser;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    userAnwser = _useStore.userAnwser,
+    reports = _useStore.reports;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "questions-report-view",
     children: questions.map(function (question, index) {
       var id = question.id,
-        point = question.point;
+        point = question.point,
+        args = _objectWithoutProperties(question, _excluded);
       var userAnwserItem = userAnwser.find(function (u) {
         return u.questionId == id;
       });
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      if ((args === null || args === void 0 ? void 0 : args.type) == 'custom_question') {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "questions-report",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "questions-report__question-text",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+              className: "questions-report__number",
+              children: ["C\xE2u ", index + 1, ". "]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              dangerouslySetInnerHTML: {
+                __html: question.question.replace(/\n\n/g, '<br/>')
+              }
+            }), function (_reports$find) {
+              var reportMetaPoints = (_reports$find = reports.find(function (r) {
+                return r.pathID == pathID;
+              })) === null || _reports$find === void 0 ? void 0 : _reports$find.metaPoints;
+              if (reportMetaPoints) {
+                var metaPoints = reportMetaPoints.find(function (r) {
+                  return r.name == (args === null || args === void 0 ? void 0 : args.component);
+                });
+                if (metaPoints) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+                    children: ["(+", metaPoints.point, " \u0111i\u1EC3m)"]
+                  });
+                }
+              }
+            }()]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("hr", {
+            style: {
+              margin: "1em 0"
+            }
+          }), function (_userAnwser$find) {
+            var CustomComponent = components[args.component];
+            var __userAnswerData = (_userAnwser$find = userAnwser.find(function (u) {
+              return u.id == "".concat(pathID, ".").concat(id);
+            })) === null || _userAnwser$find === void 0 ? void 0 : _userAnwser$find.userAnwser;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(CustomComponent, _objectSpread({
+                __currentPathId: pathID,
+                __currentQuestionId: id,
+                viewOnly: true
+              }, __userAnswerData))
+            });
+          }()]
+        }, id);
+      }
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "questions-report",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "questions-report__question-text",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
             className: "questions-report__number",
             children: ["C\xE2u ", index + 1, ". "]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             dangerouslySetInnerHTML: {
               __html: question.question.replace(/\n\n/g, '<br/>')
             }
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("hr", {
           style: {
             margin: "1em 0"
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "questions-report__answer",
           children: _toConsumableArray(Object.keys(question.options)).map(function (__key, index) {
             var classes = ['questions-report__answer__item'];
@@ -47269,14 +48046,14 @@ function QuestionsReport(_ref) {
             if ((userAnwserItem === null || userAnwserItem === void 0 ? void 0 : userAnwserItem.userAnwser) == __key && question.right_answer != __key) {
               classes.push('questions-report__answer__item--wrong');
             }
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: classes.join(' '),
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                 className: "questions-report__answer__item__label",
                 children: [__key, ". "]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                 className: "questions-report__answer__item__content",
-                children: [question.options[__key], passed == true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+                children: [question.options[__key], passed == true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
                   style: {
                     marginLeft: '1em'
                   },
@@ -47285,15 +48062,15 @@ function QuestionsReport(_ref) {
               })]
             }, index);
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("hr", {
           style: {
             margin: "1em 0"
           }
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "questions-report__question-explain",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
             children: "Gi\u1EA3i th\xEDch: "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             dangerouslySetInnerHTML: {
               __html: question === null || question === void 0 ? void 0 : question.explanation
             }
@@ -47341,24 +48118,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ QuizPathList)
 /* harmony export */ });
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-play.js");
-/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/circle-play.js");
+/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
 function QuizPathList(_ref) {
   var onSelect = _ref.onSelect;
-  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_0__["default"])(),
+  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
     version = _useStore.version,
     reports = _useStore.reports;
-  console.log(version);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+  // console.log(version)
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "quiz-path-list",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("strong", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
       children: "Ch\u1ECDn ph\u1EA7n tr\u1EAFc nghi\u1EC7m d\u01B0\u1EDBi \u0111\xE2y v\xE0 ho\xE0n th\xE0nh n\xF3 (kh\xF4ng gi\u1EDBi h\u1EA1n th\u1EDDi gian)."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
       className: "quiz-path-list-option",
       children: quizData.map(function (quiz, index) {
         var id = quiz.id,
@@ -47368,22 +48148,31 @@ function QuizPathList(_ref) {
         var reportItem = reports.find(function (i) {
           return i.pathID == id;
         });
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+        var totalPoint = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+          var mainPoint = reportItem === null || reportItem === void 0 ? void 0 : reportItem.userTotalPoins;
+          if (reportItem.metaPoints.length) {
+            mainPoint = reportItem.metaPoints.reduce(function (total, meta) {
+              return total + meta.point;
+            }, mainPoint);
+          }
+          return mainPoint;
+        }, [reportItem]);
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
           className: "quiz-path-list-item",
           onClick: function onClick(e) {
             return onSelect(quiz);
           },
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "quiz-path-list-path-name",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
               className: "__label",
               children: ["Ph\u1EA7n ", index + 1, ": ", name, " (", total_points, " \u0111i\u1EC3m / ", total_questions, " c\xE2u h\u1ECFi)"]
-            }), reportItem.status == 'done' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+            }), reportItem.status == 'done' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
               className: "__status",
-              children: ["\u0110\xE3 ho\xE0n th\xE0nh (+", reportItem.userTotalPoins, " \u0111i\u1EC3m)"]
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              children: ["\u0110\xE3 ho\xE0n th\xE0nh (+", totalPoint, " \u0111i\u1EC3m)"]
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
               className: "__icon",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {})
             })]
           })
         }, id);
@@ -47391,6 +48180,61 @@ function QuizPathList(_ref) {
     })]
   });
 }
+
+/***/ }),
+
+/***/ "./src/components/SelectField.jsx":
+/*!****************************************!*\
+  !*** ./src/components/SelectField.jsx ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+var SelectField = function SelectField(_ref) {
+  var label = _ref.label,
+    options = _ref.options,
+    value = _ref.value,
+    onChange = _ref.onChange,
+    name = _ref.name,
+    required = _ref.required,
+    readOnly = _ref.readOnly;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "select-field",
+    children: [label && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+      htmlFor: name,
+      children: [label, required && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: "required",
+        children: "*"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("select", {
+      className: [readOnly == true ? '__readonly' : ''].join(' '),
+      id: name,
+      name: name,
+      value: value,
+      onChange: onChange,
+      required: required,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+        value: "",
+        children: "Select an option"
+      }), options.map(function (option) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("option", {
+          value: option.value,
+          children: option.label
+        }, option.value);
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SelectField);
 
 /***/ }),
 
@@ -47413,19 +48257,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PathReport__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PathReport */ "./src/components/PathReport.jsx");
 /* harmony import */ var _MainReport__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MainReport */ "./src/components/MainReport.jsx");
 /* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Button */ "./src/components/Button.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _UserFinanceForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./UserFinanceForm */ "./src/components/UserFinanceForm.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 
 
 
@@ -47434,6 +48273,10 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
+
+var components = {
+  "UserFinanceForm": _UserFinanceForm__WEBPACK_IMPORTED_MODULE_7__["default"]
+};
 function Start() {
   var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_1__["default"])(),
     quizData = _useStore.quizData,
@@ -47444,24 +48287,59 @@ function Start() {
     userAnwser = _useStore.userAnwser,
     onSetUserAnwser = _useStore.onSetUserAnwser,
     reports = _useStore.reports,
-    setReport = _useStore.setReport;
-  var View = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    setReport = _useStore.setReport,
+    updateReportMetaPoints = _useStore.updateReportMetaPoints;
+  var View = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
     children: function () {
       var currentReport = reports.find(function (r) {
         return r.pathID == currentPathId;
       });
       if ((currentReport === null || currentReport === void 0 ? void 0 : currentReport.status) == 'done') {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_PathReport__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_PathReport__WEBPACK_IMPORTED_MODULE_4__["default"], {
           pathID: currentPathId
         });
       } else {
-        var _userAnwser$find;
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Question__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        var _quizData$find, _userAnwser$find2;
+        var currentQuestionData = (_quizData$find = quizData.find(function (p) {
+          return p.id == currentPathId;
+        })) === null || _quizData$find === void 0 ? void 0 : _quizData$find.questions.find(function (q) {
+          return q.id == currentQuestionId;
+        });
+        // console.log(currentQuestionData);
+
+        if ((currentQuestionData === null || currentQuestionData === void 0 ? void 0 : currentQuestionData.type) == 'custom_question') {
+          var _userAnwser$find;
+          var CustomComponent = components[currentQuestionData === null || currentQuestionData === void 0 ? void 0 : currentQuestionData.component];
+          var __userAnswerData = (_userAnwser$find = userAnwser.find(function (u) {
+            return u.id == "".concat(currentPathId, ".").concat(currentQuestionId);
+          })) === null || _userAnwser$find === void 0 ? void 0 : _userAnwser$find.userAnwser;
+          var __props = __userAnswerData ? _objectSpread({}, __userAnswerData) : _objectSpread({}, currentQuestionData === null || currentQuestionData === void 0 ? void 0 : currentQuestionData.props);
+          var __id = "".concat(currentPathId, ".").concat(currentQuestionId);
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(CustomComponent, _objectSpread(_objectSpread({
+              heading: currentQuestionData.question,
+              __currentPathId: currentPathId,
+              __currentQuestionId: currentQuestionId
+            }, __props), {}, {
+              onUpdate: function onUpdate(fields, point) {
+                // console.log(fields, point);
+                onSetUserAnwser({
+                  fields: fields
+                }, "".concat(currentPathId, ".").concat(currentQuestionId));
+                updateReportMetaPoints(currentPathId, {
+                  name: currentQuestionData === null || currentQuestionData === void 0 ? void 0 : currentQuestionData.component,
+                  point: point
+                });
+              }
+            }))
+          });
+        }
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Question__WEBPACK_IMPORTED_MODULE_3__["default"], {
           __currentPathId: currentPathId,
           __currentQuestionId: currentQuestionId,
-          userAnwser: (_userAnwser$find = userAnwser.find(function (u) {
+          userAnwser: (_userAnwser$find2 = userAnwser.find(function (u) {
             return u.id == "".concat(currentPathId, ".").concat(currentQuestionId);
-          })) === null || _userAnwser$find === void 0 ? void 0 : _userAnwser$find.userAnwser,
+          })) === null || _userAnwser$find2 === void 0 ? void 0 : _userAnwser$find2.userAnwser,
           onConfirm: function onConfirm(answer, pID, qID) {
             onSetUserAnwser(answer, "".concat(pID, ".").concat(qID));
           }
@@ -47469,36 +48347,478 @@ function Start() {
       }
     }()
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     className: "start",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
       children: "B\u1ED9 c\xE2u h\u1ECFi tr\u1EAFc nghi\u1EC7m A1Academy"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("p", {
       children: ["T\u1ED5ng h\u1EE3p v\xE0 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c n\u1EC1n c\u0103n b\u1EA3n trong \u0111\u1EA7u t\u01B0 Crypto cho ng\u01B0\u1EDDi m\u1EDBi. Bao g\u1ED3m ", quizData.length, " ph\u1EA7n, h\xE3y l\u1EA7n l\u01B0\u1EE3t tr\u1EA3 l\u1EDDi \u0111\u1EC3 nh\u1EADn \u0111\u01B0\u1EE3c k\u1EBFt qu\u1EA3 \u0111\xE1nh gi\xE1 ki\u1EBFn th\u1EE9c \u0111\u1EA7u t\u01B0 c\u1EE7a b\u1EA1n."]
-    }), currentPathId ? View : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), currentPathId ? View : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_QuizPathList__WEBPACK_IMPORTED_MODULE_2__["default"], {
       onSelect: function onSelect(q) {
         setCurrentPathId(q.id);
         setCurrentQuestionId(q.questions[0].id);
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      onClick: function onClick(e) {
-        var getRandomNumber = function getRandomNumber() {
-          var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-          var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 24;
-          return Math.floor(Math.random() * (max - min + 1)) + min;
-        };
-        var __reports = _toConsumableArray(reports).map(function (item) {
-          return _objectSpread(_objectSpread({}, item), {}, {
-            userTotalPoins: getRandomNumber(),
-            status: 'done'
-          });
-        });
-        setReport(__reports);
-      },
-      children: "Make Random Report (test report)"
     }), reports.length > 0 && reports.every(function (report) {
       return report.status === 'done';
-    }) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_MainReport__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
+    }) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_MainReport__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        onClick: function onClick(e) {
+          window.localStorage.removeItem('quiz-storage');
+          window.location.reload();
+        },
+        children: "Reset"
+      })]
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/components/UserFinanceForm.jsx":
+/*!********************************************!*\
+  !*** ./src/components/UserFinanceForm.jsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ UserFinanceForm)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Button */ "./src/components/Button.jsx");
+/* harmony import */ var _FieldCurrency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FieldCurrency */ "./src/components/FieldCurrency.jsx");
+/* harmony import */ var react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-currency-input-field */ "./node_modules/react-currency-input-field/dist/index.esm.js");
+/* harmony import */ var _SelectField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SelectField */ "./src/components/SelectField.jsx");
+/* harmony import */ var _stores_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../stores/store */ "./src/stores/store.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/house.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-right.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+var _excluded = ["quizData", "setCurrentPathId", "setCurrentQuestionId"];
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var n = Object.getOwnPropertySymbols(e); for (r = 0; r < n.length; r++) o = n[r], -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
+function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (-1 !== e.indexOf(n)) continue; t[n] = r[n]; } return t; }
+
+
+
+
+
+
+
+
+function UserFinanceForm(_ref) {
+  var _currentPath$question, _currentPath$question2;
+  var heading = _ref.heading,
+    __currentPathId = _ref.__currentPathId,
+    __currentQuestionId = _ref.__currentQuestionId,
+    fields = _ref.fields,
+    onUpdate = _ref.onUpdate,
+    _ref$viewOnly = _ref.viewOnly,
+    viewOnly = _ref$viewOnly === void 0 ? false : _ref$viewOnly;
+  var _useStore = (0,_stores_store__WEBPACK_IMPORTED_MODULE_5__["default"])(),
+    quizData = _useStore.quizData,
+    setCurrentPathId = _useStore.setCurrentPathId,
+    setCurrentQuestionId = _useStore.setCurrentQuestionId,
+    rest = _objectWithoutProperties(_useStore, _excluded);
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState2 = _slicedToArray(_useState, 2),
+    point = _useState2[0],
+    setPoint = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(fields),
+    _useState4 = _slicedToArray(_useState3, 2),
+    userFinance = _useState4[0],
+    setUserFinance = _useState4[1];
+  // useState({
+  //   'thu_nhap_chinh': 0,
+  //   'thu_nhap_phu': 0,
+  //   'thu_nhap_on_dinh': 0, // 0 - 5
+
+  //   'chi_phi_co_dinh_hang_thang': 0,
+  //   'chi_phi_linh_hoat_hang_thang': 0,
+  //   'ty_le_tiet_kem_theo_phan_tram_thu_nhap': 0, // 0 - 100
+
+  //   'tai_san_tien_mat': 0,
+  //   'tai_san_bds': 0,
+  //   'tai_san_dau_tu_truyen_thong': 0,
+  //   'tai_san_crypto': 0,
+  //   'quy_du_phong': 0,
+
+  //   'tong_du_no': 0,
+  //   'chi_phi_tra_no_hang_thang': 0,
+  //   'thoi_han_no_con_lai': 0,
+  // })
+
+  var onUpdatePoint = function onUpdatePoint() {
+    var __point = 0;
+    var num = 1000000;
+    var total_thu_nhap_chinh_phu = parseFloat(userFinance.thu_nhap_chinh || 0) + parseFloat(userFinance.thu_nhap_phu || 0);
+    if (total_thu_nhap_chinh_phu >= 30 * num) {
+      __point += 2;
+    } else if (total_thu_nhap_chinh_phu >= 20 * num) {
+      __point += 1;
+    }
+    if (userFinance.ty_le_tiet_kem_theo_phan_tram_thu_nhap >= 30) {
+      __point += 2;
+    } else if (userFinance.ty_le_tiet_kem_theo_phan_tram_thu_nhap >= 20) {
+      __point += 1;
+    }
+    if (userFinance.quy_du_phong >= 6) {
+      __point += 2;
+    } else if (userFinance.quy_du_phong >= 3) {
+      __point += 1;
+    }
+    if (userFinance.tong_du_no == 0) {
+      __point += 2;
+    } else {
+      if (userFinance.chi_phi_tra_no_hang_thang / total_thu_nhap_chinh_phu * 100 <= 30) {
+        __point += 1;
+      }
+    }
+    var multiple_assets = [userFinance.tai_san_tien_mat > 0 ? 1 : 0, userFinance.tai_san_bds > 0 ? 1 : 0, userFinance.tai_san_dau_tu_truyen_thong > 0 ? 1 : 0, userFinance.tai_san_crypto > 0 ? 1 : 0];
+    if (multiple_assets.filter(function (i) {
+      return i == 1;
+    }).length >= 3) {
+      __point += 2;
+    } else if (multiple_assets.filter(function (i) {
+      return i == 1;
+    }).length >= 2) {
+      __point += 1;
+    }
+    setPoint(__point);
+    onUpdate ? onUpdate(userFinance, __point) : '';
+  };
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    onUpdatePoint();
+  }, [userFinance]);
+  var currentPath = quizData.find(function (q) {
+    return q.id === __currentPathId;
+  });
+  var currentQuestionIndex = currentPath.questions.findIndex(function (q) {
+    return q.id === __currentQuestionId;
+  });
+  var nextQuestionId = (_currentPath$question = currentPath.questions[currentQuestionIndex + 1]) === null || _currentPath$question === void 0 ? void 0 : _currentPath$question.id;
+  var prevQuestionId = (_currentPath$question2 = currentPath.questions[currentQuestionIndex - 1]) === null || _currentPath$question2 === void 0 ? void 0 : _currentPath$question2.id;
+  var onNext = function onNext() {
+    if (nextQuestionId) {
+      setCurrentQuestionId(nextQuestionId);
+    }
+  };
+  var onPrev = function onPrev() {
+    if (prevQuestionId) {
+      setCurrentQuestionId(prevQuestionId);
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("form", {
+      className: "a-quiz-form",
+      onSubmit: function onSubmit(e) {
+        e.preventDefault();
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "user-finance-form",
+        children: [heading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+            children: heading
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("hr", {
+            style: {
+              margin: "1em 0"
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+          children: "Th\xF4ng tin thu nh\u1EADp:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "thu_nhap_chinh",
+            children: "Thu nh\u1EADp ch\xEDnh"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            defaultValue: userFinance.thu_nhap_chinh,
+            readOnly: viewOnly,
+            onValueChange: function onValueChange(value) {
+              // console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                thu_nhap_chinh: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "thu_nhap_phu",
+            children: "Thu nh\u1EADp ph\u1EE5"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.thu_nhap_phu,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                thu_nhap_phu: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "thu_nhap_on_dinh",
+            children: "Thu nh\u1EADp \u1ED5n \u0111\u1ECBnh"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_SelectField__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            readOnly: viewOnly
+            // label="Thu nhập ổn định"
+            ,
+            options: [{
+              value: 0,
+              label: 'Mức 0 (không ổn định)'
+            }, {
+              value: 1,
+              label: 'Mức 1 (đang giảm)'
+            }, {
+              value: 2,
+              label: 'Mức 2 (đang ổn định)'
+            }, {
+              value: 3,
+              label: 'Mức 3 (đang tăng)'
+            }, {
+              value: 4,
+              label: 'Mức 4 (ổn định)'
+            }, {
+              value: 5,
+              label: 'Mức 5 (cự kỳ ổn định)'
+            }],
+            value: userFinance.thu_nhap_on_dinh,
+            onChange: function onChange(e) {
+              return setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                thu_nhap_on_dinh: e.target.value
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+          children: "Chi ti\xEAu:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "chi_phi_co_dinh_hang_thang",
+            children: "Chi ph\xED c\u1ED1 \u0111\u1ECBnh h\xE0ng th\xE1ng"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.chi_phi_co_dinh_hang_thang,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                chi_phi_co_dinh_hang_thang: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "chi_phi_linh_hoat_hang_thang",
+            children: "Chi ph\xED linh ho\u1EA1t h\xE0ng th\xE1ng"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.chi_phi_linh_hoat_hang_thang,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                chi_phi_linh_hoat_hang_thang: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "ty_le_tiet_kem_theo_phan_tram_thu_nhap",
+            children: "T\u1EF7 l\u1EC7 ti\u1EBFt ki\u1EC7m theo ph\u1EA7n tr\u0103m thu nh\u1EADp"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: " (%)",
+            readOnly: viewOnly,
+            maxLength: 2,
+            defaultValue: userFinance.ty_le_tiet_kem_theo_phan_tram_thu_nhap,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                ty_le_tiet_kem_theo_phan_tram_thu_nhap: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+          children: "T\xE0i s\u1EA3n:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "tai_san_tien_mat",
+            children: "T\xE0i s\u1EA3n ti\u1EC1n m\u1EB7t"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.tai_san_tien_mat,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                tai_san_tien_mat: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "tai_san_bds",
+            children: "T\xE0i s\u1EA3n BDS"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.tai_san_bds,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                tai_san_bds: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "tai_san_dau_tu_truyen_thong",
+            children: "T\xE0i s\u1EA3n \u0111\u1EA7u t\u01B0 truy\u1EC1n th\u1ED1ng"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.tai_san_dau_tu_truyen_thong,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                tai_san_dau_tu_truyen_thong: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "tai_san_crypto",
+            children: "T\xE0i s\u1EA3n Crypto"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.tai_san_crypto,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                tai_san_crypto: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "quy_du_phong",
+            children: "Qu\u1EF9 d\u1EF1 ph\xF2ng"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: " (th\xE1ng)",
+            readOnly: viewOnly,
+            defaultValue: userFinance.quy_du_phong,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                quy_du_phong: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+          children: "N\u1EE3 v\xE0 ngh\u0129a v\u1EE5 t\xE0i ch\xEDnh:"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "tong_du_no",
+            children: "T\u1ED5ng d\u01B0 n\u1EE3"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.tong_du_no,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                tong_du_no: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "chi_phi_tra_no_hang_thang",
+            children: "Chi ph\xED tr\u1EA3 n\u1EE3 h\xE0ng th\xE1ng"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: "\u20AB",
+            readOnly: viewOnly,
+            defaultValue: userFinance.chi_phi_tra_no_hang_thang,
+            onValueChange: function onValueChange(value) {
+              console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                chi_phi_tra_no_hang_thang: parseFloat(value || 0)
+              }));
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "user-finance-form__item",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+            htmlFor: "thoi_han_no_con_lai",
+            children: "Th\u1EDDi h\u1EA1n n\u1EE3 c\xF2n l\u1EA1i"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_currency_input_field__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            suffix: " (th\xE1ng)",
+            readOnly: viewOnly,
+            defaultValue: userFinance.thoi_han_no_con_lai,
+            onValueChange: function onValueChange(value) {
+              // console.log(value);
+              setUserFinance(_objectSpread(_objectSpread({}, userFinance), {}, {
+                thoi_han_no_con_lai: parseFloat(value || 0)
+              }));
+            }
+          })]
+        })]
+      })
+    }), viewOnly != true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "questions-actions",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        disabled: prevQuestionId ? false : true,
+        variant: "outline",
+        onClick: onPrev,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {}), " Tr\u1EDF l\u1EA1i"]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        onClick: function onClick(e) {
+          e.preventDefault();
+          setCurrentPathId(null);
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        variant: "primary",
+        onClick: function onClick(e) {
+          e.preventDefault();
+          if (nextQuestionId) {
+            onNext();
+          } else {
+            onFinish();
+          }
+        },
+        children: nextQuestionId ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+          children: ["Ti\u1EBFp t\u1EE5c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {})]
+        }) : 'Hoàn thành'
+      })]
+    }) : '']
   });
 }
 
@@ -47544,7 +48864,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"path":{"id":"c0efedcc-dafa-4cb7-80ee
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"path":{"id":"e4f8b9c2-d6a3-4f15-9e87-1c2d3b4a5e6f","name":"Sức Khỏe Tài Chính","total_questions":5,"total_points":10,"questions":[{"id":"a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d","question":"Theo nguyên tắc bảo toàn vốn, tỷ lệ đầu tư vào crypto so với tổng tài sản nên là bao nhiêu?","options":{"a":"Tối đa 5-10% cho mọi nhà đầu tư","b":"15-20% với điều kiện có thu nhập ổn định","c":"25-30% nếu còn trẻ và độc thân","d":"40-50% nếu có kinh nghiệm thị trường","e":">50% nếu tin tưởng vào tương lai crypto"},"right_answer":"a","point":2,"explanation":"Nguyên tắc bảo toàn vốn đặt lên hàng đầu. 5-10% đủ để tận dụng tiềm năng tăng trưởng. Tỷ lệ này áp dụng cho mọi người để đảm bảo an toàn tài chính. Kinh nghiệm không phải yếu tố quyết định trong việc phân bổ tài sản vào loại tài sản rủi ro cao"},{"id":"b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e","question":"Trong việc quản lý tài chính cá nhân khi đầu tư crypto, thứ tự ưu tiên nào là hợp lý nhất?","options":{"a":"Chi tiêu thiết yếu > Quỹ khẩn cấp > Đầu tư an toàn > Crypto","b":"Đầu tư crypto > Tiết kiệm > Chi tiêu > Quỹ khẩn cấp","c":"Tiết kiệm > Crypto > Chi tiêu > Đầu tư an toàn","d":"Crypto > Chi tiêu > Quỹ khẩn cấp > Tiết kiệm","e":"Chi tiêu > Crypto > Tiết kiệm > Quỹ khẩn cấp"},"right_answer":"a","point":2,"explanation":"Ưu tiên chi tiêu thiết yếu và xây dựng quỹ khẩn cấp trước khi đầu tư crypto là nền tảng của sức khỏe tài chính, giúp đảm bảo cuộc sống ổn định và tránh phải bán crypto khi cần tiền gấp."},{"id":"c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f","question":"Khi nào KHÔNG NÊN tăng tỷ trọng đầu tư vào crypto?","options":{"a":"Khi tỷ lệ nợ/thu nhập hàng tháng vượt quá 30%","b":"Khi quỹ dự phòng chỉ đủ cho 2 tháng chi tiêu","c":"Khi phải vay nợ để đầu tư thêm","d":"Tất cả các điều trên","e":"Chỉ b và c"},"right_answer":"d","point":2,"explanation":"Không nên tăng tỷ trọng crypto khi có bất kỳ dấu hiệu nào về áp lực tài chính, bao gồm nợ cao, thiếu quỹ dự phòng hoặc phải vay nợ để đầu tư."},{"id":"d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8g","question":"Phương pháp nào hiệu quả nhất để bảo vệ sức khỏe tài chính khi đầu tư crypto?","options":{"a":"Đa dạng hóa danh mục đầu tư theo tỷ lệ phù hợp với thu nhập","b":"Chỉ đầu tư vào các dự án đã được kiểm chứng","c":"Tập trung vào một vài dự án tiềm năng","d":"Đầu tư theo signal của các chuyên gia","e":"Tham gia các nhóm đầu tư có uy tín"},"right_answer":"a","point":2,"explanation":"Đa dạng hóa danh mục theo tỷ lệ phù hợp với thu nhập giúp giảm thiểu rủi ro, đồng thời đảm bảo việc đầu tư không ảnh hưởng đến cuộc sống và các kế hoạch tài chính khác."},{"id":"e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8g9h","question":"Tần suất nào phù hợp nhất để review và điều chỉnh kế hoạch tài chính khi đầu tư crypto?","options":{"a":"Review hàng tháng, điều chỉnh mỗi quý nếu cần thiết","b":"Review hàng ngày, điều chỉnh theo biến động thị trường","c":"Review hàng tuần, điều chỉnh hàng tháng","d":"Review mỗi quý, điều chỉnh mỗi năm","e":"Chỉ review và điều chỉnh khi thị trường biến động mạnh"},"right_answer":"a","point":2,"explanation":"Review hàng tháng giúp nắm bắt được tình hình tài chính và thị trường, trong khi điều chỉnh mỗi quý tránh được các quyết định vội vàng và đảm bảo đủ thời gian đánh giá hiệu quả của kế hoạch."}]}}');
+module.exports = /*#__PURE__*/JSON.parse('{"path":{"id":"e4f8b9c2-d6a3-4f15-9e87-1c2d3b4a5e6f","name":"Sức Khỏe Tài Chính","total_questions":6,"total_points":20,"questions":[{"id":"8ghi-0jklmnopqrst","question":"Tổng quan tài chính cá nhân (Cung cấp bức tranh tài chính để chúng tôi có thể giúp bạn đưa ra những dự đoán chính xác nhất).","type":"custom_question","component":"UserFinanceForm","props":{"fields":{"thu_nhap_chinh":0,"thu_nhap_phu":0,"thu_nhap_on_dinh":0,"chi_phi_co_dinh_hang_thang":0,"chi_phi_linh_hoat_hang_thang":0,"ty_le_tiet_kem_theo_phan_tram_thu_nhap":0,"tai_san_tien_mat":0,"tai_san_bds":0,"tai_san_dau_tu_truyen_thong":0,"tai_san_crypto":0,"quy_du_phong":0,"tong_du_no":0,"chi_phi_tra_no_hang_thang":0,"thoi_han_no_con_lai":0}}},{"id":"a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d","question":"Theo nguyên tắc bảo toàn vốn, tỷ lệ đầu tư vào crypto so với tổng tài sản nên là bao nhiêu?","options":{"a":"Tối đa 5-10% cho mọi nhà đầu tư","b":"15-20% với điều kiện có thu nhập ổn định","c":"25-30% nếu còn trẻ và độc thân","d":"40-50% nếu có kinh nghiệm thị trường","e":">50% nếu tin tưởng vào tương lai crypto"},"right_answer":"a","point":2,"explanation":"Nguyên tắc bảo toàn vốn đặt lên hàng đầu. 5-10% đủ để tận dụng tiềm năng tăng trưởng. Tỷ lệ này áp dụng cho mọi người để đảm bảo an toàn tài chính. Kinh nghiệm không phải yếu tố quyết định trong việc phân bổ tài sản vào loại tài sản rủi ro cao"},{"id":"b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e","question":"Trong việc quản lý tài chính cá nhân khi đầu tư crypto, thứ tự ưu tiên nào là hợp lý nhất?","options":{"a":"Chi tiêu thiết yếu > Quỹ khẩn cấp > Đầu tư an toàn > Crypto","b":"Đầu tư crypto > Tiết kiệm > Chi tiêu > Quỹ khẩn cấp","c":"Tiết kiệm > Crypto > Chi tiêu > Đầu tư an toàn","d":"Crypto > Chi tiêu > Quỹ khẩn cấp > Tiết kiệm","e":"Chi tiêu > Crypto > Tiết kiệm > Quỹ khẩn cấp"},"right_answer":"a","point":2,"explanation":"Ưu tiên chi tiêu thiết yếu và xây dựng quỹ khẩn cấp trước khi đầu tư crypto là nền tảng của sức khỏe tài chính, giúp đảm bảo cuộc sống ổn định và tránh phải bán crypto khi cần tiền gấp."},{"id":"c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f","question":"Khi nào KHÔNG NÊN tăng tỷ trọng đầu tư vào crypto?","options":{"a":"Khi tỷ lệ nợ/thu nhập hàng tháng vượt quá 30%","b":"Khi quỹ dự phòng chỉ đủ cho 2 tháng chi tiêu","c":"Khi phải vay nợ để đầu tư thêm","d":"Tất cả các điều trên","e":"Chỉ b và c"},"right_answer":"d","point":2,"explanation":"Không nên tăng tỷ trọng crypto khi có bất kỳ dấu hiệu nào về áp lực tài chính, bao gồm nợ cao, thiếu quỹ dự phòng hoặc phải vay nợ để đầu tư."},{"id":"d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8g","question":"Phương pháp nào hiệu quả nhất để bảo vệ sức khỏe tài chính khi đầu tư crypto?","options":{"a":"Đa dạng hóa danh mục đầu tư theo tỷ lệ phù hợp với thu nhập","b":"Chỉ đầu tư vào các dự án đã được kiểm chứng","c":"Tập trung vào một vài dự án tiềm năng","d":"Đầu tư theo signal của các chuyên gia","e":"Tham gia các nhóm đầu tư có uy tín"},"right_answer":"a","point":2,"explanation":"Đa dạng hóa danh mục theo tỷ lệ phù hợp với thu nhập giúp giảm thiểu rủi ro, đồng thời đảm bảo việc đầu tư không ảnh hưởng đến cuộc sống và các kế hoạch tài chính khác."},{"id":"e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8g9h","question":"Tần suất nào phù hợp nhất để review và điều chỉnh kế hoạch tài chính khi đầu tư crypto?","options":{"a":"Review hàng tháng, điều chỉnh mỗi quý nếu cần thiết","b":"Review hàng ngày, điều chỉnh theo biến động thị trường","c":"Review hàng tuần, điều chỉnh hàng tháng","d":"Review mỗi quý, điều chỉnh mỗi năm","e":"Chỉ review và điều chỉnh khi thị trường biến động mạnh"},"right_answer":"a","point":2,"explanation":"Review hàng tháng giúp nắm bắt được tình hình tài chính và thị trường, trong khi điều chỉnh mỗi quý tránh được các quyết định vội vàng và đảm bảo đủ thời gian đánh giá hiệu quả của kế hoạch."}]}}');
 
 /***/ }),
 
@@ -47651,8 +48971,8 @@ var userAnwser = [];
       pathId: pItem.id,
       questionId: qItem.id,
       userAnwser: '',
-      rightAnwser: qItem.right_answer,
-      point: qItem.point,
+      rightAnwser: qItem === null || qItem === void 0 ? void 0 : qItem.right_answer,
+      point: qItem === null || qItem === void 0 ? void 0 : qItem.point,
       pathReportViewId: ''
     });
   });
@@ -47662,6 +48982,7 @@ var reports = [].concat(quizData).map(function (pItem) {
     pathName: pItem.name,
     pathID: pItem.id,
     userTotalPoins: 0,
+    metaPoints: [],
     pathTotalPoins: pItem.total_points,
     status: '' // doing / done
   };
@@ -47703,6 +49024,22 @@ var persistStore = function persistStore(set, get) {
           if (item.pathID === pathId) {
             item.userTotalPoins = userTotalPoints;
             item.status = status;
+          }
+        });
+      });
+    },
+    updateReportMetaPoints: function updateReportMetaPoints(pathId, metaPoints) {
+      set(function (state) {
+        state.reports.map(function (item) {
+          if (item.pathID === pathId) {
+            var __metaPointsIndex = item.metaPoints.findIndex(function (m) {
+              return m.name == metaPoints.name;
+            });
+            if (__metaPointsIndex >= 0) {
+              item.metaPoints[__metaPointsIndex] = metaPoints;
+            } else {
+              item.metaPoints.push(metaPoints);
+            }
           }
         });
       });

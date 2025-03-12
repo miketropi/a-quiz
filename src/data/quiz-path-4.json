@@ -2,9 +2,36 @@
   "path": {
     "id": "e4f8b9c2-d6a3-4f15-9e87-1c2d3b4a5e6f",
     "name": "Sức Khỏe Tài Chính",
-    "total_questions": 5,
-    "total_points": 10,
+    "total_questions": 6,
+    "total_points": 20,
     "questions": [
+      {
+        "id": "8ghi-0jklmnopqrst",
+        "question": "Tổng quan tài chính cá nhân (Cung cấp bức tranh tài chính để chúng tôi có thể giúp bạn đưa ra những dự đoán chính xác nhất).",
+        "type": "custom_question",
+        "component": "UserFinanceForm",
+        "props": {
+          "fields": {
+            "thu_nhap_chinh": 0,
+            "thu_nhap_phu": 0,
+            "thu_nhap_on_dinh": 0, 
+            
+            "chi_phi_co_dinh_hang_thang": 0,
+            "chi_phi_linh_hoat_hang_thang": 0,
+            "ty_le_tiet_kem_theo_phan_tram_thu_nhap": 0, 
+
+            "tai_san_tien_mat": 0,
+            "tai_san_bds": 0,
+            "tai_san_dau_tu_truyen_thong": 0,
+            "tai_san_crypto": 0,
+            "quy_du_phong": 0,
+
+            "tong_du_no": 0,
+            "chi_phi_tra_no_hang_thang": 0,
+            "thoi_han_no_con_lai": 0
+          }
+        }
+      },
       {
         "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
         "question": "Theo nguyên tắc bảo toàn vốn, tỷ lệ đầu tư vào crypto so với tổng tài sản nên là bao nhiêu?",

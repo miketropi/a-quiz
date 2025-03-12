@@ -5,9 +5,14 @@ import Question from "./Question";
 import PathReport from "./PathReport";
 import MainReport from "./MainReport";
 import Button from "./Button";
+import UserFinanceForm from "./UserFinanceForm";
+
+const components = {
+  "UserFinanceForm": UserFinanceForm,
+}
 
 export default function Start() {
-  const { quizData, currentPathId, currentQuestionId, setCurrentPathId, setCurrentQuestionId, userAnwser, onSetUserAnwser, reports, setReport } = useStore();
+  const { quizData, currentPathId, currentQuestionId, setCurrentPathId, setCurrentQuestionId, userAnwser, onSetUserAnwser, reports, setReport, updateReportMetaPoints } = useStore();
 
   const View = (
     <>
@@ -17,6 +22,34 @@ export default function Start() {
           if(currentReport?.status == 'done') {
             return <PathReport pathID={ currentPathId } />
           } else {
+            let currentQuestionData = quizData.find(p => p.id == currentPathId)?.questions.find(q => q.id == currentQuestionId);
+            // console.log(currentQuestionData);
+
+            if(currentQuestionData?.type == 'custom_question') {
+              let CustomComponent = components[currentQuestionData?.component];
+              let __userAnswerData = userAnwser.find(u => u.id == `${ currentPathId }.${ currentQuestionId }`)?.userAnwser;
+              let __props = __userAnswerData ? {... __userAnswerData} : { ...currentQuestionData?.props }
+              let __id = `${ currentPathId }.${ currentQuestionId }`;
+              return <>
+                {/* ({ totalPoint }) */}
+                {/* <h4 dangerouslySetInnerHTML={{__html: currentQuestionData.question.replace(/\n\n/g, '<br/>')}}></h4> */}
+
+                <CustomComponent 
+                  heading={ currentQuestionData.question }
+                  __currentPathId={ currentPathId } 
+                  __currentQuestionId={ currentQuestionId } 
+                  { ...__props } 
+                  onUpdate={ (fields, point) => {
+                    // console.log(fields, point);
+                    onSetUserAnwser({ fields }, `${ currentPathId }.${ currentQuestionId }`);
+                    updateReportMetaPoints(currentPathId, {
+                      name: currentQuestionData?.component,
+                      point: point,
+                    })
+                  } } />
+              </>
+            }
+
             return <Question 
               __currentPathId={ currentPathId } 
               __currentQuestionId={ currentQuestionId } 
@@ -46,7 +79,7 @@ export default function Start() {
       )
     }
     {/* <PathReport pathID={ '103827a5-b064-4314-b0b3-22b4a6e9e186' } /> */}
-    <Button onClick={ e => {
+    {/* <Button onClick={ e => {
       const getRandomNumber = (min = 1, max = 24) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
@@ -59,12 +92,20 @@ export default function Start() {
       })
 
       setReport(__reports)
-    } }>Make Random Report (test report)</Button>
+    } }>Make Random Report (test report)</Button> */}
+
+    {/* <UserFinanceForm /> */}
 
     {
-      reports.length > 0 && reports.every(report => report.status === 'done') && (
+      reports.length > 0 && reports.every(report => report.status === 'done') && <>
         <MainReport />
-      )
+        <Button onClick={ e => {
+          window.localStorage.removeItem('quiz-storage');
+          window.location.reload();
+        } }>Reset</Button>
+      </>
     }
+
+    {/* <MainReport /> */}
   </div>
 }

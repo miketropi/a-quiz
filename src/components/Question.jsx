@@ -7,6 +7,7 @@ import PathReport from "./PathReport";
 
 export default function Question({ __currentPathId, __currentQuestionId, userAnwser, onConfirm }) {
   const [ answer, setAnswer ] = useState("");
+  const [ finish, setFinish ] = useState(false);
   const { quizData, setCurrentPathId, setCurrentQuestionId, ...rest } = useStore();
   const currentPath = quizData.find(q => q.id === __currentPathId);
   const currentQuestion = currentPath.questions.find(q => q.id === __currentQuestionId);
@@ -15,7 +16,7 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
   const nextQuestionId = currentPath.questions[currentQuestionIndex + 1]?.id;
   const prevQuestionId = currentPath.questions[currentQuestionIndex - 1]?.id;
   const totalPoint = useMemo(() => {
-    console.log([...rest.userAnwser].filter(i => i.pathId == __currentPathId));
+    // console.log([...rest.userAnwser].filter(i => i.pathId == __currentPathId));
     return [...rest.userAnwser].filter(i => i.pathId == __currentPathId).reduce((total, question) => {
       if(question.rightAnwser == question.userAnwser) {
         return total + question.point;
@@ -26,10 +27,10 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
   }, [rest.userAnwser])
 
   useEffect(() => {
-    let status = nextQuestionId ? 'doing' : 'done';
+    let status = finish ? 'done' : 'doing';
     // console.log(status, nextQuestionId)
     rest.updateReport(__currentPathId, totalPoint, status)
-  }, [totalPoint, userAnwser])
+  }, [totalPoint, userAnwser, finish])
 
   useEffect(() => {
     // console.log('userAnwser', userAnwser)
@@ -49,7 +50,8 @@ export default function Question({ __currentPathId, __currentQuestionId, userAnw
   }
 
   const onFinish = () => { 
-    console.log('Finish!!!')
+    // console.log('Finish!!!')
+    setFinish(true)
     // rest.updateReport(__currentPathId, totalPoint, 'done')
   }
 
