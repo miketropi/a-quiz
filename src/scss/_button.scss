@@ -86,6 +86,10 @@
       opacity: 0.75;
     }
   }
+
+  @media(max-width: 500px) {
+    padding: .5em;
+  }
 }
 
 @keyframes spin {
